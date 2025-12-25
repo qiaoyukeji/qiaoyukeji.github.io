@@ -1,0 +1,909 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Rust编程入门——第三章_通用编程概念 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1766632321926">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1766632321926"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Rust编程入门——第三章_通用编程概念
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-12-26 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/xfpZj7XRq/" class="post-tags">
+                            # 学习教程
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>一门赋予每个人构建可靠且高效软件能力的语言。</p>
+<!-- more -->
+<h2 id="第三章-通用编程概念">第三章  通用编程概念</h2>
+<ul>
+<li>变量与可变性</li>
+<li>数据类型
+<ul>
+<li>标量类型</li>
+<li>符合类型</li>
+</ul>
+</li>
+<li>函数</li>
+<li>注释</li>
+<li>控制流</li>
+</ul>
+<h3 id="31-变量与可变性">3.1 变量与可变性</h3>
+<h4 id="311-变量">3.1.1 变量</h4>
+<ul>
+<li>申明变量使用 <code>let</code> 关键字</li>
+<li>默认情况下，变量是不可变的（<code>immutable</code>）</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+
+    let x: i32=5;
+    println!(&quot;the value of x is {}&quot;,x);
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="http://img.upy.qiaoyukeji.cn/2023/12/25/20231225152936.png" alt="" loading="lazy"></figure>
+<ul>
+<li>申明变量时，在变量前面加上 <code>mut</code>，就可以使变量可变</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+
+    let mut x: i32=5;
+    x=8;
+    println!(&quot;the value of x is {}&quot;,x);
+}
+</code></pre>
+<h4 id="312-常量">3.1.2 常量</h4>
+<ul>
+<li>常量（<code>constant</code>），常量在绑定值以后是不可变的，但是让他与不可变的变量有很多区别：
+<ul>
+<li>不可以使用 <code>mut</code> ，常量永远都是不可变的</li>
+<li>申明常量使用 <code>const</code> 关键字，它的类型必须被标注</li>
+<li>常量可以在任何作用域内申明，包括全局作用域</li>
+<li>常量只能绑定到常量表达式，无法绑定到函数的调用结果或只能在运行时才能计算的值</li>
+</ul>
+</li>
+<li>在程序运行期间，常量在其申明的作用域内一直有效</li>
+<li>命名规范：<code>Rust</code> 里常量使用全大写字母，每个单词之间用下划线分开，例如：
+<ul>
+<li><code>MAX_POINTS</code></li>
+<li><code>const MAX_POINTS:u32 = 100_000;</code></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust">const MAX_POINTS:u32 = 100_000;
+
+fn main() {
+    println!(&quot;Hello, world!&quot;);
+    println!(&quot;the number is {}&quot;,MAX_POINTS)
+}
+
+</code></pre>
+<h4 id="313-shadowing隐藏">3.1.3 <code>Shadowing</code>（隐藏）</h4>
+<ul>
+<li>可以使用相同的名字申明新的变量，新的变量就会 <code>Shadow</code>（隐藏）之前申明的同名变量
+<ul>
+<li>在后续的代码中这个变量名代表的就是新的变量</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust">const MAX_POINTS:u32 = 100_000;
+
+fn main() {
+    println!(&quot;Hello, world!&quot;);
+
+    println!(&quot;the number is {}&quot;,MAX_POINTS)
+}
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="http://img.upy.qiaoyukeji.cn/2023/12/25/20231225154756.png" alt="" loading="lazy"></figure>
+<ul>
+<li><code>Shadow</code> 和把变量标记为 <code>mut</code> 是不一样的：
+<ul>
+<li>如果不使用 <code>let</code> 关键字，那么重新给非 <code>mut</code> 的变量赋值会导致编译错误</li>
+<li>而使用 <code>let</code> 申明的同名新变量，也是不可变的</li>
+<li>使用 <code>let</code> 申明的同名新变量，他的类型可以与之前不同</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let spaces = &quot;    &quot;;
+    let spaces=spaces.len();
+    
+    println!(&quot;the number is {}&quot;, spaces)  // 4
+}
+</code></pre>
+<h3 id="32-数据类型">3.2 数据类型</h3>
+<ul>
+<li>标量和复合类型</li>
+<li><code>Rust</code> 是静态编译语言，在编译时必须知道所有变量的类型
+<ul>
+<li>基于使用的值，编译器通常能够推断出它的具体类型</li>
+<li>但如果可能的类型较多（如将 <code>String</code> 转为整数的 <code>parse</code> 方法），就必须添加类型的标注，否则编译会报错</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let guess:i32 = &quot;42&quot;.parse().expect(&quot;not a number&quot;);
+
+    println!(&quot;number is {}&quot;,guess);
+}
+</code></pre>
+<h4 id="321-标量类型">3.2.1 标量类型</h4>
+<ul>
+<li>一个标量类型代表一个单个的值</li>
+<li>Rust 有四个主要的标量类型：
+<ul>
+<li>整数类型</li>
+<li>浮点类型</li>
+<li>布尔类型</li>
+<li>字符类型</li>
+</ul>
+</li>
+</ul>
+<h4 id="322-整数类型">3.2.2 整数类型</h4>
+<h5 id="3221-基础介绍">3.2.2.1 基础介绍</h5>
+<ul>
+<li>
+<p>整数类型没有小数部分</p>
+</li>
+<li>
+<p>例如 <code>u32</code> 就是一个无符号的整数类型，占据32位空间</p>
+</li>
+<li>
+<p>无符号整数类型以 <code>u</code> 开头</p>
+</li>
+<li>
+<p>有符号整数类型以 <code>i</code> 开头</p>
+</li>
+<li>
+<p>Rust 的整数类型列表如图：</p>
+<ul>
+<li>每种都分为 i 和 u ，以及固定位数</li>
+<li>有符号的范围： -2<sup>(n-1)~2</sup>(n-1)-1</li>
+<li>无符号的范围：0~2^n-1</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="http://img.upy.qiaoyukeji.cn/2023/12/25/20231225185142.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+<h5 id="3222-isize-和-usize">3.2.2.2 <code>isize</code> 和 <code>usize</code></h5>
+<ul>
+<li><code>isize</code> 和 <code>usize</code> 类型的位数由程序运行的计算机的架构所决定的：</li>
+<li>如果是 64 位计算机，那就是 64 位的</li>
+<li>使用 <code>isize</code> 和 <code>usize</code> 的主要场景是对某种集合进行索引操作</li>
+</ul>
+<h5 id="3223-整数字面值">3.2.2.3 整数字面值</h5>
+<ul>
+<li>除了 <code>byte</code> 类型外，所有的数值字面值都允许使用类型后缀
+<ul>
+<li>例如 <code>57u8</code></li>
+</ul>
+</li>
+<li>如果不太清楚应该使用那种类型，可以使用 <code>Rust</code> 相应的默认类型</li>
+<li>整数的默认类型就是 <code>i32</code>
+<ul>
+<li>总体上来说速冻更快，即使在 64 位系统中</li>
+</ul>
+</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="http://img.upy.qiaoyukeji.cn/2023/12/25/20231225190417.png" alt="" loading="lazy"></figure>
+<h5 id="3224-整数溢出">3.2.2.4 整数溢出</h5>
+<ul>
+<li>例如：u8 的范围是 0-255，如果你把一个 u8 变量的值设为 256 ，那么：
+<ul>
+<li>调试模式下编译：Rust 会检查整数溢出，如果发生溢出，程序在运行时就会 panic</li>
+<li>发布模式下(--release)编译：Rust 不会检查可能导致 panic 的整数溢出
+<ul>
+<li>如果溢出发生：Rust 会执行“环绕”操作：
+<ul>
+<li>256 变成 0，257 变成 1 ...</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="323-浮点类型">3.2.3 浮点类型</h4>
+<h5 id="3231-基础介绍">3.2.3.1 基础介绍</h5>
+<ul>
+<li>Rust 有两种基础的浮点类型，也就是含有小数部分的类型
+<ul>
+<li><code>f32</code>，32位，单精度</li>
+<li><code>f64</code>，64为，双精度</li>
+</ul>
+</li>
+<li>Rust 的浮点类型使用了 <code>IEEE-754</code> 标准来表达</li>
+<li><code>f64</code> 是默认类型，因为在现代 CPU 上 <code>f64</code> 和 <code>f32</code> 的速度差不多，而且精度更高</li>
+</ul>
+<h5 id="3232-数值操作">3.2.3.2 数值操作</h5>
+<ul>
+<li>加减乘除余等</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let sum = 5 + 10;
+
+    let difference = 95.5 - 4.3;
+
+    let product = 4 * 30;
+
+    let quotient = 56.7 / 32.2;
+
+    let reminder = 54 % 5;
+}
+</code></pre>
+<h4 id="324-布尔类型">3.2.4 布尔类型</h4>
+<ul>
+<li>Rust 的布尔类型也有两个值：true 和 false</li>
+<li>一个字节大小</li>
+<li>符号是 bool</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let t = true;
+    let m: bool = false;
+}
+</code></pre>
+<h4 id="325-字符类型">3.2.5 字符类型</h4>
+<ul>
+<li>Rust 语言中 char 类型被用来描述语言中最基础的单个字符。</li>
+<li>字符类型的字面值使用单引号</li>
+<li>占用 4 个字节大小</li>
+<li>是 Unicode 标量值，可以表示比 ASCII 多得多的字符内容：拼音、中日韩文、零长度空白字符、emoji表情等。
+<ul>
+<li><code>U+0000</code> 到 <code>U+D7FF</code></li>
+<li><code>U+E000</code> 到 <code>U+10FFFF</code></li>
+</ul>
+</li>
+<li>但 Unicode 中并没有 “字符” 的概念，所以直觉上认为的字符也许与 Rust 中的概念并不相符</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let x: &amp;str = &quot;z&quot;;
+    let y: char='z';
+    let z: char='😂';
+}
+</code></pre>
+<h3 id="33-复合类型">3.3 复合类型</h3>
+<ul>
+<li>复合类型可以将多个值放在一个类型里。</li>
+<li>Rust 提供了两种基础的复合类型：元组（Tuple）、数组</li>
+</ul>
+<h4 id="331-元组tuple">3.3.1 元组（Tuple）</h4>
+<ul>
+<li>Tuple 可以将多个类型的多个值放到一个类型里</li>
+<li>Tuple 的长度是固定的：一旦申明就无法改变</li>
+</ul>
+<h5 id="3311-创建-tuple">3.3.1.1 创建 Tuple</h5>
+<ul>
+<li>在小括号里，将值用逗号分开</li>
+<li>Tuple 中的每一个位置都对应一个类型，Tuple 中个元素的类型不必相同</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let tup: (i32, f64, u8) =(500,6.4,1);
+    println!(&quot;{},{},{}&quot;,tup.0,tup.1,tup.2);
+}
+</code></pre>
+<h5 id="3312-获取-tuple-的元素值">3.3.1.2 获取 Tuple 的元素值</h5>
+<ul>
+<li>可以使用模式匹配来解构（destructure）一个 Tuple 来获取元素的值</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let tup: (i32, f64, u8) =(500,6.4,1);
+
+    let (x,y,z) =tup;
+    println!(&quot;{},{},{}&quot;,x,y,z);
+}
+</code></pre>
+<h5 id="3313-访问-tuple-的元素">3.3.1.3 访问 Tuple 的元素</h5>
+<ul>
+<li>在 Tuple 变量使用点标记法，后接元素的索引号</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let tup: (i32, f64, u8) =(500,6.4,1);
+    println!(&quot;{},{},{}&quot;,tup.0,tup.1,tup.2);
+}
+</code></pre>
+<h4 id="332-数组">3.3.2 数组</h4>
+<ul>
+<li>数组也可以将多个值放在同一个类型里</li>
+<li>数组中每个元素的类型必须相同</li>
+<li>数组的长度也是固定的</li>
+</ul>
+<h5 id="3321-申明数组">3.3.2.1 申明数组</h5>
+<ul>
+<li>在中括号里，各值用逗号分开</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let a = [1,2,3,4,5];
+}
+</code></pre>
+<h5 id="3322-数组的用处">3.3.2.2 数组的用处</h5>
+<ul>
+<li>如果想让数据存放在 stack（栈）上而不是 heap（堆）上，或者想保证有固定数量的元素，这时使用数组更有好处</li>
+<li>数组没有 Vector 灵活
+<ul>
+<li>Vector 和数组类似，它由标准库提供</li>
+<li>Vector 的长度可以改变</li>
+<li>如果你不确定应该使用数组还是 Vector ，那么估计你应该使用 Vector</li>
+</ul>
+</li>
+</ul>
+<h5 id="3323-数组的类型">3.3.2.3 数组的类型</h5>
+<ul>
+<li>数组的类型表示形式：[类型；长度]
+<ul>
+<li>例如：<code>let a:[i32;5] = [1,2,3,4,5];</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="3324-另一种申明数组的方式">3.3.2.4 另一种申明数组的方式</h5>
+<ul>
+<li>如果数组的每个元素都相同，那么可以：
+<ul>
+<li>在中括号中指定初始值</li>
+<li>然后是一个 &quot;;&quot;</li>
+<li>最后是数组的长度</li>
+<li>例如：<code>let a=[3;5];</code> 相当于 <code>let a = [3,3,3,3,3];</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="3325-访问数组的元素">3.3.2.5 访问数组的元素</h5>
+<ul>
+<li>数组是在 stack 上分配的单个块的内存</li>
+<li>可以使用索引来访问数组的元素</li>
+<li>如果访问的索引<mark>超出了数组的范围</mark>，那么
+<ul>
+<li>编译会通过</li>
+<li>运行会报错（runtime 时会 panic ）
+<ul>
+<li>Rust 不会允许其继续访问相应地址的内存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let a = [1,2,3,4,5];
+
+    let first = a[0];
+    let second = a[1];
+}
+</code></pre>
+<h3 id="34-函数">3.4 函数</h3>
+<ul>
+<li>申明函数使用 fn 关键字</li>
+<li>按照惯例，针对函数与变量名，Rust 使用 snake case 命名规范：
+<ul>
+<li>所有的字母都是小写，单词之间使用下划线分开</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;hello world!&quot;);
+    another_function();
+}
+
+fn another_function(){
+    println!(&quot;Another function&quot;);
+}
+</code></pre>
+<h4 id="341-函数的参数">3.4.1 函数的参数</h4>
+<ul>
+<li><code>parameters</code>、<code>arguments</code></li>
+<li>在函数签名里，必须包含每个参数的类型</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;hello world!&quot;);
+    another_function(5);    // argument
+}
+
+fn another_function(x:i32){    // parameter
+    println!(&quot; the number is {}&quot;,x);
+}
+</code></pre>
+<h4 id="342-函数体中的语句与表达式">3.4.2 函数体中的语句与表达式</h4>
+<ul>
+<li>函数体由一系列语句组成，可选的由一个表达式结束</li>
+<li>Rust 是一个基于表达式的语言</li>
+<li>语句是执行一些动作的指令</li>
+<li>表达式会计算产生一个值</li>
+<li>函数定义也是语句</li>
+<li>语句不返回值，所以不可以使用 let 将一个语句赋给一个变量</li>
+</ul>
+<h4 id="343-函数的返回值">3.4.3 函数的返回值</h4>
+<ul>
+<li>在 <code>-&gt;</code> 符号后边申明函数返回值的类型，但是不可以为返回值命名</li>
+<li>在 Rust 中，返回值就是函数体里面<mark>最后一个表达式的值</mark></li>
+<li>若想提前返回。需使用 return 关键字，并指定一个值</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let x=five(1);
+    println!(&quot;the number is {}&quot;,x); // 6
+}
+
+fn five(x:i32)-&gt;i32{
+    x+5
+}
+</code></pre>
+<h3 id="35-控制流-if-else">3.5 控制流 ：if else</h3>
+<h4 id="351-if-表达式">3.5.1 if 表达式</h4>
+<ul>
+<li>if 表达式允许您根据条件来执行不同的代码分支
+<ul>
+<li>这个条件必须是bool类型</li>
+</ul>
+</li>
+<li>if 表达式中，与条件相关联的代码块就叫做分支（arm）</li>
+<li>可选的，在后边可以加上一个 else 表达式</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let num=3;
+    if num&lt;5{
+        println!(&quot;true&quot;);
+    }else {
+        println!(&quot;false&quot;);
+    }
+}
+</code></pre>
+<h4 id="352-使用-else-if-处理多重条件">3.5.2 使用 else if 处理多重条件</h4>
+<ul>
+<li>如果使用了多于一个 else if ，那么最好使用 match 来重构代码</li>
+</ul>
+<h4 id="353-在-let-语句中使用-if">3.5.3 在 let 语句中使用 if</h4>
+<ul>
+<li>因为 if 是一个表达式，所以可以将它放在 let 语句中等号的右边</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let condition = true;
+
+    let num = if condition { 5 } else { 6 };
+    
+    println!(&quot;the number is {}&quot;,num);    // 5
+}
+</code></pre>
+<h3 id="36-控制流-rust-的循环">3.6 控制流： Rust 的循环</h3>
+<ul>
+<li>Rust 提供了 3 中循环：loop，while 和 for</li>
+</ul>
+<h4 id="361-loop-循环">3.6.1 loop 循环</h4>
+<ul>
+<li>loop 关键字告诉 Rust 反复的执行一块代码，直到喊停</li>
+<li>可以在 loop 循环中使用 break 关键字来告诉程序何时停止循环</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+
+    println!(&quot;the result is {}&quot;, result);    // 20
+}
+</code></pre>
+<h4 id="362-while-条件循环">3.6.2 while 条件循环</h4>
+<ul>
+<li>另外一种常见的循环模式是每次执行循环体之前都判断一次条件</li>
+<li>while条件循环为这种模式而生</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let mut counter = 3;
+
+    while counter != 0 {
+        println!(&quot;number is {}&quot;, counter);
+        counter = counter - 1;
+    }
+    println!(&quot;LIFTOFF!!!&quot;);
+}
+</code></pre>
+<h4 id="363-使用-for-循环遍历集合">3.6.3 使用 for 循环遍历集合</h4>
+<ul>
+<li>可是使用 while 或 loop 来遍历集合，但是易错且低效</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let a = [10, 20, 30, 40, 50];
+    let mut index = 0;
+
+    while index &lt; 5 {
+        println!(&quot;{}&quot;, a[index]);
+
+        index += 1;
+    }
+}
+</code></pre>
+<ul>
+<li>使用 for 循环更简洁紧凑，它可以针对集合中的每个元素来执行一些代码</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let a = [10, 20, 30, 40, 50];
+    for element in a.iter(){
+        println!(&quot;{}&quot;,element);
+    }
+}
+</code></pre>
+<ul>
+<li>由于 for 循环的安全、简洁性，所以它在 Rust 里用的最多</li>
+</ul>
+<h4 id="364-range">3.6.4 Range</h4>
+<ul>
+<li>标准库提供</li>
+<li>指定一个开始数字和一个结束数字，Range 可以生成它们之间的数字（不含结束）</li>
+<li>rev 方法可以反转 Range</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    for number in (1..4).rev(){
+        println!(&quot;{}&quot;,number);
+    }
+    println!(&quot;LIFTOFF!!!&quot;)
+}
+</code></pre>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/C++_001/" class="post-title gt-a-link">
+                    C++学习——01.C++基础
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>
