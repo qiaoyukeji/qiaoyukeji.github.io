@@ -1,0 +1,519 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>构建NPS内网穿透服务客户端GUI界面 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    构建NPS内网穿透服务客户端GUI界面
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2024-04-07 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本教程使用 PySimpleGUI 绘制内网穿透服务客户端 GUI页面，使用 pyinstaller 打包构建出 exe 程序，适用于windows 操作系统</p>
+<!-- more -->
+<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E9%97%AE%E9%A2%98%E6%9D%A5%E6%BA%90">1、问题来源</a></li>
+<li><a href="#2-%E6%93%8D%E4%BD%9C%E6%95%99%E7%A8%8B">2、操作教程</a>
+<ul>
+<li><a href="#21-%E5%8E%9F%E7%90%86">2.1 原理</a></li>
+<li><a href="#22-nps_gui%E7%95%8C%E9%9D%A2%E4%BB%A3%E7%A0%81">2.2 NPS_GUI界面代码</a></li>
+<li><a href="#23-python-%E7%A8%8B%E5%BA%8F%E8%BD%AC-exe-%E7%A8%8B%E5%BA%8F">2.3 python 程序转 exe 程序</a></li>
+</ul>
+</li>
+<li><a href="#3-%E6%80%BB%E7%BB%93">3、总结</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="1-问题来源">1、问题来源</h2>
+<p>本人之前撰写过一个 <a href="https://blog.gitnote.cn/post/nps/">使用nps搭建内网穿透并配置泛域名解析</a>的教程，但其中的运行客户端程序使用的是 CMD 命令行进行操作，并且需要配置的参数较多，总是记不住。<br>
+<img src="https://md.gitnote.cn/nps%E6%90%AD%E5%BB%BA%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%B3%9B%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90-1673272870029-20231922117.png" alt="" loading="lazy"></p>
+<p>所以就在考虑是否能将 cmd 命令程序转成 EXE GUI程序，方便配置参数运行。本教程就营运而生了。</p>
+<h2 id="2-操作教程">2、操作教程</h2>
+<h3 id="21-原理">2.1 原理</h3>
+<p>PySimpleGUI是一个用于创建图形用户界面（GUI）的Python模块。本教程使用 PySimpleGUI 为 NPS内网穿透客户端程序(v0.26.0)制作了一个GUI界面。</p>
+<h3 id="22-nps_gui界面代码">2.2 NPS_GUI界面代码</h3>
+<p>首先新建一个目录为 <code>nps_gui</code> ，在目录中新建一个 <code>main.py</code> 程序，并将与 <code>nps</code> 服务端配套的 <code>npc.exe</code> 文件复制到该目录下。<br>
+<code>main.py</code> 程序为主程序，用来绘制 GUI 界面，调用 CMD 命令运行程序。<br>
+<code>main.py</code> 程序内容如下：</p>
+<pre><code class="language-python"># main.py
+
+import subprocess
+import threading
+import PySimpleGUI as sg
+
+# 定义版本号和作者信息
+version = &quot;0.0.1&quot;
+author = &quot;巧遇科技工作室&quot;
+about_me = &quot;本程序是NPS内网穿透服务的GUI界面，用来辅助NPS内网穿透服务客户端进行使用，与之配套的NPS版本为0.26.10。&quot;
+
+def read_output(process, output_element):
+    &quot;&quot;&quot;
+    读取子进程的输出并将其传递给GUI线程显示的函数
+    &quot;&quot;&quot;
+    for line in process.stdout:
+        output_element.print(line.strip())
+
+    for line in process.stderr:
+        output_element.print(line.strip())
+
+# 定义GUI布局
+layout = [
+    [sg.Menu([['关于', ['本程序介绍','版本号', '作者']]])],
+    [sg.Text(&quot;服务端地址(IP):&quot;), sg.Input(default_text=&quot;nps.qiaoyukeji.cn&quot;,key=&quot;-ADDRESS-&quot;)],
+    [sg.Text(&quot;服务端端口号:&quot;), sg.Input(default_text=&quot;28024&quot;,key=&quot;-PORT-&quot;)],
+    [sg.Text(&quot;验证密钥(vkey):&quot;), sg.Input(key=&quot;-VKEY-&quot;)],
+    [sg.Text(&quot;连接方式:&quot;), sg.Input(default_text=&quot;tcp&quot;,key=&quot;-TYPE-&quot;)],
+    [sg.Button(&quot;连接远程穿透服务器&quot;), sg.Button(&quot;退出&quot;)],
+    [sg.Output(size=(60, 10), key=&quot;-OUTPUT-&quot;)]
+]
+
+# 创建窗口
+window = sg.Window(&quot;NPS内网穿透GUI工具（v0.0.1）&quot;, layout)
+output_element = window[&quot;-OUTPUT-&quot;]
+
+# 事件循环
+while True:
+    event, values = window.read()
+
+    if event == sg.WINDOW_CLOSED or event == &quot;退出&quot;:
+        break
+
+    if event == &quot;连接远程穿透服务器&quot;:
+        address = values[&quot;-ADDRESS-&quot;]
+        port = values[&quot;-PORT-&quot;]
+        vkey = values[&quot;-VKEY-&quot;]
+        type = values[&quot;-TYPE-&quot;]
+
+        command = f&quot;npc.exe -server={address}:{port} -vkey={vkey} -type={type}&quot;
+        startupinfo = subprocess.STARTUPINFO()
+        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            bufsize=1,
+            startupinfo=startupinfo,
+            creationflags=subprocess.CREATE_NO_WINDOW
+        )
+
+        # 创建线程读取子进程输出并传递给GUI线程显示
+        output_thread = threading.Thread(target=read_output, args=(process, output_element), daemon=True)
+        output_thread.start()
+
+    if event == &quot;版本号&quot;:
+        sg.popup(f&quot;版本号: {version}&quot;)
+
+    if event == &quot;作者&quot;:
+        sg.popup(f&quot;作者: {author}&quot;)
+    if event == &quot;本程序介绍&quot;:
+        sg.popup(f&quot;{about_me}&quot;)
+
+# 关闭窗口
+window.close()
+</code></pre>
+<p>目录下输入 <code>python main.py</code> 运行程序，程序的运行图如下所示。</p>
+<figure data-type="image" tabindex="1"><img src="http://img.upy.qiaoyukeji.cn/2024/04/06/20240406214012.png" alt="" loading="lazy"></figure>
+<p>填写好自己的 nps 服务端的 网址(IP)、端口、验证密钥(vkey)与连接方式，点击连接显示连接成功。</p>
+<figure data-type="image" tabindex="2"><img src="http://img.upy.qiaoyukeji.cn/2024/04/07/20240407164854.png" alt="" loading="lazy"></figure>
+<p>至此，python 代码版的 nps 客户端 GUI 程序已完成。</p>
+<h3 id="23-python-程序转-exe-程序">2.3 python 程序转 exe 程序</h3>
+<p>python 版的程序虽然已经完成，但是需要电脑先安装 python 运行环境，并且安装对应的 python 库，之后运行 python 代码才能正真的运行起来程序，对于普通人来说过于麻烦与繁琐了。</p>
+<p>能不能打包成 exe 文件，无需安装，双击就能运行呢？</p>
+<p>答案是肯定的，就是使用 <code>pyinstaller</code> 。<br>
+PyInstaller 是一个用于将 Python 应用程序打包成可执行文件的工具。它可以将 Python 脚本及其依赖的库、资源文件等打包成一个独立的可执行文件，方便在没有 Python 解释器的环境中运行。</p>
+<p>首先安装使用 <code>pip install pyinstaller</code> 安装 <code>pyinstaller</code> ；<br>
+之后在上面的目录中运行 PyInstaller 打包程序；</p>
+<pre><code class="language-bash">pyinstaller --onefile --hidden-import PySimpleGUI main.py --name &quot;NPS内网穿透客户端GUI程序&quot;  --noconsole
+</code></pre>
+<blockquote>
+<p>--onefile：指定生成一个单个的可执行文件，而不是生成一个文件夹包含多个文件。这意味着所有的依赖项将被打包到一个可执行文件中。</p>
+<p>--hidden-import PySimpleGUI：指定需要导入的额外模块或库。在这个例子中，指定了需要导入PySimpleGUI库，因为脚本&quot;main.py&quot;中使用了PySimpleGUI。这样PyInstaller会确保将该库包含在生成的可执行文件中。</p>
+<p>main.py：要打包的Python脚本的文件名或路径。在这个例子中，指定了&quot;main.py&quot;作为要打包的脚本。</p>
+<p>--name &quot;NPS内网穿透客户端GUI程序&quot;：指定生成的可执行文件的名称。在这个例子中，指定了生成的可执行文件的名称为&quot;NPS内网穿透客户端GUI程序&quot;。</p>
+<p>--noconsole：指定生成的可执行文件在运行时不显示控制台窗口。这适用于图形用户界面（GUI）应用程序，因为它们通常不需要显示控制台输出。</p>
+</blockquote>
+<p>上述打包程序就可以在目录下生成一个 <code>dist</code> 目录、将 <code>main.py</code> 打包成一个 <code>exe</code> 程序放置在 <code>dist</code> 目录中，然后我们需要将 <code>npc.exe</code> 也复制一份到 <code>dist</code> 目录中。</p>
+<p><img src="http://img.upy.qiaoyukeji.cn/2024/04/07/20240407170648.png" alt="" loading="lazy"><br>
+在 <code>dist</code> 目录中双击 <code>NPS内网穿透客户端GUI程序.exe</code> 即可正常运行 NPS_GUI 程序。</p>
+<p>我们可以将  <code>NPS内网穿透客户端GUI程序.exe</code>  与 <code>npc.exe</code> 两个文件打包成一个压缩包发送给他人，他人无需安装配置运行环境、仅需解压缩后双击程序即可运行程序。</p>
+<p>至此 nps 客户端程序 GUI 界面程序已全部完成。</p>
+<h2 id="3-总结">3、总结</h2>
+<p>本教程已在 Gitee、Github中进行开源。<br>
+Gitee：https://gitee.com/qiaoyukeji/nps_gui<br>
+Github：https://github.com/qiaoyukeji/nps_gui</p>
+<p>本教程使用的是 <code>PySimpleGUI</code> 绘制 GUI 界面，由于 <code>PySimpleGUI</code>  库本身的问题，第一次使用会提示<mark>填入授权码</mark>或者<mark>选择忽略跳过</mark>。<br>
+授权码 <code>PySimpleGUI</code> 官方免费提供，但需要注册领取，填入注册授权码后可一直免费使用。<br>
+选择忽略将导致 <code>PySimpleGUI</code> 绘制的程序将只能试用31天，注册填入授权码即可解决</p>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/inside_001/" class="post-title gt-a-link">
+                    nanopc-T4硬件连接与数据采集上传物联网平台交接文档（内部交接使用）
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>nanopc-T4硬件连接与数据采集上传物联网平台交接文档（内部交接使用） | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    nanopc-T4硬件连接与数据采集上传物联网平台交接文档（内部交接使用）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2024-04-03 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/AFuGMIat4/" class="post-tags">
+                            # 内部交接文档
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本文档为实验室内部交接文档，无其他含义</p>
+<!-- more -->
+<h1 id="nanopc-t4硬件连接与数据采集上传">nanopc-T4硬件连接与数据采集上传</h1>
+<p>内容：硬件交接（nanopc-T4）<br>
+时间：2024.04.01</p>
+<h2 id="一-nanopc-t4硬件连接">一、nanopc-T4硬件连接</h2>
+<p>需要硬件：nanopc-T4、罗技C920摄像头、氨气传感器、四合一传感器等、RS485</p>
+<h2 id="二-nanopc-t4运行软件">二、nanopc-T4运行软件</h2>
+<h3 id="21-使用ssh协议连接nanopc-t4">2.1 使用SSH协议连接nanopc-T4</h3>
+<p>将 nanopc-T4 与电脑连接到同一个网段（路由器）中，在电脑中安装 xshell 软件连接到 nanopc-T4。<br>
+普通账号密码：pi，pi<br>
+root账号密码：root，fa</p>
+<h3 id="22-获取运行程序并修改设备id">2.2 获取运行程序并修改设备ID</h3>
+<p>在nanopc-T4 中下载需要运行的程序，通过 Git 获取运行程序，https://gitee.com/qiaoyukeji/nanopc2jetlinks4mqtt，<br>
+所有要运行的具体内容都在程序的 <code>test_008_mqttControl</code> 目录中，修改运行程序中的设备 ID</p>
+<h3 id="23-设置程序的自动启动与nanopc-t4的自动重启">2.3 设置程序的自动启动与nanopc-T4的自动重启</h3>
+<p>设置程序的自启动等方法在 <code>test_008_mqttControl</code> 中的 readme.md 中</p>
+<h2 id="三-物联网平台相关操作">三、物联网平台相关操作</h2>
+<p>平台网址：http://aau.aau506.cn<br>
+账号密码：</p>
+<h3 id="31-新建设备">3.1 新建设备</h3>
+<p>按前期标准设置 id 号</p>
+<h3 id="32-设置连接密钥并配置物模型">3.2 设置连接密钥并配置物模型</h3>
+<p>设置好连接的账号密码、并配置好属性定义物模型与功能定义物模型</p>
+<h2 id="四-视频实时采集">四、视频实时采集</h2>
+<h3 id="41-腾讯云直播仅需第一次修改">4.1 腾讯云直播（仅需第一次修改）</h3>
+<p>添加推流域名，领取免费的20G测试流量</p>
+<h3 id="42-域名解析仅需第一次修改">4.2 域名解析（仅需第一次修改）</h3>
+<h3 id="43-nanopc-t4端运行">4.3 nanopc-T4端运行</h3>
+<p>运行程序在 <code>test_009_onlyFFmpeg</code> 目录中</p>
+<h3 id="44-可视化展示端修改程序展示仅需第一次修改">4.4 可视化展示端修改程序展示（仅需第一次修改）</h3>
+<p>修改 大数据可视化界面的 <code>play.js</code><br>
+平台网址：http://1.117.229.138:8888/qiaoyu<br>
+账号密码：</p>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/2023/" class="post-title gt-a-link">
+                    2023年年度总结回顾（流水账）
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

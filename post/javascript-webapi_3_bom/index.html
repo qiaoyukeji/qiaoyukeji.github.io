@@ -1,0 +1,856 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>javascript学习笔记——webapi_3_BOM | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    javascript学习笔记——webapi_3_BOM
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-09-24 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/GShRDCpDp/" class="post-tags">
+                            # javascript
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/l3xjV_uj9T/" class="post-tags">
+                            # 前端
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>这是本人最近学习 JavaScript_BOM 的一些记录，用来提醒和复习等使用！</p>
+<!-- more -->
+<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#bom-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B">BOM 浏览器对象模型</a>
+<ul>
+<li><a href="#1-bom-%E6%A6%82%E8%BF%B0">1. BOM 概述</a>
+<ul>
+<li><a href="#11-%E4%BB%80%E4%B9%88%E6%98%AFbom">1.1 什么是BOM</a></li>
+<li><a href="#12-bom-%E7%9A%84%E6%9E%84%E6%88%90">1.2 BOM 的构成</a></li>
+</ul>
+</li>
+<li><a href="#2-window-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E4%BA%8B%E4%BB%B6">2. window 对象的常见事件</a>
+<ul>
+<li><a href="#21-%E7%AA%97%E5%8F%A3%E5%8A%A0%E8%BD%BD%E4%BA%8B%E4%BB%B6">2.1 窗口加载事件</a></li>
+<li><a href="#22-%E8%B0%83%E6%95%B4%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F%E4%BA%8B%E4%BB%B6">2.2 调整窗口大小事件</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%AE%9A%E6%97%B6%E5%99%A8">3. 定时器</a>
+<ul>
+<li><a href="#31-%E4%B8%A4%E7%A7%8D%E5%AE%9A%E6%97%B6%E5%99%A8">3.1 两种定时器</a></li>
+<li><a href="#32-settimeout-%E5%AE%9A%E6%97%B6%E5%99%A8">3.2 setTimeout() 定时器</a></li>
+<li><a href="#33-%E5%81%9C%E6%AD%A2-settimeout-%E5%AE%9A%E6%97%B6%E5%99%A8">3.3 停止 setTimeout() 定时器</a></li>
+<li><a href="#34-setinterval-%E5%AE%9A%E6%97%B6%E5%99%A8">3.4 setInterval() 定时器</a></li>
+<li><a href="#35-%E5%81%9C%E6%AD%A2-setinterval-%E5%AE%9A%E6%97%B6%E5%99%A8">3.5 停止 setInterval() 定时器</a></li>
+<li><a href="#36-this">3.6 this</a></li>
+</ul>
+</li>
+<li><a href="#4-js-%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6">4. JS 执行机制</a>
+<ul>
+<li><a href="#41-js-%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B">4.1 JS 是单线程</a></li>
+<li><a href="#42-%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5">4.2 同步和异步</a></li>
+<li><a href="#43-%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%BC%82%E6%AD%A5%E6%89%A7%E8%A1%8C">4.3 同步执行与异步执行</a></li>
+<li><a href="#44-js-%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6">4.4 JS 执行机制</a></li>
+</ul>
+</li>
+<li><a href="#5-location-%E5%AF%B9%E8%B1%A1">5. location 对象</a>
+<ul>
+<li><a href="#51-%E4%BB%80%E4%B9%88%E6%98%AF-localtion-%E5%AF%B9%E8%B1%A1">5.1 什么是 localtion 对象</a></li>
+<li><a href="#52-url">5.2 URL</a></li>
+<li><a href="#53-location-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7">5.3 location 对象的属性</a></li>
+<li><a href="#54-location-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95">5.4 location 对象的方法</a></li>
+</ul>
+</li>
+<li><a href="#6-navigator-%E5%AF%B9%E8%B1%A1">6. navigator 对象</a></li>
+<li><a href="#7-history-%E5%AF%B9%E8%B1%A1">7. history 对象</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="bom-浏览器对象模型">BOM 浏览器对象模型</h2>
+<h3 id="1-bom-概述">1. BOM 概述</h3>
+<h4 id="11-什么是bom">1.1 什么是BOM</h4>
+<p>BOM（Browser Object Model）即浏览器对象模型，它提供了独立于内容而<mark>与浏览器窗口进行交互的对象</mark>，其核心对象是 window。<br>
+BOM 由一系列相关的对象构成，并且每个对象都提供了很多方法与属性。<br>
+BOM 缺乏标准，JavaScript 语法的标准化组织是 ECMA，DOM 的标准化组织是 W3C，BOM 最初是Netscape 浏览器标准的一部分。</p>
+<blockquote>
+<p>DOM:</p>
+<ul>
+<li>文档对象模型</li>
+<li>DOM 就是把「文档」当做一个「对象」来看待</li>
+<li>DOM 的顶级对象是 document</li>
+<li>DOM 主要学习的是操作页面元素</li>
+<li>DOM 是 W3C 标准规范</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>BOM:</p>
+<ul>
+<li>浏览器对象模型</li>
+<li>把「浏览器」当做一个「对象」来看待</li>
+<li>BOM 的顶级对象是 window</li>
+<li>BOM 学习的是浏览器窗口交互的一些对象</li>
+<li>BOM 是浏览器厂商在各自浏览器上定义的，兼容性较差</li>
+</ul>
+</blockquote>
+<h4 id="12-bom-的构成">1.2 BOM 的构成</h4>
+<p>BOM 比 DOM 更大，它包含 DOM 。</p>
+<figure data-type="image" tabindex="1"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924155312.png" alt="WebApi笔记_3_BOM-2021924155312.png" loading="lazy"></figure>
+<p><mark>window 对象是浏览器的顶级对象</mark>，它具有双重角色。</p>
+<ol>
+<li>它是 JS 访问浏览器窗口的一个接口。</li>
+<li>它是一个全局对象。定义在全局作用域中的变量、函数都会变成 window 对象的属性和方法。</li>
+</ol>
+<p>在调用的时候可以省略 window，前面学习的对话框都属于 window 对象方法，如 alert()、prompt() 等。</p>
+<p><strong>注意：window下的一个特殊属性 window.name</strong></p>
+<h3 id="2-window-对象的常见事件">2. window 对象的常见事件</h3>
+<h4 id="21-窗口加载事件">2.1 窗口加载事件</h4>
+<pre><code>window.onload=function(){}
+或者
+window.addEvenListener('load',function(){})
+</code></pre>
+<p>window.onload 是窗口 (页面) 加载事件,当文档内容<mark>完全加载完成</mark>会触发该事件(包括图像、脚本文件、CSS 文件等), 才调用的处理函数。</p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>有了 window.onload 就可以把 JS 代码写到页面元素的上方，因为 onload 是等页面内容全部加载完毕， 再去执行处理函数。</li>
+<li>window.onload 传统注册事件方式 只能写一次，如果有多个，会以最后一个 window.onload 为准。</li>
+<li>如果使用 addEventListener 则没有限制</li>
+</ol>
+</blockquote>
+<pre><code>document.addEventListener('DOMContentLoaded',function(){})
+</code></pre>
+<p>DOMContentLoaded 事件触发时，<mark>仅当DOM加载完成</mark>，不包括样式表，图片，flash等等。</p>
+<p>如果页面的图片很多的话, 从用户访问到onload触发可能需要较长的时间, 交互效果就不能实现，必然影响用户的体验，此时用 DOMContentLoaded 事件比较合适。</p>
+<h4 id="22-调整窗口大小事件">2.2 调整窗口大小事件</h4>
+<pre><code>window.onresize=function(){}
+或者
+window.addEventListener('resize',function(){})
+</code></pre>
+<p>window.onresize 是调整窗口大小加载事件, 当触发时就调用的处理函数。</p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>只要窗口大小发生像素变化，就会触发这个事件。</li>
+<li>我们经常利用这个事件完成响应式布局。 window.innerWidth 当前屏幕的宽度</li>
+</ol>
+</blockquote>
+<pre><code class="language-javascript">&lt;style&gt;
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+&lt;/style&gt;
+
+&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var div = document.querySelector('div');
+        window.addEventListener('resize', function() {
+            // window.innerWidth 当前屏幕的宽度
+            console.log(window.innerWidth);
+            if (window.innerWidth &lt;= 800) {
+                // 宽度 &lt; 800 时，隐藏 div
+                div.style.display = 'none';
+            }else{
+                div.style.display = 'block';
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="3-定时器">3. 定时器</h3>
+<h4 id="31-两种定时器">3.1 两种定时器</h4>
+<p>window 对象给我们提供了 2 个非常好用的方法-定时器。</p>
+<ul>
+<li>setTimeout()</li>
+<li>setInterval()</li>
+</ul>
+<h4 id="32-settimeout-定时器">3.2 setTimeout() 定时器</h4>
+<pre><code>window.setTimeout(调用函数,[延迟的毫秒数])
+</code></pre>
+<p>setTimeout() 方法用于设置一个定时器，该定时器在定时器到期后执行调用函数。</p>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>window 可以省略。</li>
+<li>这个调用函数可以直接写函数，或者<mark>写函数名</mark>或者采取字符串‘函数名()'三种形式。第三种不推荐</li>
+<li>延迟的毫秒数省略默认是 0，如果写，必须是毫秒。</li>
+<li>因为定时器可能有很多，所以我们经常给定时器赋值一个标识符</li>
+</ol>
+</blockquote>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;script&gt;
+        // 1. setTimeout
+        // 语法规范：window.setTimeout(调用函数,[延迟的毫秒数])
+        // 延时时间单位是毫秒，但是可以省略，省略默认为 0
+        // 页面中可能有很多的定时器，我们经常给定时器加标识符（名字）
+        var timer1 = setTimeout(function() {
+            console.log(11);
+        }, 3000);
+
+        var timer2 = setTimeout(fn, 5000);
+        function fn() {
+            console.log(22);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<p>setTimeout() 这个调用函数我们也称为<mark>回调函数 callback</mark> 。<br>
+普通函数是按照代码顺序直接调用。<br>
+而这个函数，需要等待时间，时间到了才去调用这个函数，因此称为回调函数。</p>
+<p><strong>简单理解： 回调，就是回头调用的意思。上一件事干完，再回头再调用这个函数。</strong></p>
+<p>以前我们讲的 element.onclick = function(){} 或者 element.addEventListener(“click”, fn); 里面的 函数也是回调函数。</p>
+<blockquote>
+<p>5秒后关闭广告案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="2"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-202192418386.png" alt="WebApi笔记_3_BOM-202192418386.png" loading="lazy"></figure>
+<pre><code class="language-javascript">   &lt;style&gt;
+        div {
+            width: 150px;
+            height: 400px;
+            background-color: pink;
+        }
+    &lt;/style&gt;
+
+&lt;body&gt;
+    &lt;div&gt;广告&lt;/div&gt;
+    &lt;script&gt;
+        var ad = document.querySelector('div');
+        setTimeout(function() {
+            ad.style.display = 'none';
+        }, 5000);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924184244.png" alt="WebApi笔记_3_BOM-2021924184244.png" loading="lazy"></figure>
+<h4 id="33-停止-settimeout-定时器">3.3 停止 setTimeout() 定时器</h4>
+<pre><code>window.clearTimeout(timeoutID)
+</code></pre>
+<p>clearTimeout()方法取消了先前通过调用 setTimeout() 建立的定时器。timeoutID 为之前定义的标识符。</p>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;button&gt;点击停止定时器&lt;/button&gt;
+    &lt;script&gt;
+        var btn = document.querySelector('button');
+        var timer1 = setTimeout(() =&gt; {
+            console.log('爆炸了！');
+        }, 5000);
+        btn.addEventListener('click', function() {
+            clearTimeout(timer1);
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h4 id="34-setinterval-定时器">3.4 setInterval() 定时器</h4>
+<pre><code>window.setInterval(回调函数,[间隔毫秒数]);
+</code></pre>
+<p>setInterval() 方法<mark>重复调用</mark>一个函数，每隔这个时间，就去调用一次回调函数。</p>
+<blockquote>
+<p>倒计时案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="4"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924191514.png" alt="WebApi笔记_3_BOM-2021924191514.png" loading="lazy"></figure>
+<pre><code class="language-javascript">    &lt;style&gt;
+        span {
+            width: 50px;
+            height: 50px;
+            background-color: pink;
+            display: block;
+            float: left;
+            margin-left: 10px;
+            font-size: 30px;
+            line-height: 50px;
+            text-align: center;
+        }
+    &lt;/style&gt;
+
+&lt;body&gt;
+    &lt;div&gt;
+        &lt;span class=&quot;h&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;3&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // 1. 获取元素
+        var hh = document.querySelector('.h');
+        var mm = document.querySelector('.m');
+        var ss = document.querySelector('.s');
+
+        var inputTime = +new Date('2021-09-26');
+        // 倒计时函数
+        function countDown() {
+            var nowTime = +new Date();
+            var times = (inputTime - nowTime) / 1000;
+            var h = parseInt(times / 60 / 60);
+            var m = parseInt(times / 60 % 60);
+            var s = parseInt(times % 60);
+            hh.innerHTML = h;
+            mm.innerHTML = m;
+            ss.innerHTML = s;
+        }
+
+        setInterval(countDown, 1000);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924191547.png" alt="WebApi笔记_3_BOM-2021924191547.png" loading="lazy"></figure>
+<h4 id="35-停止-setinterval-定时器">3.5 停止 setInterval() 定时器</h4>
+<pre><code> window.clearInterval(intervalID);
+</code></pre>
+<p>clearInterval()方法取消了先前通过调用 setInterval()建立的定时器。</p>
+<blockquote>
+<p>发送短信案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="6"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924193237.png" alt="WebApi笔记_3_BOM-2021924193237.png" loading="lazy"></figure>
+<pre><code class="language-javascript">&lt;body&gt;
+    手机号码：&lt;input type=&quot;number&quot; name=&quot;&quot; id=&quot;&quot;&gt;
+    &lt;button&gt;发送&lt;/button&gt;
+    &lt;script&gt;
+        var time = 10;
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            btn.disabled = true;
+            var timer1 = setInterval(() =&gt; {
+                if (time) {
+                    btn.innerHTML = '还剩余' + time + '秒';
+                    time--;
+                } else {
+                    clearInterval(timer1);
+                    btn.innerHTML = '发送';
+                    btn.disabled = false;
+                    // time 需要重新赋值，以便下次操作
+                    time = 10;
+                }
+            }, 1000);
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924193321.png" alt="WebApi笔记_3_BOM-2021924193321.png" loading="lazy"></figure>
+<h4 id="36-this">3.6 this</h4>
+<p>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，一般情况下this的最终指向的是那个调用它的对象。</p>
+<blockquote>
+<p>现阶段，我们先了解一下几个this指向</p>
+<ol>
+<li>全局作用域或者普通函数中this指向全局对象window（注意定时器里面的this指向window）</li>
+<li>方法调用中谁调用this指向谁</li>
+<li>构造函数中this指向构造函数的实例</li>
+</ol>
+</blockquote>
+<h3 id="4-js-执行机制">4. JS 执行机制</h3>
+<h4 id="41-js-是单线程">4.1 JS 是单线程</h4>
+<p>JavaScript 语言的一大特点就是<mark>单线程</mark>，也就是说，<mark>同一个时间只能做一件事</mark>。这是因为 Javascript 这门脚本语言诞生的使命所致——JavaScript 是为处理页面中用户的交互，以及操作 DOM 而诞生的。比如我们对某个 DOM 元素进行添加和删除操作，不能同时进行。 应该先进行添加，之后再删除。</p>
+<h4 id="42-同步和异步">4.2 同步和异步</h4>
+<p>为了解决这个问题，利用多核 CPU 的计算能力，HTML5 提出 Web Worker 标准，允许 JavaScript 脚本创建多个线程。于是，JS 中出现了<mark>同步</mark>和<mark>异步</mark>。</p>
+<blockquote>
+<p>同步：</p>
+<ul>
+<li>前一个任务结束后再执行后一个任务，程序的执行顺序与任务的排列顺序是一致的、同步的。比如做饭的同步做法：我们要烧水煮饭，等水开了（10分钟之后），再去切菜，炒菜。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>异步</p>
+<ul>
+<li>你在做一件事情时，因为这件事情会花费很长时间，在做这件事的同时，你还可以去处理其他事情。比如做饭的异步做法，我们在烧水的同时，利用这10分钟，去切菜，炒菜。</li>
+</ul>
+</blockquote>
+<p><mark>他们的本质区别： 这条流水线上各个流程的执行顺序不同。</mark></p>
+<h4 id="43-同步执行与异步执行">4.3 同步执行与异步执行</h4>
+<p><strong>同步任务</strong>：</p>
+<ul>
+<li>同步任务都在主线程上执行，形成一个<mark>执行栈</mark>。</li>
+</ul>
+<p><strong>异步任务</strong>：</p>
+<ul>
+<li>JS 的异步是通过回调函数实现的。</li>
+<li>一般而言，异步任务有以下三种类型:
+<ul>
+<li>1、普通事件，如 click、resize 等</li>
+<li>2、资源加载，如 load、error 等</li>
+<li>3、定时器，包括 setInterval、setTimeout 等</li>
+</ul>
+</li>
+</ul>
+<p>异步任务相关回调函数添加到<mark>任务队列</mark>中（任务队列也称为消息队列）。<br>
+<img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924203156.png" alt="WebApi笔记_3_BOM-2021924203156.png" loading="lazy"></p>
+<h4 id="44-js-执行机制">4.4 JS 执行机制</h4>
+<ol>
+<li>先执行<mark>执行栈中的同步任务</mark>。</li>
+<li>异步任务（回调函数）放入任务队列中。</li>
+<li>一旦执行栈中的所有同步任务执行完毕，系统就会按次序读取任务队列中的异步任务，于是被读取的异步任务结束等待状态，进入执行栈，开始执行。</li>
+</ol>
+<figure data-type="image" tabindex="8"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924203358.png" alt="WebApi笔记_3_BOM-2021924203358.png" loading="lazy"></figure>
+<p>由于主线程不断的重复获得任务、执行任务、再获取任务、再执行，所以这种机制被称为<mark>事件循环（ event loop）</mark>。</p>
+<figure data-type="image" tabindex="9"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924204643.png" alt="WebApi笔记_3_BOM-2021924204643.png" loading="lazy"></figure>
+<h3 id="5-location-对象">5. location 对象</h3>
+<h4 id="51-什么是-localtion-对象">5.1 什么是 localtion 对象</h4>
+<p>window 对象给我们提供了一个 <strong>location 属性</strong>用于<mark>获取或设置窗体的 URL</mark>，并且可以用于解析 URL 。 因为这个属性返回的是一个对象，所以我们将这个属性也称为 location 对象。</p>
+<h4 id="52-url">5.2 URL</h4>
+<p><mark>统一资源定位符 (Uniform Resource Locator, URL)</mark> 是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的 URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。</p>
+<pre><code>protocol://host[:port]/path/[?query]#fragment
+http://www.itcast.cn/index.html?name=andy&amp;age=18#link
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924204957.png" alt="WebApi笔记_3_BOM-2021924204957.png" loading="lazy"></figure>
+<h4 id="53-location-对象的属性">5.3 location 对象的属性</h4>
+<figure data-type="image" tabindex="11"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-202192420518.png" alt="WebApi笔记_3_BOM-202192420518.png" loading="lazy"></figure>
+<p><mark>重点记住： href 和 search</mark></p>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;button&gt;点击&lt;/button&gt;
+    &lt;script&gt;
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            console.log(location.href); // 打印当前 URL
+            location.href = 'http://blog.gitnote.cn'; // 去往新的URL
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<blockquote>
+<p>5秒后跳转首页案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="12"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-202192421317.png" alt="WebApi笔记_3_BOM-202192421317.png" loading="lazy"></figure>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var div = document.querySelector('div');
+        var time = 5;
+        setInterval(function() {
+            if (time) {
+                div.innerHTML = '你将在' + time + 's后转到首页';
+                time--;
+            } else {
+                location.href = 'http://blog.gitnote.cn'; // 去往新的URL
+                time = 5;
+            }
+        }, 1000)
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="13"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-202192421344.png" alt="WebApi笔记_3_BOM-202192421344.png" loading="lazy"></figure>
+<blockquote>
+<p>URL 传参案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="14"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-202192421721.png" alt="WebApi笔记_3_BOM-202192421721.png" loading="lazy"></figure>
+<p>① 第一个登录页面，里面有提交表单， action 提交到 index.html页面<br>
+② 第二个页面，可以使用第一个页面的参数，这样实现了一个数据不同页面之间的传递效果<br>
+③ 第二个页面之所以可以使用第一个页面的数据，是利用了URL 里面的 location.search参数<br>
+④ 在第二个页面中，需要把这个参数提取。<br>
+⑤ 第一步去掉？ 利用 substr<br>
+⑥ 第二步 利用=号分割 键 和 值 split(‘=‘) ⑦ 第一个数组就是键 第二个数组就是值</p>
+<pre><code class="language-javascript">// # login.html
+&lt;body&gt;
+    &lt;form action=&quot;index.html&quot;&gt;
+        用户名：&lt;input type=&quot;text&quot; name=&quot;uname&quot; id=&quot;&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; name=&quot;&quot; id=&quot;&quot;&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+</code></pre>
+<pre><code class="language-javascript">// # index.html
+&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;script&gt;
+        console.log(location.search);
+        // 1. 先去掉 ？  substr(起始的位置,截取几个字符)
+        var params = location.search.substr(1);
+        console.log(params);
+        // 2. 利用 = 分割字符串 split('=')
+        var arr = params.split('=');
+        console.log(arr);
+
+        var div = document.querySelector('div');
+        div.innerHTML = arr[1] + '欢迎你！';
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="15"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924211932.png" alt="WebApi笔记_3_BOM-2021924211932.png" loading="lazy"></figure>
+<h4 id="54-location-对象的方法">5.4 location 对象的方法</h4>
+<figure data-type="image" tabindex="16"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924212128.png" alt="WebApi笔记_3_BOM-2021924212128.png" loading="lazy"></figure>
+<pre><code>location.assign('URL'); // 实现链接跳转，记录浏览历史，可以实现前进后退
+location.replace('URL'); // 实现链接跳转，不记录浏览历史，不能实现前进后退
+</code></pre>
+<h3 id="6-navigator-对象">6. navigator 对象</h3>
+<p>navigator 对象包含有关浏览器的信息，它有很多属性，我们最常用的是 userAgent，该属性可以返回由客户机发送服务器的 user-agent 头部的值。</p>
+<p>下面前端代码可以判断用户那个终端打开页面，实现跳转:</p>
+<pre><code class="language-javascript">if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|
+Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS
+|Symbian|Windows Phone)/i))) {
+ window.location.href = &quot;&quot;; //手机
+} else {
+ window.location.href = &quot;&quot;; //电脑
+}
+</code></pre>
+<h3 id="7-history-对象">7. history 对象</h3>
+<p>window 对象给我们提供了一个 history 对象，与浏览器历史记录进行交互。该对象包含用户（在浏览器窗口中）访问过的 URL。</p>
+<figure data-type="image" tabindex="17"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_3_BOM-2021924213059.png" alt="WebApi笔记_3_BOM-2021924213059.png" loading="lazy"></figure>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/javascript-webapi_2/" class="post-title gt-a-link">
+                    javascript学习笔记——webapi_2_事件高级
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

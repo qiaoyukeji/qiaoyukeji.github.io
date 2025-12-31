@@ -1,0 +1,1110 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>nanopc-T4_RK3399 舵机与人脸检测跟踪相关程序 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    nanopc-T4_RK3399 舵机与人脸检测跟踪相关程序
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-11-20 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/lpnXeS9hT_/" class="post-tags">
+                            # c/c++
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/0KB92EUnm/" class="post-tags">
+                            # python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本人最近在 nanopc T4 开发板上做了一些小功能（完成导师安排的任务），初步实现了以下几个功能：</p>
+<ul>
+<li>
+<ol>
+<li>键盘控制 舵机上下左右旋转（两台舵机）</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>nanopc-T4 开发板实现的人脸检测</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>根据人脸的位置控制舵机跟随人脸左右运动（人脸识别+人脸跟踪）</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>nanopc-T4 开发板实现人脸识别</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>远程（http_get）控制舵机上下左右转动</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>舵机使用软件 PWM 驱动</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>解决舵机软件 PWM 驱动造成的抖动的一种方法</li>
+</ol>
+</li>
+</ul>
+<!-- more -->
+<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E9%94%AE%E7%9B%98%E6%8E%A7%E5%88%B6-%E8%88%B5%E6%9C%BA%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E6%97%8B%E8%BD%AC%E4%B8%A4%E5%8F%B0%E8%88%B5%E6%9C%BA">1. 键盘控制 舵机上下左右旋转（两台舵机）</a></li>
+<li><a href="#2-nanopc-t4-%E5%BC%80%E5%8F%91%E6%9D%BF%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B">2. nanopc-T4 开发板实现的人脸检测</a></li>
+<li><a href="#3-%E6%A0%B9%E6%8D%AE%E4%BA%BA%E8%84%B8%E7%9A%84%E4%BD%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E8%88%B5%E6%9C%BA%E8%B7%9F%E9%9A%8F%E4%BA%BA%E8%84%B8%E5%B7%A6%E5%8F%B3%E8%BF%90%E5%8A%A8%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E4%BA%BA%E8%84%B8%E8%B7%9F%E8%B8%AA">3. 根据人脸的位置控制舵机跟随人脸左右运动（人脸检测+人脸跟踪）</a></li>
+<li><a href="#4-nanopc-t4-%E5%BC%80%E5%8F%91%E6%9D%BF%E5%AE%9E%E7%8E%B0%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB">4. nanopc-T4 开发板实现人脸识别</a></li>
+<li><a href="#5-%E8%BF%9C%E7%A8%8Bhttp_get%E6%8E%A7%E5%88%B6%E8%88%B5%E6%9C%BA%E4%B8%8A%E4%B8%8B%E5%B7%A6%E5%8F%B3%E8%BD%AC%E5%8A%A8">5. 远程（http_get）控制舵机上下左右转动</a></li>
+<li><a href="#6-%E8%88%B5%E6%9C%BA%E4%BD%BF%E7%94%A8%E8%BD%AF%E4%BB%B6-pwm-%E9%A9%B1%E5%8A%A8">6. 舵机使用软件 PWM 驱动</a></li>
+<li><a href="#7-%E8%A7%A3%E5%86%B3%E8%88%B5%E6%9C%BA%E8%BD%AF%E4%BB%B6-pwm-%E9%A9%B1%E5%8A%A8%E9%80%A0%E6%88%90%E7%9A%84%E6%8A%96%E5%8A%A8%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95">7. 解决舵机软件 PWM 驱动造成的抖动的一种方法</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<hr>
+<h2 id="1-键盘控制-舵机上下左右旋转两台舵机">1. 键盘控制 舵机上下左右旋转（两台舵机）</h2>
+<pre><code class="language-c">#include &lt;wiringPi.h&gt;
+# include &lt;stdio.h&gt;
+# include &lt;stdlib.h&gt;
+
+void foo(int pinN,int moveAngle);
+// 接收一个输入度数
+int main(void)
+{
+    // pinN 为nanopc-T4 开发板上的引脚（以 Wpi脚 计数，通过 gpio readall 命令查看 wpi 引脚标号）
+    // 物理引脚为 7、11
+    int pinN_1=7;
+    int pinN_2=0;
+    int num;
+    wiringPiSetup() ;
+    //设置舵机控制引脚
+    pinMode (pinN_1, OUTPUT) ;
+    pinMode (pinN_2, OUTPUT) ;
+    //设置初始旋转到90度
+    // 330-2400 (10~170度)
+    int moveAngle_1=1365;
+    int moveAngle_2=1365;
+    foo(pinN_1,moveAngle_1);
+    foo(pinN_2,moveAngle_2);
+    for(;;){
+        printf(&quot;请输入移动方向，0表示左，1表示右,2表示上，3表示下\n&quot;);
+        scanf(&quot;%d&quot;,&amp;num);
+        if(num==0||num==1){
+            if(num==0){
+            moveAngle_1=moveAngle_1-100;
+            }
+            if(num==1){
+                moveAngle_1=moveAngle_1+100;
+            }
+            foo(pinN_1,moveAngle_1);
+        }
+
+        if(num==2||num==3){
+            if(num==2){
+            moveAngle_2=moveAngle_2-100;
+            }
+            if(num==3){
+                moveAngle_2=moveAngle_2+100;
+            }
+            foo(pinN_2,moveAngle_2);
+        }
+        
+        if(moveAngle_1&gt;2400||moveAngle_1&lt;320||moveAngle_2&gt;2400||moveAngle_2&lt;320){
+            printf(&quot;已到头！&quot;);
+            break;
+        }
+    }
+	printf(&quot;%d\n&quot;, num);
+	printf(&quot;%d\n&quot;, moveAngle_1);
+	printf(&quot;%d\n&quot;, moveAngle_2);
+	return 0;
+}
+
+void foo(int pinN,int moveAngle){
+     // 给舵机一段时间的反应，持续输出控制值
+    for (int i = 0; i &lt; 200; i++)
+    {
+    digitalWrite(pinN,HIGH);
+    delayMicroseconds(moveAngle);
+    digitalWrite(pinN,LOW);
+    delayMicroseconds(2500-moveAngle);
+    }
+    printf(&quot;1&quot;);
+}
+</code></pre>
+<h2 id="2-nanopc-t4-开发板实现的人脸检测">2. nanopc-T4 开发板实现的人脸检测</h2>
+<pre><code class="language-python">import numpy as np
+import cv2
+
+# 获取opencv自带的用于人脸识别的级联分类器 
+faceCascade = cv2.CascadeClassifier('/media/pi/userdata/root/usr/local/share/OpenCV/haarcascades/haarcascade_frontalcatface.xml')
+eye_cascade = cv2.CascadeClassifier('/media/pi/userdata/root/usr/local/share/OpenCV/haarcascades/haarcascade_eye.xml')
+
+# 打开摄像头，本地自带的摄像头默认为0
+cap = cv2.VideoCapture(10)
+cap.set(3,640) # set Width
+cap.set(4,480) # set Height
+i=0
+range1=80
+range2=60
+# 设置舵机旋转90度时对应值
+moveAngle_1=1435
+
+while True:
+    ret, img = cap.read()
+    #  控制图像翻转给，1，左右翻转，-1，上下翻转
+    img = cv2.flip(img, 1) 
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = faceCascade.detectMultiScale(
+        gray,     
+        # 表示每次图像检测的比例
+        scaleFactor=1.1,
+        # 表示每一个目标至少要被检测到3次才算是真的目标
+        minNeighbors=3,     
+        minSize=(20, 20)
+    )
+    
+    for (x,y,w,h) in faces:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+        print(&quot;%d,x = %d,x+w = %d,y = %d,y+h = %d&quot; %(i,x,x+w,y,y+h))
+        i+=1
+        #  框选出人脸区域，在人脸区域而不是全图中进行人眼检测，节省计算资源
+        face_area = img[y:y+h, x:x+w]  # 人脸区域
+        eyes = eye_cascade.detectMultiScale(face_area,1.1,5)
+        for (ex,ey,ew,eh) in eyes:
+            #画出人眼框，绿色，画笔宽度为1
+            cv2.rectangle(face_area,(ex,ey),(ex+ew,ey+eh),(0,255,0),1)
+
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = img[y:y+h, x:x+w]  
+    
+    cv2.namedWindow(&quot;enhanced&quot;,0);
+
+    cv2.resizeWindow(&quot;enhanced&quot;, 640, 640);
+    cv2.imshow('video',img)
+    
+    k = cv2.waitKey(30) &amp; 0xff
+    if k == 27: # press 'ESC' to quit
+        break
+ 
+cap.release()
+cv2.destroyAllWindows()
+</code></pre>
+<h2 id="3-根据人脸的位置控制舵机跟随人脸左右运动人脸检测人脸跟踪">3. 根据人脸的位置控制舵机跟随人脸左右运动（人脸检测+人脸跟踪）</h2>
+<p>通过 1 与 2 的结合，调整部分程序代码实现。</p>
+<blockquote>
+<p>舵机控制程序  duoji.c</p>
+</blockquote>
+<pre><code class="language-c">#include &lt;wiringPi.h&gt;
+# include &lt;stdio.h&gt;
+# include &lt;stdlib.h&gt;
+
+// gcc -Wall -o duoji duoji.c -lwiringPi -lwiringPiDev -lpthread -lrt -lm -lcrypt -shared
+
+void foo(int pinN,int moveAngle);
+
+// 接收一个输入度数
+int fmain(int num,int moveAngle_1)
+{
+    // pinN 为nanopc-T4 开发板上的引脚（以 Wpi脚 计数，通过 gpio readall 命令查看 wpi 引脚标号）
+    int pinN_1=7;
+    int pinN_2=0;
+
+    wiringPiSetup() ;
+
+    // for(;;){
+    //     moveAngle_1=1365;
+    //     moveAngle_2=1365;
+    //     break;
+    // }
+    //设置舵机控制引脚
+    pinMode (pinN_1, OUTPUT) ;
+    pinMode (pinN_2, OUTPUT) ;
+    //旋转到90度
+
+    // foo(pinN_1,moveAngle_1);
+    // foo(pinN_2,moveAngle_2);
+    
+        // printf(&quot;请输入移动方向，0表示左，1表示右,2表示上，3表示下\n&quot;);
+        // scanf(&quot;%d&quot;,&amp;num);
+        if(num==0||num==1){
+            if(num==0){
+            moveAngle_1=moveAngle_1-50;
+            }
+            if(num==1){
+                moveAngle_1=moveAngle_1+50;
+            }
+            foo(pinN_1,moveAngle_1);
+        }
+
+        if(moveAngle_1&gt;2400||moveAngle_1&lt;320){
+            printf(&quot;已到头！&quot;);
+        }
+    
+	printf(&quot;%d\n&quot;, num);
+	printf(&quot;%d\n&quot;, moveAngle_1);
+
+	return moveAngle_1;
+}
+
+void foo(int pinN,int moveAngle){
+     // 给舵机一段时间的反应，持续输出控制值
+    for (int i = 0; i &lt; 200; i++)
+    {
+    digitalWrite(pinN,HIGH);
+    delayMicroseconds(moveAngle);
+    digitalWrite(pinN,LOW);
+    delayMicroseconds(2500-moveAngle);
+    }
+    printf(&quot;1&quot;);
+}
+</code></pre>
+<blockquote>
+<p>通过编译命令将其进行编译<br>
+<code>gcc -Wall -o duoji duoji.c -lwiringPi -lwiringPiDev -lpthread -lrt -lm -lcrypt -shared</code></p>
+</blockquote>
+<blockquote>
+<p>通过人脸检测程序 <code>face.py</code> 判断人脸的位置，并调用舵机控制程序实现人脸的跟踪</p>
+</blockquote>
+<pre><code class="language-python">import numpy as np
+import cv2
+# python 调用 C 所必须的操作
+import ctypes  
+ll = ctypes.cdll.LoadLibrary   
+lib = ll(&quot;./duoji/duoji&quot;)
+ 
+faceCascade = cv2.CascadeClassifier('/media/pi/userdata/root/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('/media/pi/userdata/root/usr/local/share/OpenCV/haarcascades/haarcascade_eye.xml')
+
+
+cap = cv2.VideoCapture(10)
+cap.set(3,640) # set Width
+cap.set(4,480) # set Height
+i=0
+moveAngle_1=1435
+
+while True:
+    ret, img = cap.read()
+    img = cv2.flip(img, 1) 
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = faceCascade.detectMultiScale(
+        gray,     
+        # 表示每次图像尺寸减小的比例
+        scaleFactor=1.1,
+        # 表示每一个目标至少要被检测到3次才算是真的目标
+        minNeighbors=10,     
+        minSize=(20, 20)
+    )
+    
+    for (x,y,w,h) in faces:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+        print(&quot;%d,x = %d,x+w = %d,y = %d,y+h = %d&quot; %(i,x,x+w,y,y+h))
+        i+=1
+         # 框选出人脸区域，在人脸区域而不是全图中进行人眼检测，节省计算资源
+        face_area = img[y:y+h, x:x+w]  # 人脸区域
+        eyes = eye_cascade.detectMultiScale(face_area,1.1,5)
+        for (ex,ey,ew,eh) in eyes:
+            #画出人眼框，绿色，画笔宽度为1
+            cv2.rectangle(face_area,(ex,ey),(ex+ew,ey+eh),(0,255,0),1)
+
+        # x 是人脸识别框中的左上角横坐标，根据 x 坐标在相机中的位置，判断相机（舵机）的移动方向
+        if(x &lt; 320-0.7*w):
+            print(x)
+            # 0 或 1 表示转动方向，moveAngle_1 为转动角度系数，调用 duoji.c 中函数
+            moveAngle_1=lib.fmain(0,moveAngle_1)
+            # print(&quot;lib.fmain(0)=&quot;+str(lib.fmain(0)))
+        if(x+w &gt; 320+0.7*w):
+            moveAngle_1=lib.fmain(1,moveAngle_1)
+
+        roi_gray = gray[y:y+h, x:x+w]
+        roi_color = img[y:y+h, x:x+w]  
+    
+    cv2.namedWindow(&quot;enhanced&quot;,0);
+
+    cv2.resizeWindow(&quot;enhanced&quot;, 640, 640);
+    cv2.imshow('video',img)
+    
+    k = cv2.waitKey(30) &amp; 0xff
+    if k == 27: # press 'ESC' to quit
+        break
+ 
+cap.release()
+cv2.destroyAllWindows()
+</code></pre>
+<h2 id="4-nanopc-t4-开发板实现人脸识别">4. nanopc-T4 开发板实现人脸识别</h2>
+<p>本次使用3个Python程序，分别为人脸数据采集程序，人脸数据训练程序以及人脸数据检测程序来实现此人脸识别程序。本程序经测试在本地电脑中运行结果良好，能正常识别出已训练好的人脸数据，但在 nanopc-T4 开发板中运行结果较不理想，初步判断为 nanopc-T4 开发板性能不足导致，后期仔细分析病假一改善。</p>
+<p>在OpenCV中，可以用函数cv2.face.LBPHFaceRecognizer_create()生成LBPH识别器实例模型，然后应用cv2.face_FaceRecognizer.train()函数完成训练，最后用cv2.face_FaceRecognizer.predict()函数完成人脸识别。</p>
+<blockquote>
+<ol>
+<li>个人人脸图片采集程序，将采集的人脸图片数据存放到 ./userImg 目录下</li>
+</ol>
+</blockquote>
+<pre><code class="language-python">import cv2
+import os
+
+cam = cv2.VideoCapture(0)  # 获取摄像头
+cam.set(3, 640) # set video width  # 设置视频的高度和宽度
+cam.set(4, 480) # set video height
+
+# 获取本地安装的cv2目录下的级联分类器
+face_detector = cv2.CascadeClassifier(r'C:\Users\hotpotman\.conda\envs\face\Lib\site-packages\cv2\data\haarcascade_frontalface_default.xml')
+
+# 对于每个人，输入一个编号用以区分
+face_id = input('\n enter user id end press &lt;return&gt; ==&gt;  ')
+
+#print(&quot;\n [INFO] Initializing face capture. Look the camera and wait ...&quot;)
+# Initialize individual sampling face count
+count = 0
+
+while(True):
+    ret, img = cam.read() # 从摄像头读取图像
+    # 从文件中读取图像
+    # img = cv2.imread(&quot;/home/pi/Desktop/uerImg/&quot; + str(count) + '.jpg')
+    #print(&quot;/home/pi/Desktop/兔子牙/&quot; + str(count) + '.jpg')
+    # 翻转图像 1  水平翻转  0 垂直翻转   -1 水平垂直翻转
+    #img = cv2.flip(img, -1) # flip video image vertically
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转化为灰度图
+    # 使用级联分类器进行图片人脸检测
+    faces = face_detector.detectMultiScale(gray, 1.2, 5)
+    
+    count += 1
+# 在人脸上画矩形
+    for (x,y,w,h) in faces:
+        cv2.rectangle(img, (x,y), (x+w,y+h), (255,0,0), 2)
+        
+
+        # 将图片保存到 userImg目录下
+        cv2.imwrite(&quot;./userImg/&quot; + str(face_id) + '.' + str(count) + &quot;.jpg&quot;, gray[y:y+h,x:x+w])
+        cv2.imshow('image', img) # 显示
+        
+    cv2.imshow('image', img) # 显示
+    # 当按下 ESC 或者采集到 10 张图片时 退出
+    k = cv2.waitKey(100) &amp; 0xff 
+    if k == 27:
+        break
+    elif count &gt;= 10: 
+        break
+
+# 关闭所有窗口，并释放资源
+print(&quot;\n [INFO] Exiting Program and cleanup stuff&quot;)
+cam.release()
+cv2.destroyAllWindows()
+</code></pre>
+<blockquote>
+<ol start="2">
+<li>根据采集到的人脸数据进行训练，提取其特征，并将训练好的数据存放到 ./trainer/trainer.yml 文件中</li>
+</ol>
+</blockquote>
+<pre><code class="language-python">import numpy as np
+from PIL import Image # python里面的图像库
+import os
+import cv2
+
+# Path for face image database
+path = './userImg' # 数据集的路径
+
+
+# 在OpenCV中，可以用函数cv2.face.LBPHFaceRecognizer_create()生成LBPH识别器实例模型，然后应用cv2.face_FaceRecognizer.train()函数完成训练，最后用cv2.face_FaceRecognizer.predict()函数完成人脸识别。
+# https://blog.csdn.net/qq_43069920/article/details/103673125
+
+# LBPH识别器实例模型
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+
+# 获取本地安装的cv2目录下的人脸检测级联分类器
+detector = cv2.CascadeClassifier(r'C:\Users\hotpotman\.conda\envs\face\Lib\site-packages\cv2\data\haarcascade_frontalface_default.xml');
+
+# 定义一个函数 用来获取 LBPH识别器 训练的图像和标签
+def getImagesAndLabels(path):
+    imagePaths = [os.path.join(path,f) for f in os.listdir(path)]
+    # print(imagePaths) # 输出文件夹所有的文件路径
+    faceSamples=[]  # 存放人脸
+    ids = []       # 存放人脸的ID
+    for imagePath in imagePaths:  # 遍历路径
+        PIL_img = Image.open(imagePath).convert('L') # convert it to grayscale
+        img_numpy = np.array(PIL_img,'uint8')
+        print(os.path.split(imagePath)[-1])
+        # 获取图片中包含的人脸id
+        id = int(os.path.split(imagePath)[-1].split(&quot;.&quot;)[0]) # 获取ID
+        print(id)
+        #print(&quot; &quot; + str(id)) # 输入ID
+        faces = detector.detectMultiScale(img_numpy)
+        for (x,y,w,h) in faces:
+            faceSamples.append(img_numpy[y:y+h,x:x+w])
+            ids.append(id)
+    return faceSamples,ids
+
+print (&quot;\n [INFO] Training faces. It will take a few seconds. Wait ...&quot;)
+faces,ids = getImagesAndLabels(path)
+# 传入图像和标签 ，训练 LBPH识别器
+recognizer.train(faces, np.array(ids))
+
+# 将训练好的识别器 导出为 .yml 文件
+recognizer.write('./trainer/trainer.yml') # recognizer.save() worked on Mac, but not on Pi
+
+# Print the numer of faces trained and end program
+print(&quot;\n [INFO] {0} faces trained. Exiting Program&quot;.format(len(np.unique(ids))))
+
+</code></pre>
+<blockquote>
+<ol start="3">
+<li>根据训练好的数据，调用摄像头实时进行识别</li>
+</ol>
+</blockquote>
+<pre><code class="language-python">import cv2
+import numpy as np
+import os 
+ 
+recognizer = cv2.face.LBPHFaceRecognizer_create()  # 识别器
+recognizer.read('./trainer/trainer.yml') # 加载训练集
+
+# 获取本地安装的cv2目录下的人脸识别级联分类器
+faceCascade = cv2.CascadeClassifier(r&quot;C:\Users\hotpotman\.conda\envs\face\Lib\site-packages\cv2\data\haarcascade_frontalface_default.xml&quot;);
+ 
+font = cv2.FONT_HERSHEY_SIMPLEX   # 字体
+ 
+#iniciate id counter
+id = 0
+ 
+# 定义图片中的人物名称，根据输入的 id 对应填写
+names = ['None', 'zhaww', 'liuss','ligb'] 
+ 
+# 获取摄像头 本地摄像头默认为 0
+cam = cv2.VideoCapture(0)
+cam.set(3, 640) # set video widht
+cam.set(4, 480) # set video height
+# 在AGX上不要去直接设置帧率，不好用，主要是opencv默认为YUY2格式的视频流，最高帧率只有40,而这个MJPG格式可以很高
+# cam.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+ 
+# 定义最小识别范围
+minW = 0.1*cam.get(3)
+minH = 0.1*cam.get(4)
+ 
+while True:
+    ret, img =cam.read()  # 读取一帧图像
+    # 设置图像对称旋转，-1或1
+    img = cv2.flip(img, 1) 
+    #img = cv2.flip(img, -1) # Flip vertically
+    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) # 转化为灰度图
+    
+    # 使用级联分类器进行图片人脸检测
+    faces = faceCascade.detectMultiScale( 
+        gray,
+        scaleFactor = 1.2,
+        # 图片重复检车次数
+        minNeighbors = 5,
+        minSize = (int(minW), int(minH)),
+       )
+ 
+    for(x,y,w,h) in faces:
+        # 根据坐标画出人脸框，蓝色，画笔宽度为2
+        cv2.rectangle(img, (x,y), (x+w,y+h), (0,255,0), 2)
+        # 根据 LBPH识别器训练好的数据，与当前画面中的人脸进行匹配，返回其 ID 与 置信区间值
+        id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
+        print(&quot;id=%d&quot;%(id))
+        # Check if confidence is less them 100 ==&gt; &quot;0&quot; is perfect match 
+        if (confidence &lt; 100):
+            # print(&quot;%id=&quot;%(id))
+            id = names[id]
+            confidence = &quot;  {0}%&quot;.format(round(100 - confidence))
+        else:
+            id = &quot;unknown&quot;
+            confidence = &quot;  {0}%&quot;.format(round(100 - confidence))
+        # 将 id 与 置信区间值 写到图片帧中
+        cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
+        cv2.putText(img, str(confidence), (x+5,y+h-5), font, 1, (255,255,0), 1)  
+     
+    cv2.imshow('camera',img) 
+ 
+    k = cv2.waitKey(10) &amp; 0xff # Press 'ESC' for exiting video
+    if k == 27:
+        break
+ 
+# Do a bit of cleanup
+print(&quot;\n [INFO] Exiting Program and cleanup stuff&quot;)
+cam.release()
+cv2.destroyAllWindows()
+
+</code></pre>
+<h2 id="5-远程http_get控制舵机上下左右转动">5. 远程（http_get）控制舵机上下左右转动</h2>
+<p>在 nanopc-T4 上使用 web.py 部署 http_server ，用来解析 http_get 请求发送过来的数据，并根据传过来的数据调用舵机控制程序控制舵机上下左右转动。</p>
+<blockquote>
+<ol>
+<li>使用 natfrp 服务在 nanopc-T4（ubuntu18.04）中搭建内网穿透服务，注意使用 http 协议。</li>
+<li>在 nanopc-T4 上使用 web.py 搭建一个 web 服务器，接受通过内网穿透服务所传递过来的 http_get 请求，请解析出其携带的参数。</li>
+<li>根据解析出的参数，调用舵机控制程序控制舵机上下左右转动。</li>
+</ol>
+</blockquote>
+<pre><code class="language-python"># python_web 程序
+
+# 接受 http_get 请求并解析出参数
+import web
+# python 调用 c 所必须
+import ctypes 
+ll = ctypes.cdll.LoadLibrary   
+lib = ll(&quot;./duoji&quot;)
+
+# 设置路由及其对应的处理类
+urls = (
+  '/', 'index'
+)
+# 舵机旋转90度对应值
+moveAngle_1=1435
+
+class index():
+    def GET(self):
+        print(web.input().num)
+        # moveAngle_1=lib.fmain(web.input().num,moveAngle_1)
+
+        return moveDUoji(int(web.input().num))
+
+ 
+def moveDUoji(num):
+    # 必须使用 global  声明 moveAngle_1 为全局变量，否则函数内尝试改变全局就会报错
+    # https://blog.csdn.net/sinat_40304087/article/details/115701595
+    global moveAngle_1
+    moveAngle_1=lib.fmain(num,moveAngle_1)
+    print(num)
+    print(moveAngle_1)
+
+
+if __name__== &quot;__main__&quot;:
+    app= web.application(urls,globals())
+    app.run()
+
+# 命令行带端口号
+</code></pre>
+<h2 id="6-舵机使用软件-pwm-驱动">6. 舵机使用软件 PWM 驱动</h2>
+<pre><code class="language-python">#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;wiringPi.h&gt;
+#include &lt;softPwm.h&gt;
+// gcc -Wall -o demo2 demo2.c -lwiringPi -lwiringPiDev -lpthread -lrt -lm -lcrypt -shared
+
+#define RANGE 200     /* 1 means 100 us , 200 means 20 ms 1等于100微妙，200等于20毫秒 */
+
+void foo(int pinN,int moveAngle);
+// 接收一个输入度数
+int main(void)
+{
+    // pinN 为nanopc-T4 开发板上的引脚（以 Wpi脚 计数，通过 gpio readall 命令查看 wpi 引脚标号）
+    int pinN_1=7;
+    int pinN_2=0;
+    int num=-1;
+    wiringPiSetup() ;
+    //设置舵机控制引脚
+ 	int	moveAngle_1	= 90;
+	int	moveAngle_2	= 90;
+	wiringPiSetup();                        /* wiringpi初始化 */
+	softPwmCreate( pinN_1, 0, RANGE );     /* 创建一个使舵机转到90的pwm输出信号 */
+	softPwmCreate( pinN_2, 0, RANGE );     /* 创建一个使舵机转到90的pwm输出信号 */
+
+    for(;;){
+        num=-1;
+        printf(&quot;请输入移动方向，0表示左，1表示右,2表示上，3表示下\n&quot;);
+        scanf(&quot;%d&quot;,&amp;num);
+        if(num==0||num==1){
+            if(num==0){
+            // 每次调节+-5度
+            moveAngle_1=moveAngle_1-5;
+            }
+            if(num==1){
+                moveAngle_1=moveAngle_1+5;
+            }
+            foo(pinN_1,moveAngle_1);
+        }
+
+        if(num==2||num==3){
+            if(num==2){
+            moveAngle_2=moveAngle_2-5;
+            }
+            if(num==3){
+                moveAngle_2=moveAngle_2+5;
+            }
+            foo(pinN_2,moveAngle_2);
+        }
+        
+        if(moveAngle_1&gt;180||moveAngle_1&lt;0||moveAngle_2&gt;180||moveAngle_2&lt;0){
+            printf(&quot;已到头！&quot;);
+            break;
+        }
+        printf(&quot;%d\n&quot;, num);
+	printf(&quot;%d\n&quot;, moveAngle_1);
+	printf(&quot;%d\n&quot;, moveAngle_2);
+
+    }
+	return 0;
+}
+
+void foo(int pinN,int moveAngle){
+     
+    int degree;
+    // 将角度转化为pwm值（0-180：5ms-25ms）
+	degree = 5 +  moveAngle  / 180.0 * 20.0;    
+    softPwmWrite( pinN, degree ); /* pwm输出脉冲控制舵机旋转 */
+    delay(500);
+    printf(&quot;函数执行完了&quot;);
+}
+</code></pre>
+<h2 id="7-解决舵机软件-pwm-驱动造成的抖动的一种方法">7. 解决舵机软件 PWM 驱动造成的抖动的一种方法</h2>
+<p>在每次引脚输出 pwm 之后，给引脚一个 pwm=0 的值，经测试可以有效的解决舵机抖动的问题。</p>
+<blockquote>
+<p>舵机旋转角度与 pwm 值之间的关系：</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://md.gitnote.cn/nanopc-T4_RK3399%20%E8%88%B5%E6%9C%BA%E4%B8%8E%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E8%B7%9F%E8%B8%AA%E7%9B%B8%E5%85%B3%E7%A8%8B%E5%BA%8F-1637667464554-2021112319386.png" alt="nanopc-T4_RK3399 舵机与人脸检测跟踪相关程序-1637667464554-2021112319386.png" loading="lazy"></figure>
+<pre><code class="language-pytrhon">/* file name=sg90.c */
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include &lt;wiringPi.h&gt;
+#include &lt;softPwm.h&gt;
+
+#define RANGE 200     /* 1 means 100 us , 200 means 20 ms 1等于100微妙，200等于20毫秒 */
+
+int move( int pin, int moveAngle )
+{
+	int degree;
+	degree = 5 +  moveAngle  / 180.0 * 20.0;
+
+	softPwmWrite( pin, degree ); /* 再次复写pwm输出 */
+	delay( 200 );
+	printf(&quot;%d\n&quot;,degree);
+	printf(&quot;%d\n&quot;,moveAngle);
+	// softPwmStop(pin);
+	// 输入 pwm 后，给 pwm 为 0，防抖
+	softPwmWrite( pin, 0 );
+    return 0;
+}
+
+int main( void )
+{
+	int	num;
+	int	pinN_1	= 7;
+	int	pinN_2	= 0;
+
+	int	moveAngle_1	= 90;
+	int	moveAngle_2	= 90;
+	wiringPiSetup();                        /* wiringpi初始化 */
+	softPwmCreate( pinN_1, 15, RANGE );     /* 创建一个使舵机转到90的pwm输出信号 */
+	delay(500);
+		softPwmWrite( pinN_1, 0 );
+	softPwmCreate( pinN_2, 15, RANGE );     /* 创建一个使舵机转到90的pwm输出信号 */
+	delay(500);
+	softPwmWrite( pinN_2, 0 );
+
+	for (;; )
+	{
+		printf( &quot;请输入移动方向，0表示左，1表示右,2表示上，3表示下\n&quot; );
+		scanf( &quot;%d&quot;, &amp;num );
+
+		if ( !(( num ) &gt;= 0 &amp;&amp; ( num ) &lt;= 180) ){
+			printf( &quot;degree is between 0 and 180\n&quot; );
+			exit( 0 );
+		}
+
+		if ( num == 0 || num == 1 ){
+			if ( num == 0 ){
+				moveAngle_1 = moveAngle_1 - 5;
+			}
+			if ( num == 1 ){
+				moveAngle_1 = moveAngle_1 + 5;
+			}
+			move( pinN_1, moveAngle_1 );
+		}
+
+		if ( num == 2 || num == 3 ){
+			if ( num == 2 ){
+				moveAngle_2 = moveAngle_2 - 5;
+			}
+			if ( num == 3 ){
+				moveAngle_2 = moveAngle_2 + 5;
+			}
+			move( pinN_2, moveAngle_2 );
+		}
+	}
+    return 0;
+}
+</code></pre>
+<hr>
+<p>本文相关代码见 ：<a href="https://gitee.com/qiaoyukeji/nanopcT4_used">https://gitee.com/qiaoyukeji/nanopcT4_used</a></p>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/nanopc-t4_rk3399-duo-ji-kong-zhi-dai-ma/" class="post-title gt-a-link">
+                    nanopc-T4_RK3399 舵机控制代码
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>为无登陆鉴权功能的接口与网站添加登陆鉴权功能 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    为无登陆鉴权功能的接口与网站添加登陆鉴权功能
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-04-11 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/Jn56ztszV/" class="post-tags">
+                            # nginx
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/JYsDWHd7J/" class="post-tags">
+                            # 杂七杂八事务所
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/l3xjV_uj9T/" class="post-tags">
+                            # 前端
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>使用 HTTP Basic Auth 和 NGINX 反向代理为无登陆鉴权功能的接口与网站添加登陆鉴权功能。</p>
+<!-- more -->
+<p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E7%BC%98%E7%94%B1">1. 缘由</a></li>
+<li><a href="#2-http-basic-auth">2. HTTP Basic Auth</a>
+<ul>
+<li><a href="#21-%E4%BB%80%E4%B9%88%E6%98%AF-http-basic-auth">2.1 什么是 HTTP Basic Auth ？</a></li>
+<li><a href="#22-%E4%B8%BA%E6%8E%A5%E5%8F%A3%E6%B7%BB%E5%8A%A0-http-basic-auth-%E9%89%B4%E6%9D%83">2.2 为接口添加 HTTP Basic Auth 鉴权</a>
+<ul>
+<li><a href="#221-%E5%88%9B%E5%BB%BA%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%BD%91%E7%AB%99">2.2.1 创建反向代理网站</a></li>
+<li><a href="#222-%E5%AE%89%E8%A3%85-htpasswd-%E5%B9%B6%E7%94%9F%E6%88%90%E9%89%B4%E6%9D%83%E8%B4%A6%E5%8F%B7%E5%92%8C%E5%AF%86%E7%A0%81">2.2.2 安装 htpasswd 并生成鉴权账号和密码</a></li>
+<li><a href="#223-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E9%89%B4%E6%9D%83%E8%AE%A4%E8%AF%81">2.2.3 配置反向代理与鉴权认证</a></li>
+<li><a href="#224-%E9%80%9A%E8%BF%87-ajax-%E8%AF%B7%E6%B1%82-api-%E5%BD%A2%E5%BC%8F%E8%AE%BF%E9%97%AE">2.2.4 通过 ajax 请求 api 形式访问</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="1-缘由">1. 缘由</h2>
+<p>本人部分服务的测试接口为方便日常测试调试，使用了 ip+端口 的形式进行访问，并且未配置账号密码鉴权机制。在日常测试一段时间后，终于还是收到了来自腾讯云的监管通知，说服务存在数据泄露的风险，需要进行整改，否则将强行关停服务。<br>
+<img src="http://img.upyun.gitnote.cn/2023/04/11/20230411100823.png" alt="" loading="lazy"></p>
+<p>于是，本人认真思考本问题、查找相关资料并结合本人的web服务实际情况，决定使用 <code>HTTP Basic Auth</code> 技术并结合 <code>NGINX</code> 反向代理来完成接口鉴权的操作。</p>
+<h2 id="2-http-basic-auth">2. HTTP Basic Auth</h2>
+<h3 id="21-什么是-http-basic-auth">2.1 什么是 HTTP Basic Auth ？</h3>
+<p>HTTP 提供一个用于权限控制和认证的通用框架：基本认证（Basic access authentication），其是一种用来允许网页浏览器或其他客户端程序在请求时提供用户名和口令形式的身份凭证的一种登录验证方式。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>操作简单</li>
+<li>所有流行的网页浏览器都支持基本认证</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>认证信息仅仅使用Base64进行编码，并未使用加密算法</li>
+<li>无法防止中间人攻击，中间人可已修改报文然后请求服务器</li>
+</ol>
+<h3 id="22-为接口添加-http-basic-auth-鉴权">2.2 为接口添加 HTTP Basic Auth 鉴权</h3>
+<p>原理：本人使用 <code>NGINX</code> 反向代理访问接口数据服务器，并在 <code>NGINX</code> 反向代理配置文件中添加 Basic Auth 鉴权功能，<br>
+<img src="http://img.upyun.gitnote.cn/2023/04/11/20230411104106.png" alt="" loading="lazy"></p>
+<h4 id="221-创建反向代理网站">2.2.1 创建反向代理网站</h4>
+<p>在反向代理服务器中使用宝塔面板创建一个网站，并将域名（或任使用ip+port）解析到该网站。</p>
+<h4 id="222-安装-htpasswd-并生成鉴权账号和密码">2.2.2 安装 htpasswd 并生成鉴权账号和密码</h4>
+<ol>
+<li>首先安装 htpasswd 服务</li>
+</ol>
+<pre><code class="language-bash">sudo apt-get install httpd-tools
+</code></pre>
+<ol start="2">
+<li>htpasswd是开源的http服务器Apache Http Server的一个命令行工具，可以用来创建和更新基本认证的用户认证密码文件。</li>
+<li>参数</li>
+</ol>
+<pre><code>-b —&gt;密码直接写在命令行中,而非使用提示输入的方式
+-c —&gt;创建密码文件,如果文件存在,则覆盖
+-n —&gt;不更新密码文件,将用户名密码进行标注输出
+-m —&gt;使用md5算法对密码处理
+-d —&gt;使用crypt算法对面处理
+-s —&gt;使用sha算法对密码处理
+-p —&gt;不对密码加密处理,使用明文
+-D —&gt;从密码文件中删除指定用户记录
+</code></pre>
+<ol start="4">
+<li>生成鉴权的账号密码文件<br>
+在指定目录下生成鉴权的账号密码文件，该目录文件普通用户需要可以访问并读写。</li>
+</ol>
+<pre><code class="language-bash">htpasswd -bc /usr/local/myPasswd/nginxpasswd test 123123
+</code></pre>
+<h4 id="223-配置反向代理与鉴权认证">2.2.3 配置反向代理与鉴权认证</h4>
+<p>在刚刚创建的反向代理网站的配置文件中添加以下内容：</p>
+<pre><code class="language-nginx">location / {
+	# 设置跨域相关配置
+    add_header 'Access-Control-Allow-Origin''*';
+    add_header 'Access-Control-Allow-Methods''*';
+    add_header 'Access-Control-Allow-Headers''*';
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+
+	# 设置鉴权相关配置
+	# 帐号认证弹框的banner信息，说明服务名称
+    auth_basic &quot;请输出账号密码：&quot;;
+    # 认证的帐号密码文件，也就是我们上面使用 htpasswd 创建的密码文件
+    auth_basic_user_file /usr/local/myPasswd/nginxpasswd;
+
+	# 设置反向代理相关配置
+	# 配置需要被反向代理的数据接口服务器的 ip+端口
+    proxy_pass http: //127.0.0.1:12345;
+}
+</code></pre>
+<p>然后通过反向代理服务器配置的域名访问网站，会弹出输入用户名和密码的弹框：<br>
+<img src="http://img.upyun.gitnote.cn/2023/04/11/20230411110327.png" alt="" loading="lazy"></p>
+<h4 id="224-通过-ajax-请求-api-形式访问">2.2.4 通过 ajax 请求 api 形式访问</h4>
+<p>添加了 Basic Auth 鉴权的接口在使用 ajax 请求时需要在 headers 头部增加 <code>Authorization</code> 字段，并包含鉴权的用户名和密码，否则报错401。<br>
+例如使用 axios 发送请求：</p>
+<pre><code class="language-js">axios.post(url,{headers:{'Authorization': 'Basic ' + base64encode(username+&quot;:&quot;+password)})
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="http://img.upyun.gitnote.cn/2023/04/11/20230411112029.png" alt="" loading="lazy"></figure>
+<p>至此 HTTP Basic Auth 的配置教程已全部结束。</p>
+<hr>
+<p>参考文档：</p>
+<ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication">MDN：HTTP身份验证</a></li>
+<li><a href="https://www.jianshu.com/p/4cd42f7359f4">简书：HTTP Authorization</a></li>
+<li><a href="https://www.cnblogs.com/Chilam007/p/16900400.html">博客园：Nginx实现Basic Auth</a></li>
+</ol>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/vscode_run_cpp/" class="post-title gt-a-link">
+                    windows中vscode编译运行c++程序
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>解决ESP32cam中WIFI与ADC2无法共用的问题 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    解决ESP32cam中WIFI与ADC2无法共用的问题
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-07-10 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/kC1UI7U5z/" class="post-tags">
+                            # ESP32
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/9cVEUchBCB/" class="post-tags">
+                            # 嵌入式硬件
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p><ul class="markdownIt-TOC">
+<li><a href="#1-esp32cam-%E4%BB%8B%E7%BB%8D">1. ESP32cam 介绍</a></li>
+<li><a href="#2-%E9%97%AE%E9%A2%98%E6%9D%A5%E6%BA%90%E4%B8%8E%E8%B5%84%E6%96%99">2. 问题来源与资料</a>
+<ul>
+<li><a href="#21-%E9%97%AE%E9%A2%98%E6%9D%A5%E6%BA%90">2.1 问题来源</a></li>
+<li><a href="#22-%E6%9F%A5%E9%98%85%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99">2.2 查阅相关资料</a></li>
+</ul>
+</li>
+<li><a href="#3-esp32cam%E4%B8%AD-wifi-%E4%B8%8E-adc2-%E5%85%B1%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95">3. ESP32cam中 WIFI 与 ADC2 共用解决方法</a></li>
+</ul>
+</p>
+<h1 id="1-esp32cam-介绍">1. ESP32cam 介绍</h1>
+<figure data-type="image" tabindex="1"><img src="http://img.upyun.gitnote.cn/2023/07/10/20230710141753.png" alt="" loading="lazy"></figure>
+<p>ESP32-CAM是小尺寸的摄像头模组该模块可以作为最小系统独立工作，尺寸仅为 <code>27*40.5*4.5mm</code>，可广泛应用于各种物联网场合，适用于家庭智能设备、工业无线控制、无线监控、QR无线识别，无线定位系统信号以及其它物联网应用，是物联网应用的理想解决方案。<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+<p>其产品特性如下：</p>
+<ul>
+<li>采用低功耗双核32位CPU，可作应用处理器</li>
+<li>主频高达240MHz，运算能力高达 600 DMIPS</li>
+<li>内置 520 KB SRAM，外置8MB PSRAM</li>
+<li>支持UART/SPI/I2C/PWM/ADC/DAC等接口</li>
+<li>支持OV2640和OV7670摄像头，内置闪光灯</li>
+<li>支持图片WiFI上传</li>
+<li>支持TF卡</li>
+<li>支持多种休眠模式。</li>
+<li>内嵌Lwip和FreeRTOS</li>
+<li>支持 STA/AP/STA+AP 工作模式</li>
+<li>支持 Smart Config/AirKiss 一键配网</li>
+<li>支持二次开发</li>
+</ul>
+<p>ESP32cam 的接口引脚图如下所示：</p>
+<figure data-type="image" tabindex="2"><img src="http://img.upyun.gitnote.cn/2023/07/10/20230710143145.png" alt="" loading="lazy"></figure>
+<h1 id="2-问题来源与资料">2. 问题来源与资料</h1>
+<h2 id="21-问题来源">2.1 问题来源</h2>
+<p>因实验室需要，本人使用 ESP32cam 采集图片视频等信息传输到物联网平台中，同时还要采集温湿度与PH值等传感信息，同步传输到物联网平台中。</p>
+<p>因内容较多所以分开测试：</p>
+<ul>
+<li>
+<ol>
+<li>测试 esp32cam 连接 wifi 是否使用正常</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>测试 esp32cam 图片是否采集正常，是否能通过 wifi 传输到外网服务器中</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>测试 esp32cam 是否能采集温湿度与 PH 值等传感信息并输出</li>
+</ol>
+</li>
+</ul>
+<p>这时问题就出现了，分开测试 1、2、3 项功能全部正常，但合并程序后，PH 传感器采集的值全部为 0 ，我一直以为是传感器出现问题或代码合并时出错，在这些地方耽误了好长时间；后来查阅大量资料发现是 ESP32 开发板硬件的问题。</p>
+<h2 id="22-查阅相关资料">2.2 查阅相关资料</h2>
+<p>PH值传感器是模拟量采集传感器，需要连接到 ESP32 的 ADC 接口进行数模转换，但是 ESP32系列仅仅拥有两个 ADC 数模转换器，当 ESP32 开发板连接 WIFI 的时候，WIFI 会占用 ADC2，同时 WIFI 占用 ADC2 的优先级比较高，其他模块就无法使用 ADC2 获取数值，这就是为什么PH 传感器采集的值全部为 0 的原因。但 ADC1 不受影响，此时只需要将 模拟传感器接入 ADC1 即可正常使用。</p>
+<p>官方Github：wifi 与 ADC2 不能同时使用。<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<p>ESP32 开发板关于 ADC 的引脚功能定义如下：<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup><br>
+<img src="http://img.upyun.gitnote.cn/2023/07/10/20230710145254.jpeg" alt="" loading="lazy"></p>
+<p>但对于 ESP32cam 开发板来说，这又是一个困难。ESP32cam 开发板并未引出 ADC1 的IO引脚，并且 ADC1 部分引脚被摄像头模块占用了，所以在 ESP32cam 开发板中，无法正常使用 ADC1 数模转换器。<br>
+ESP32cam 开发板关于 ADC 的引脚功能定义如下：<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup><br>
+<img src="http://img.upyun.gitnote.cn/2023/07/10/20230710172506.png" alt="" loading="lazy"></p>
+<h1 id="3-esp32cam中-wifi-与-adc2-共用解决方法">3. ESP32cam中 WIFI 与 ADC2 共用解决方法</h1>
+<p>通知上述解释以及其他各种文献、教程、参考资料等都在说是因为 WIFI 与 ADC2 不能共用。<br>
+但追其本质，是 WIFI 占用 ADC2 导致其他模拟传感器不能通过 ADC2 读取数据。</p>
+<blockquote>
+<p>问：那能不能在 ESP32 读取 ADC2 上连接的模拟传感器数据前关闭 WIFI 功能，在读取完数据之后再打开 WIFI 功能，然后将数据发送到外网平台中呢？</p>
+</blockquote>
+<blockquote>
+<p>答案是：能，即交替使用 WIFI 与 ADC2。</p>
+</blockquote>
+<p>通过在 ESP32cam 开发板中进行实测，发现这样可以正常读出 ADC2 上连接的模拟信号传感器的正确数值，但每次都要多花费时间进行重连 WIFI ，重连 WIFI 的时间不定，约为 1 秒。</p>
+<p>这种方法可以解决对非高实时性采集信息的模拟传感器使用 ADC2 采集数据的问题。<br>
+例如对 PH 值传感器，每 3 分钟或 5 分钟采集一次 PH 值信息，此时重连 WIFI 的 1 秒钟对于分钟级别的采集数据可以忽略不计。<br>
+但是对于实时性有较高要求的使用 ADC2 的模拟信号传感器来说，重连 WIFI 的 1 秒钟就变得难以接受，本方法也就没有用处了。</p>
+<p>ESP32cam中 WIFI 与 ADC2 共用 arduino 代码如下：</p>
+<pre><code class="language-arduino">#include &lt;Arduino.h&gt;
+#include &lt;WiFi.h&gt;
+#include &lt;vector&gt;
+
+// ph and tem 变量设置
+// 将模拟信号传感器连接到 ESP32cam 上的 GPIO2 口，该口为 ADC2
+const int phPin = 2;
+float Value = 0;
+
+// wifi 账号与密码
+const char *ssid = &quot;TP-LINK_1760&quot;;
+const char *password = &quot;987654321&quot;;
+
+// 初始化 wifi
+void wifi_init() {
+  WiFi.mode(WIFI_STA);
+  WiFi.setSleep(false);  //关闭STA模式下wifi休眠，提高响应速度
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(&quot;.&quot;);
+  }
+  Serial.println(&quot;WiFi Connected!&quot;);
+  Serial.print(&quot;IP Address:&quot;);
+  Serial.println(WiFi.localIP());
+}
+
+void setup() {
+  Serial.begin(115200);
+  //  wifi 初始化
+  wifi_init();
+  pinMode(phPin, INPUT);
+}
+void loop() {
+  // 关闭 wifi
+  WiFi.disconnect(true);
+  WiFi.mode(WIFI_OFF);
+  
+  // adc2 读取数据
+  pinMode(phPin, INPUT);
+  Value = analogRead(phPin);
+  
+  // 打开 wifi
+  wifi_init();
+  // 串口打印数据
+  Serial.print(Value);
+  delay(500);
+}
+</code></pre>
+<p>代码运行效果图如下：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/10/20230710171450.png" alt="" loading="lazy"></p>
+<hr>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>https://docs.ai-thinker.com/esp32-cam <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>https://github.com/espressif/arduino-esp32/issues/8356 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>https://blog.csdn.net/h56464646/article/details/125324902 <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>https://mischianti.org/2021/09/02/esp32-cam-high-resolution-pinout-and-specs/ <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/the_middle_of_2023/" class="post-title gt-a-link">
+                    2023个人博客数据年中汇总
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

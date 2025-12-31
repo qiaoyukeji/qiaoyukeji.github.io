@@ -1,0 +1,905 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Nodejs学习——Express | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Nodejs学习——Express
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-03-09 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/ujPeyaWYH/" class="post-tags">
+                            # nodejs
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/GShRDCpDp/" class="post-tags">
+                            # javascript
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-express-%E7%AE%80%E4%BB%8B">1. Express 简介</a></li>
+<li><a href="#2-express-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">2. Express 的基本使用</a>
+<ul>
+<li><a href="#21-%E5%88%9B%E5%BB%BA%E5%9F%BA%E6%9C%AC%E7%9A%84-web-%E6%9C%8D%E5%8A%A1%E5%99%A8">2.1 创建基本的 web 服务器：</a></li>
+<li><a href="#22-%E7%9B%91%E5%90%AC-get-%E4%B8%8E-post-%E8%AF%B7%E6%B1%82">2.2 监听 GET 与 POST 请求</a></li>
+<li><a href="#23-express-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%89%98%E7%AE%A1">2.3 Express 静态资源托管</a></li>
+<li><a href="#24-nodeman">2.4 nodeman</a></li>
+</ul>
+</li>
+<li><a href="#3-express-%E8%B7%AF%E7%94%B1">3. Express 路由</a>
+<ul>
+<li><a href="#31-%E8%B7%AF%E7%94%B1%E7%9A%84%E6%A6%82%E5%BF%B5">3.1 路由的概念</a></li>
+<li><a href="#32-%E8%B7%AF%E7%94%B1%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8">3.2 路由的简单使用</a></li>
+<li><a href="#33-%E8%B7%AF%E7%94%B1%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96">3.3 路由的模块化</a></li>
+<li><a href="#34-%E4%B8%BA%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%9D%97%E6%B7%BB%E5%8A%A0%E7%BB%9F%E4%B8%80%E7%9A%84%E5%89%8D%E7%BC%80">3.4 为路由模块添加统一的前缀</a></li>
+</ul>
+</li>
+<li><a href="#4-express-%E4%B8%AD%E9%97%B4%E4%BB%B6">4. Express 中间件</a>
+<ul>
+<li><a href="#41-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">4.1 中间件的基本概念</a></li>
+<li><a href="#42-%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%87%BD%E6%95%B0%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8">4.2 中间件函数的简单使用</a>
+<ul>
+<li><a href="#421-%E5%85%A8%E5%B1%80%E4%B8%AD%E9%97%B4%E4%BB%B6">4.2.1 全局中间件</a></li>
+<li><a href="#422-%E5%B1%80%E9%83%A8%E4%B8%AD%E9%97%B4%E4%BB%B6">4.2.2 局部中间件</a></li>
+<li><a href="#423-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4.2.3 中间件的作用与注意事项</a></li>
+</ul>
+</li>
+<li><a href="#43-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%88%86%E7%B1%BB">4.3 中间件的分类</a></li>
+<li><a href="#44-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%AD%E9%97%B4%E4%BB%B6">4.4 自定义中间件</a></li>
+</ul>
+</li>
+<li><a href="#5-cors-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB">5. CORS 跨域资源共享</a>
+<ul>
+<li><a href="#51-cors-%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F">5.1 cors 中间件解决跨域</a></li>
+<li><a href="#52-%E4%BB%80%E4%B9%88%E6%98%AF-cors">5.2 什么是 CORS ?</a></li>
+<li><a href="#53-cors%E5%B8%B8%E8%A7%81%E5%93%8D%E5%BA%94%E5%A4%B4">5.3 CORS常见响应头：</a></li>
+<li><a href="#54-cors%E8%AF%B7%E6%B1%82%E5%88%86%E7%B1%BB">5.4 CORS请求分类：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="1-express-简介">1. Express 简介</h2>
+<blockquote>
+<p>基于 Node.js 平台，快速、开放、极简的 Web 开发框架</p>
+</blockquote>
+<p>Express 是用于快速创建服务器的第三方模块。</p>
+<p>内置的 http 模块用起来很复杂，开发效率低；Express 是基于内置的 http 模块进一步封装出来的，能够极大程度的提高开发效率。</p>
+<figure data-type="image" tabindex="1"><img src="http://img.upyun.gitnote.cn/2023/03/06/20230306201439.png" alt="" loading="lazy"></figure>
+<p>Express 能做什么？</p>
+<ul>
+<li>Web 网站服务器：专门对外提供 Web 网页资源的服务器。</li>
+<li>API 接口服务器：专门对外提供 API 接口的服务器。</li>
+</ul>
+<h2 id="2-express-的基本使用">2. Express 的基本使用</h2>
+<h3 id="21-创建基本的-web-服务器">2.1 创建基本的 web 服务器：</h3>
+<pre><code class="language-javascript">// 导入 express
+const express = require('express');
+
+// 创建 express 实例（ web 服务器）
+const app = express();
+
+// 启动 web 服务器
+app.listen(5000, () =&gt; {
+    console.log('服务器启动成功，访问地址：http://127.0.0.1:5000');
+});
+</code></pre>
+<h3 id="22-监听-get-与-post-请求">2.2 监听 GET 与 POST 请求</h3>
+<p>监听 get 请求：</p>
+<ul>
+<li>通过 app.get() 方法，可以监听客户端的GET请求，具体的语法格式：</li>
+</ul>
+<pre><code class="language-javascript">// 参数1：请求的 url
+// 参数2：处理函数
+// 处理函数：接收两个参数，分别是请求对象和响应对象
+app.get(&quot;请求url&quot;, (req, res) =&gt; { /* 处理函数 */})
+</code></pre>
+<p>监听 post 请求：</p>
+<ul>
+<li>通过 app.post() 方法，可以监听客户端的POST请求，具体的语法格式：</li>
+</ul>
+<pre><code class="language-javascript">// 参数1：请求的 url
+// 参数2：处理函数
+// 处理函数：接收两个参数，分别是请求对象和响应对象
+app.post(&quot;请求url&quot;, (req, res) =&gt; { /* 处理函数 */})
+</code></pre>
+<p>把内容响应给客户端：</p>
+<ul>
+<li>通过 res.send() 方法，可以把处理好的内容，发送给客户端：</li>
+</ul>
+<pre><code class="language-javascript">app.get('/user', (req, res) =&gt; {
+  res.send({ name: 'zs', age: 20, gender: '男' })
+})
+app.post('/user', (req, res) =&gt; {
+  res.send('请求成功')
+})
+</code></pre>
+<p>获取 URL 中携带的查询参数</p>
+<ul>
+<li>通过 req.query 对象，可以访问到客户端通过查询字符串的形式，发送到服务器的参数：</li>
+</ul>
+<pre><code class="language-javascript">app.get('/', (req, res) =&gt; {
+    // 通过 req.query 可以获取到客户端发送过来的查询参数（?abc=123）
+    console.log(req.query); // { abc: '123' }
+    res.send(req.query)
+})
+</code></pre>
+<p>获取 URL 中的动态参数：</p>
+<ul>
+<li>通过 <mark>req.params</mark> 对象，可以访问到 URL 中通过 ：匹配到的动态参数</li>
+</ul>
+<pre><code class="language-javascript">// 这里的 :id 是一个动态的参数
+app.get('/user/:id', (req, res) =&gt; {
+    // req.params 是动态匹配到的 URL 参数，默认是一个空对象
+    console.log(req.params);
+    res.send(req.params);
+})
+</code></pre>
+<h3 id="23-express-静态资源托管">2.3 Express 静态资源托管</h3>
+<ol>
+<li>express.static()<br>
+通过 express.static() 方法可创建静态资源服务器，向外开放访问静态资源。</li>
+</ol>
+<pre><code class="language-javascript">app.use(express.static('public'))
+</code></pre>
+<p><mark>注意：</mark> Express 在指定静态目录中查找文件，并对外提供资源的访问路径。因此，<mark>存放静态文件的目录名不会出现在 URL<br>
+中。</mark></p>
+<ol start="2">
+<li>挂载路径前缀<br>
+如果希望在托管的静态资源访问路径之前，挂载路径前缀，则可以使用如下的方式：</li>
+</ol>
+<pre><code class="language-javascript">app.use('/public',express.static('public'))
+</code></pre>
+<h3 id="24-nodeman">2.4 nodeman</h3>
+<p>nodeman 能够监听项目文件的变动，当代码被修改后，nodeman 会自动重启项目，极大的方便了开发与调试。</p>
+<p>全局安装 nodeman：</p>
+<pre><code class="language-shell">npm install -g nodeman
+</code></pre>
+<p>使用 nodeman ：</p>
+<pre><code class="language-node">nodeman index.js
+</code></pre>
+<h2 id="3-express-路由">3. Express 路由</h2>
+<h3 id="31-路由的概念">3.1 路由的概念</h3>
+<p>什么是路由？广义来说，路由就是<mark>映射关系</mark>。</p>
+<p>在 Express 中，路由是指客户端的请求与服务器处理函数之前的映射关系。</p>
+<p>Express 中的路由分为 3 个部分组成，分别是<mark>请求的类型、请求的URL地址、处理函数</mark>，格式如下：</p>
+<pre><code class="language-javascript">// 导入 express
+const express = require('express');
+
+// 创建 express 实例（ web 服务器）
+const app = express();
+
+app.get('/user', (req, res) =&gt; {
+    res.send(&quot;hello get user&quot;)
+  })
+app.post('/user', (req, res) =&gt; {
+    res.send('hello post user')
+  })
+
+// 启动 web 服务器
+app.listen(5000, () =&gt; {
+    console.log('服务器启动成功，访问地址：http://127.0.0.1:5000');
+});
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="http://img.upyun.gitnote.cn/2023/03/07/20230307152915.png" alt="" loading="lazy"></figure>
+<p>路由匹配的注意点：</p>
+<ul>
+<li>按照定义的先后顺序进行匹配</li>
+<li>请求类型和请求的URL同时匹配成功，才会调用相对应的处理函数。</li>
+</ul>
+<h3 id="32-路由的简单使用">3.2 路由的简单使用</h3>
+<p>Express 中最简单的路由使用方式，就是将路由挂载到 app 上：</p>
+<pre><code class="language-javascript">// 导入 express
+const express = require('express');
+
+// 创建 express 实例（ web 服务器）
+const app = express();
+
+app.get('/user', (req, res) =&gt; {
+    res.send(&quot;hello get user&quot;)
+  })
+app.post('/user', (req, res) =&gt; {
+    res.send('hello post user')
+  })
+
+// 启动 web 服务器
+app.listen(5000, () =&gt; {
+    console.log('服务器启动成功，访问地址：http://127.0.0.1:5000');
+});
+</code></pre>
+<h3 id="33-路由的模块化">3.3 路由的模块化</h3>
+<p>为了<strong>方便对路由进行模块化的管理</strong>，Express 不建议将路由直接挂载到 app 上，而是<strong>推荐将路由抽离为单独的模块</strong>。</p>
+<p>抽离步骤：</p>
+<ol>
+<li>创建路由模块对应的 js 文件</li>
+<li>调用 express.Router() 函数创建路由对象</li>
+<li>向路由对象上挂载具体的路由</li>
+<li>使用 module.exports 向外共享路由对象</li>
+<li>使用 app.use() 函数注册路由模块</li>
+</ol>
+<pre><code class="language-node">// router.js
+
+const express = require('express')
+// 创建路由对象
+const router = express.Router()
+
+// 挂载具体路由
+router.get('/user/list', (req, res) =&gt; {
+  res.send('Get user list.')
+})
+router.post('/user/add', (req, res) =&gt; {
+  res.send('Add new user.')
+})
+
+// 向外导出路由对象
+module.exports = router
+</code></pre>
+<pre><code class="language-node">// index.js 
+const express = require('express');
+
+
+const app = express();
+
+// 导入路由模块
+const router = require('./router.js');
+
+app.use(router);
+
+app.listen('5000', () =&gt; {
+    console.log('服务器启动成功，访问地址：http://127.0.0.1:5000');
+});
+</code></pre>
+<h3 id="34-为路由模块添加统一的前缀">3.4 为路由模块添加统一的前缀</h3>
+<p>类似与托管静态资源时，为静态资源统一挂载 访问前缀一样，路由模块添加前缀的方式也非常简单：</p>
+<pre><code class="language-node">const express = require('express')
+const router = require('./router')
+
+const app = express()
+
+// 注册路由模块，添加访问前缀
+app.use('/api', router)
+
+app.listen(80, () =&gt; {
+  console.log('http://127.0.0.1')
+})
+</code></pre>
+<h2 id="4-express-中间件">4. Express 中间件</h2>
+<h3 id="41-中间件的基本概念">4.1 中间件的基本概念</h3>
+<ul>
+<li>中间件是指流程的中间处理环节</li>
+<li>服务器收到请求后，可先调用中间件进行预处理</li>
+<li>中间件是一个 function 处理函数，包含 req, res, next 三个参数，next() 参数把流转关系交给下一个中间件或路由<br>
+<img src="http://img.upyun.gitnote.cn/2023/03/07/20230307155705.png" alt="" loading="lazy"></li>
+</ul>
+<p>next 函数的作用：<br>
+next 函数是<strong>实现多个中间件连续调用</strong>的关键，它表示把流转关系<strong>转交</strong>给下一个中间件或路由。</p>
+<h3 id="42-中间件函数的简单使用">4.2 中间件函数的简单使用</h3>
+<p>定义一个简单的中间件函数：</p>
+<pre><code class="language-node">// 常亮 mw 所指向的，就是一个中间件函数
+const mw = function(req,res,next){
+	console.log(&quot;这是一个最简单的中间件函数&quot;)
+	// 注意：当前中间件的业务处理完毕后，必须调用 next() 函数
+	// 表示把流转关系转交给下一个中间件或路由
+	next()
+}
+</code></pre>
+<h4 id="421-全局中间件">4.2.1 全局中间件</h4>
+<p>全局中间件：</p>
+<ul>
+<li>通过 app.use() 定义的中间件为全局中间件。</li>
+</ul>
+<p>客户端发起的任何请求，到达服务器之后，都会触发的中间件。</p>
+<pre><code class="language-node">const express = require('express')
+const app = express()
+
+// 定义第一个全局中间件
+app.use((req, res, next) =&gt; {
+  console.log('调用了第1个全局中间件')
+  next()
+})
+// 定义第二个全局中间件
+app.use((req, res, next) =&gt; {
+  console.log('调用了第2个全局中间件')
+  next()
+})
+
+app.get('/user', (req, res) =&gt; {
+  res.send('User page.')
+})
+
+app.listen(80, () =&gt; {
+  console.log('http://127.0.0.1')
+})
+</code></pre>
+<h4 id="422-局部中间件">4.2.2 局部中间件</h4>
+<p>局部中间件：</p>
+<pre><code class="language-node">const express = require('express')
+const app = express()
+
+// 定义中间件函数
+const mw1 = (req, res, next) =&gt; {
+  console.log('调用了第一个局部生效的中间件')
+  next()
+}
+
+const mw2 = (req, res, next) =&gt; {
+  console.log('调用了第二个局部生效的中间件')
+  next()
+}
+
+// 两种定义局部中间件的方式
+app.get('/hello', mw2, mw1, (req, res) =&gt; res.send('hello page.'))
+app.get('/about', [mw1, mw2], (req, res) =&gt; res.send('about page.'))
+
+app.get('/user', (req, res) =&gt; res.send('User page.'))
+
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+</code></pre>
+<h4 id="423-中间件的作用与注意事项">4.2.3 中间件的作用与注意事项</h4>
+<p>中间件的作用：</p>
+<ul>
+<li>多个中间件之间，<strong>共享一份 req 和 res</strong>。基于这样的特性，可以在上游的中间件中，统一为 req 和 res 对象添加<mark>自定义的属性和方法</mark>，供下游的中间件或路由进行使用。</li>
+</ul>
+<p>中间件使用注意事项：</p>
+<ul>
+<li>一定要在<mark>路由之前</mark>定义中间件。</li>
+<li>客户端发送来的请求，<mark>可以连续调用多个</mark>中间件进行处理。</li>
+<li>执行完中间件代码后，不要忘了调用 next() 函数。</li>
+<li>next() 后不要在写代码。</li>
+<li>连续调用多个中间件时，多个中间件共享 req、 res对象。</li>
+</ul>
+<h3 id="43-中间件的分类">4.3 中间件的分类</h3>
+<p>Express 把常见的中间件用法分成两 5 大类：</p>
+<ul>
+<li>
+<p>应用级别的中间件</p>
+<ul>
+<li>通过 app.use() 或 app.get() 或 app.post() 绑定到 app 实例上的中间件，叫做应用级别的中间件。</li>
+</ul>
+</li>
+<li>
+<p>路由级别的中间件</p>
+<ul>
+<li>绑定到 express.Router() 实例上的中间件，叫做路由级别的中间件。用法和应用级别中间件没有区别。应用级别中间件是绑定到 app 实例上，路由级别中间件绑定到 router 实例上。</li>
+</ul>
+<pre><code class="language-node">const app = express()
+const router = express.Router()
+
+router.use(function (req, res, next) {
+  console.log(1)
+  next()
+})
+
+app.use('/', router)
+</code></pre>
+</li>
+<li>
+<p>错误级别的中间件</p>
+<ul>
+<li>用来捕获整个项目中发生的异常错误，从而防止项目异常崩溃的问题。</li>
+<li>错误级别中间件的处理函数中，<strong>必须有 4 个形参</strong>，形参顺序从前到后分别是 (err, req, res, next) 。</li>
+<li>错误级别的中间件必须注册在所有<strong>路由之后</strong></li>
+</ul>
+<pre><code class="language-node">const express = require('express')
+const app = express()
+
+app.get('/', (req, res) =&gt; {
+  throw new Error('服务器内部发生了错误！')
+  res.send('Home page.')
+})
+
+// 定义错误级别的中间件，捕获整个项目的异常错误，从而防止程序的崩溃
+app.use((err, req, res, next) =&gt; {
+  console.log('发生了错误！' + err.message)
+  res.send('Error：' + err.message)
+})
+
+app.listen(80, function () {
+  console.log('Express server running at http://127.0.0.1')
+})
+</code></pre>
+</li>
+<li>
+<p>Express 内置中间件</p>
+<ul>
+<li>自 Express 4.16.0 版本开始，Express 内置了 3 个常用的中间件，极大的提高了 Express 项目的开发效率和体验：
+<ul>
+<li>express.static 快速托管静态资源的内置中间件，例如： HTML 文件、图片、CSS 样式等（无兼容性）</li>
+<li>express.json 解析 JSON 格式的请求体数据（有兼容性，仅在 4.16.0+ 版本中可用）</li>
+<li>express.urlencoded 解析 URL-encoded 格式的请求体数据（有兼容性，仅在 4.16.0+ 版本中可用）</li>
+</ul>
+<pre><code class="language-node">app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>第三方中间件</p>
+</li>
+</ul>
+<h3 id="44-自定义中间件">4.4 自定义中间件</h3>
+<p>自己动手模拟一个类似与 express.urlencoded 这样的中间件，来解析 POST 提交到服务器的表单数据。<br>
+实现步骤：</p>
+<ul>
+<li>定义中间件</li>
+<li>监听 req 的 data 事件</li>
+<li>监听 req 的 end 事件</li>
+<li>使用 querystring 模块解析请求体数据</li>
+<li>将解析出来的数据对象挂载为 req.body</li>
+<li>将自定义中间件封装为模块</li>
+</ul>
+<pre><code class="language-node">// 导入 express
+const express = require('express');
+
+// 创建 express 实例（ web 服务器）
+const app = express();
+
+// 导入 querystring 模块
+const querystring = require('querystring');
+
+// 监听 req 中的 data 事件，获取客户端发送过来的数据
+let str = '';
+
+// 定义中间件
+app.use((req, res, next) =&gt; {
+    // 定义中间件的具体业务
+    // 监听 req 中的 data 事件，获取客户端发送过来的数据
+    let str = '';
+    req.on('data', (chunk) =&gt; {
+        str += chunk;
+    })
+
+    // 监听 req 中的 end 事件
+    req.on('end', () =&gt; {
+        // 将获取到的数据赋值给 req.body
+        // req.body = str;
+        console.log(str);
+        var obj = querystring.parse(str);
+        console.log(&quot;obj:&quot;,obj);
+        req.body = obj;
+        next();
+    })
+
+})
+
+app.post('/user', (req, res) =&gt; {
+    res.send(req.body);
+})
+
+// 启动 web 服务器
+app.listen(5000, () =&gt; {
+    console.log('服务器启动成功，访问地址：http://127.0.0.1:5000');
+});
+</code></pre>
+<h2 id="5-cors-跨域资源共享">5. CORS 跨域资源共享</h2>
+<h3 id="51-cors-中间件解决跨域">5.1 cors 中间件解决跨域</h3>
+<ul>
+<li>安装中间件：<code>npm install cors</code></li>
+<li>导入中间件：<code>const cors = require('cors')</code></li>
+<li>配置中间件：<code>app.use(cors)</code></li>
+</ul>
+<h3 id="52-什么是-cors">5.2 什么是 CORS ?</h3>
+<ul>
+<li>CORS（Cross-Origin Resource Sharing，跨域资源共享）解决跨域，是通过 HTTP 响应头决定浏览器是否阻止前端 JS 代码跨域获取资源。</li>
+<li>浏览器的同源安全策略默认会阻止网页“跨域”获取资源。但如果接口服务器配置了 CORS 相关的 HTTP 响应头，就可解除浏览器端的跨域访问限制。</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="http://img.upyun.gitnote.cn/2023/03/09/20230309095656.png" alt="" loading="lazy"></figure>
+<ul>
+<li>CORS 主要在服务器端进行配置。客户端浏览器无须做任何额外的配置，即可请求开启了 CORS 的接口。</li>
+<li>CORS 在浏览器中有兼容性。只有支持 XMLHttpRequest Level2 的浏览器，才能正常访问开启了 CORS 的服务端接口（例如：IE10+、Chrome4+、FireFox3.5+）。</li>
+</ul>
+<h3 id="53-cors常见响应头">5.3 CORS常见响应头：</h3>
+<ul>
+<li><code>Access-Control-Allow-Origin</code>：制定了允许访问资源的外域 URL</li>
+</ul>
+<pre><code class="language-node">// 控制只允许来自某些网站的请求
+res.setHeader('Access-Control-Allow-Origin', 'http://bruceblog.io')
+res.setHeader('Access-Control-Allow-Origin', '*')
+</code></pre>
+<ul>
+<li><code>Access-Control-Allow-Headers</code></li>
+<li>默认情况下，CORS 仅支持客户端向服务器发送如下的 9 个请求头：Accept、Accept-Language、Content-Language、DPR、Downlink、Save-Data、Viewport-Width、Width 、Content-Type （值仅限于 text/plain、multipart/form-data、application/x-www-form-urlencoded 三者之一）</li>
+<li>如果客户端向服务器发送了额外的请求头信息，则需要在服务器端，通过 Access-Control-Allow-Headers 对额外的请求头进行声明，否则这次请求会失败！</li>
+</ul>
+<pre><code class="language-node">res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Custom-Header')
+</code></pre>
+<ul>
+<li><code>Access-Control-Allow-Methods</code></li>
+<li>默认情况下，CORS 仅支持客户端发起 GET、POST、HEAD 请求。如果客户端希望通过 PUT、DELETE 等方式请求服务器的资源，则需要在服务器端，通过 Access-Control-Alow-Methods 来指明实际请求所允许使用的 HTTP 方法</li>
+</ul>
+<pre><code class="language-node">res.setHeader('Access-Control-Allow-Methods', 'POST, GET, DELETE, HEAD')
+res.setHEader('Access-Control-Allow-Methods', '*')
+</code></pre>
+<h3 id="54-cors请求分类">5.4 CORS请求分类：</h3>
+<ol>
+<li>简单请求</li>
+</ol>
+<ul>
+<li>请求方式：GET、POST、HEAD 三者之一</li>
+<li>HTTP 头部信息不超过以下几种字段：无自定义头部字段、Accept、Accept-Language、Content-Language、DPR、Downlink、Save-Data、Viewport-Width、Width 、Content-Type（只有三个值 application/x-www-formurlencoded、multipart/form-data、text/plain）</li>
+</ul>
+<ol start="2">
+<li>预检请求</li>
+</ol>
+<ul>
+<li>请求方式为 GET、POST、HEAD 之外的请求 Method 类型</li>
+<li>请求头中包含自定义头部字段</li>
+<li>向服务器发送了 application/json 格式的数据</li>
+</ul>
+<p>在浏览器与服务器正式通信之前，浏览器会先发送 OPTION 请求进行预检，以获知服务器是否允许该实际请求，所以这一次的 OPTION 请求称为“预检请求”。服务器成功响应预检请求后，才会发送真正的请求，并且携带真实数据</p>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/nodejs01/" class="post-title gt-a-link">
+                    Nodejs学习——Nodejs基础
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

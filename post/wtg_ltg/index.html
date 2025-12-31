@@ -1,0 +1,488 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>windows to go 和 linux to go 制作教程 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    windows to go 和 linux to go 制作教程
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-11-15 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/JYsDWHd7J/" class="post-tags">
+                            # 杂七杂八事务所
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p><ul class="markdownIt-TOC">
+<li><a href="#%E4%BD%BF%E7%94%A8-ventoy-%E5%88%B6%E4%BD%9C-windows-to-go-%E5%92%8C-linux-to-go-%E6%95%99%E7%A8%8B%E5%B0%86%E7%B3%BB%E7%BB%9F%E8%A3%85%E8%BF%9Bu%E7%9B%98%E4%B8%AD%E9%9A%8F%E8%BA%AB%E6%90%BA%E5%B8%A6">使用 ventoy 制作 windows to go 和 linux to go 教程，将系统装进U盘中随身携带</a>
+<ul>
+<li><a href="#1-ventoy-%E4%BB%8B%E7%BB%8D">1. ventoy 介绍</a></li>
+<li><a href="#2-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C">2. 准备工作</a></li>
+<li><a href="#3-windows-to-go">3. windows to go</a>
+<ul>
+<li><a href="#31-%E5%B0%86-u%E7%9B%98%E5%88%9D%E5%A7%8B%E5%8C%96">3.1 将 U盘初始化</a></li>
+<li><a href="#32-%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98%E5%AE%89%E8%A3%85-windows-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">3.2 虚拟磁盘安装 windows 操作系统</a></li>
+<li><a href="#33-u%E7%9B%98%E5%90%AF%E5%8A%A8-vhd-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">3.3 U盘启动 VHD 操作系统</a></li>
+</ul>
+</li>
+<li><a href="#4-linux-to-go">4. linux to go</a>
+<ul>
+<li><a href="#41-%E5%B0%86-u%E7%9B%98%E5%88%9D%E5%A7%8B%E5%8C%96">4.1 将 U盘初始化</a></li>
+<li><a href="#42-%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98%E5%AE%89%E8%A3%85-linux-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">4.2 虚拟磁盘安装 linux 操作系统</a></li>
+<li><a href="#43-u%E7%9B%98%E5%90%AF%E5%8A%A8-vhd-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F">4.3 U盘启动 VHD 操作系统</a></li>
+</ul>
+</li>
+<li><a href="#5-%E6%80%BB%E7%BB%93">5. 总结</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h1 id="使用-ventoy-制作-windows-to-go-和-linux-to-go-教程将系统装进u盘中随身携带">使用 ventoy 制作 windows to go 和 linux to go 教程，将系统装进U盘中随身携带</h1>
+<h2 id="1-ventoy-介绍">1. ventoy 介绍</h2>
+<p>ventoy 是一个U盘启动盘制作工具。官方网址：<a href="https://www.ventoy.net/">https://www.ventoy.net/</a></p>
+<blockquote>
+<p>简单来说，Ventoy是一个制作可启动U盘的开源工具。<br>
+有了Ventoy你就无需反复地格式化U盘，你只需要把 ISO/WIM/IMG/VHD(x)/EFI 等类型的文件直接拷贝到U盘里面就可以启动了，无需其他操作。<br>
+你可以一次性拷贝很多个不同类型的镜像文件，Ventoy 会在启动时显示一个菜单来供你进行选择 (参见 截图)。<br>
+你还可以在 Ventoy 的界面中直接浏览并启动本地硬盘中的 ISO/WIM/IMG/VHD(x)/EFI 等类型的文件。</p>
+</blockquote>
+<h2 id="2-准备工作">2. 准备工作</h2>
+<p>本教程并不是教你如何制作安装操作系统的 U盘启动盘，而是制作一个可以在 <mark>U盘中实时运行的系统</mark>，将 U盘当C盘使用，像随身携带一个自己的操作系统一样，可在其他电脑上直接启动。</p>
+<p>首先你需要准备一下内容，提前准备好有助于节省大量时间：</p>
+<ul>
+<li>安装有 windows10 以上版本的电脑一台 。</li>
+<li>一个大容量 USB3.0 接口的U盘。（安装linux推荐32G+，安装windows推荐64G+）</li>
+<li>VirtualBox 虚拟机软件</li>
+<li>ventoy 安装软件</li>
+</ul>
+<h2 id="3-windows-to-go">3. windows to go</h2>
+<p>windows to go 简称 wtg，wtg的教程有很多，目前市面上有很多工具可以直接将 U盘 一键转换成 wtg U盘，例如 萝卜头论坛的 WTGA 工具等等。<a href="https://bbs.luobotou.org/forum.php?mod=forumdisplay&amp;fid=88">https://bbs.luobotou.org/forum.php?mod=forumdisplay&amp;fid=88</a></p>
+<p>但这些工具都是使用了整个 U 盘空间，使 U盘只能当系统盘使用，无法使用其内部的剩余空间，造成了资源的浪费。</p>
+<p>本教程使用虚拟磁盘技术(VHD)，将 U盘中的一部分用于安装系统，另一部分还可当正常的 U盘使用，且两部分互不干扰。</p>
+<p>本教程原理是使用虚拟磁盘技术，从 U盘中分出一部分固定空间，在固定空间中安装操作系统，然后使用 ventoy 软件引导操作系统的启动，从而实现在保留 U盘原始功能的条件下将操作系统运行在 U盘中。</p>
+<h3 id="31-将-u盘初始化">3.1 将 U盘初始化</h3>
+<blockquote>
+<p>警告：U盘的文件系统建议使用 NTFS，FAT32会出问题。</p>
+</blockquote>
+<p>使用 ventoy 软件将 U盘转换成 ventoy U盘，然后将U盘主分区格式化为 NTFS 格式。</p>
+<figure data-type="image" tabindex="1"><img src="https://blog.zhawenwen.cn//post-images/1668518366527.png" alt="" loading="lazy"></figure>
+<blockquote>
+<p><mark>使用 ventoy 工具将U盘转换成 ventoy U盘后，U盘主分区会变成 exFAT 格式，需要将其主分区格式化成 NTFS 格式，否则 windows to go 无法正常启动</mark></p>
+</blockquote>
+<h3 id="32-虚拟磁盘安装-windows-操作系统">3.2 虚拟磁盘安装 windows 操作系统</h3>
+<blockquote>
+<p>警告：本教程使用的是 VirtualBox 软件，其他虚拟机软件可能会出现问题。</p>
+</blockquote>
+<p>打开 VirtualBox 软件新建虚拟电脑，创建固定大小的 VHD，注意只支持静态大小的，不支持动态扩展类型的。大小为40G左右，这个大小可以根据自己的需要进行调整，<mark>位置放在本地磁盘中</mark>，后期需要拷贝到U盘中。</p>
+<p>注意勾选上 EFI，使文件既能在 Legacy BIOS 模式下启动，也能在 UEFI 模式下启动。<br>
+<img src="https://blog.zhawenwen.cn//post-images/1668518344349.png" alt="" loading="lazy"></p>
+<p>然后在 VirtualBox 中创建好的虚拟电脑中安装 windows 操作系统。正常安装即可。</p>
+<h3 id="33-u盘启动-vhd-操作系统">3.3 U盘启动 VHD 操作系统</h3>
+<p>将上面创建的安装好操作系统的虚拟磁盘VHD 拷贝到 U盘中。</p>
+<p>要想在 U盘中启动 VHD 操作系统，还需要在 U盘中放置一个 Windows VHD 文件启动插件：ventoy_vhdboot.img 。</p>
+<p>从下面任意一个链接中下载 ventoy_vhdboot.img 文件即可（几个链接中的文件都是一样的）。<br>
+https://github.com/ventoy/vhdiso/releases<br>
+https://ventoy.lanzoub.com/b01dlxuaj (蓝奏云，密码: 7my4)</p>
+<p>把下载后的文件放在U盘第1个分区（就是放ISO文件的分区）的 ventoy 目录下（默认没有这个目录，需手动创建，注意大小写），即 /ventoy/ventoy_vhdboot.img 就可以了。<br>
+<mark>注意是放在容量大的、存放ISO文件的那个分区中，不要放到那个 32MB 的 VTOYEFI 分区里面。</mark></p>
+<p>然后重启电脑选择U盘启动，选择 VHD 操作系统启动即可。</p>
+<h2 id="4-linux-to-go">4. linux to go</h2>
+<p>linux to go 是一种在 U盘中运行 linux 操作系统的技术，本教程使用的是 ubuntu2004 ，即将 ubuntu2004 操作系统安装到 U盘中，然后使用 ventoy 软件引导操作系统的启动，从而实现在保留 U盘原始功能的条件下将操作系统运行在 U盘中。</p>
+<h3 id="41-将-u盘初始化">4.1 将 U盘初始化</h3>
+<p>将U盘格式化为NTFS格式，然后使用 ventoy 软件将 U盘转换成 ventoy U盘。</p>
+<figure data-type="image" tabindex="2"><img src="https://blog.zhawenwen.cn//post-images/1668518366527.png" alt="" loading="lazy"></figure>
+<h3 id="42-虚拟磁盘安装-linux-操作系统">4.2 虚拟磁盘安装 linux 操作系统</h3>
+<blockquote>
+<p>警告：本教程使用的是 VirtualBox 软件，其他虚拟机软件可能会出现问题。</p>
+</blockquote>
+<p>打开 VirtualBox 软件新建虚拟电脑，创建固定大小的 vdi，注意只支持静态大小的，不支持动态扩展类型的。大小为20G左右，这个大小可以根据自己的需要进行调整，<mark>位置放在本地磁盘中</mark>，后期需要拷贝到U盘中。</p>
+<p>注意勾选上 EFI，使文件既能在 Legacy BIOS 模式下启动，也能在 UEFI 模式下启动。<br>
+<img src="https://blog.zhawenwen.cn//post-images/1668518344349.png" alt="" loading="lazy"></p>
+<p>然后在 VirtualBox 中创建好的虚拟电脑中安装 ubuntu2004 操作系统。正常安装即可。</p>
+<p>安装完成后，启动 VirtualBox中的虚拟电脑，进入 ubuntu2004 操作系统，然后下载 vtoyboot 脚本，这一步是为了在系统中做一些处理，以支持Ventoy启动。</p>
+<p>vtoyboot 脚本下载地址：<a href="https://github.com/ventoy/vtoyboot/releases">https://github.com/ventoy/vtoyboot/releases</a></p>
+<p>下载的是 vtoyboot.xxx.iso 文件，解压得到 vtoyboot.sh 脚本文件，然后以root权限执行里面的脚本 <code>sudo bash vtoyboot.sh</code> ，执行成功后关机。</p>
+<h3 id="43-u盘启动-vhd-操作系统">4.3 U盘启动 VHD 操作系统</h3>
+<p>将上面创建的安装好操作系统的虚拟磁盘VHD 拷贝到 U盘中。<mark>然后将文件的后缀名改为 .vtoy ,例如：ubuntu2004.vtoy 或者 ubuntu2004.vdi.vtoy。</mark></p>
+<p>然后重启电脑选择 U盘启动，选择 buntu2004.vdi.vtoy 操作系统启动即可。</p>
+<hr>
+<h2 id="5-总结">5. 总结</h2>
+<p>U盘容量不能太小，vhd 与 vdi 大小一旦固定，后期无法更改，且 vhd 与 vdi 的大小就是操作系统里可见的最大空间。</p>
+<p>U盘速度不能太慢，建议使用 USB3.0 以上接口的 U盘，否则会影响操作系统的运行速度。</p>
+<p>windows to go 和 linux to go 安装完成后可以放在同一个 U盘中，但是启动时需要选择不同的启动项，按需运行。</p>
+<p>部分参考链接：</p>
+<p>【1】<a href="https://www.ventoy.net/">ventoy官网：新一代多系统启动U盘解决方案</a><br>
+【2】<a href="https://www.ventoy.net/cn/doc_start.html">ventoy官方文档：Ventoy使用手册</a><br>
+【3】<a href="https://www.ventoy.net/cn/plugin.html">ventoy插件文档</a><br>
+【4】<a href="https://bbs.luobotou.org/forum-88-1.html">萝卜头IT论坛：Windows To Go优盘系统</a><br>
+【5】<a href="https://www.disktool.cn/wintogo.html">傲梅口袋系统(WinToGo)——将Win 10装进U盘</a></p>
+<hr>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/pigAuido_reco_show/" class="post-title gt-a-link">
+                    搭建音频在线实时分类系统
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

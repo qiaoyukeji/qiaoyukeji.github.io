@@ -1,0 +1,769 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Qt学习笔记_第一阶段 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Qt学习笔记_第一阶段
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-10-25 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/-JCsLImfP/" class="post-tags">
+                            # qt
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/lpnXeS9hT_/" class="post-tags">
+                            # c/c++
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h2 id="1qt简介">1.QT简介</h2>
+<h3 id="11-跨平台图形界面引擎">1.1 跨平台图形界面引擎</h3>
+<h3 id="12-优点">1.2 优点</h3>
+<ul>
+<li>跨平台</li>
+<li>接口简单，容易上手</li>
+<li>一定程度上简化了内存回收</li>
+</ul>
+<h3 id="13-版本问题">1.3 版本问题</h3>
+<ul>
+<li>商业版</li>
+<li>开源版（Qt 5.9）</li>
+</ul>
+<h3 id="14-成功案例">1.4 成功案例</h3>
+<ul>
+<li>linux 桌面环境 KDE</li>
+<li>谷歌地图</li>
+<li>VLC 多媒体播放器</li>
+</ul>
+<h2 id="2创建第一个-qt-程序">2.创建第一个 Qt 程序</h2>
+<h3 id="21-点击创建项目后选择项目的路径和名称">2.1 点击创建项目后，选择项目的路径和名称</h3>
+<h3 id="22-名称不能有中文和空格">2.2 名称不能有中文和空格</h3>
+<h3 id="23-路径不能有中文名称">2.3 路径不能有中文名称</h3>
+<h3 id="24-默认创建窗口类mywidget基类有三种选择qwidgetqmainwidgetqdialog">2.4 默认创建窗口类：myWidget，基类有三种选择：QWidget，QMainWidget，QDialog</h3>
+<h3 id="25-main-函数">2.5 main 函数</h3>
+<ul>
+<li>QApplication a 应用程序对象，有且仅有一个</li>
+<li>myWidget w; 实例化窗口对象</li>
+<li>w.show(); 调用show函数，显示函数</li>
+<li>return a.exec(); 让应用程序对象进入消息循环机制中，代码阻塞到当前行</li>
+</ul>
+<pre><code class="language-c++">// main.cpp
+
+#include &quot;mywidget.h&quot;
+#include &lt;QApplication&gt; //包含一个应用程序类的头文件
+
+
+// mian 函数入口    argc命令行变量的数量  argv命令行变量的数组
+int main(int argc, char *argv[])
+{
+    // a 应用程序对象，在qt中，应用程序对象有且仅有一个
+    QApplication a(argc, argv);
+    //窗口对象 myWidget父类 -&gt; QWidget
+    myWidget w;
+    //窗口对象默认不会显示，必须调用show方法展示窗口
+    w.show();
+
+    //让应用程序对象进入消息循环
+    //让代码阻塞到这行
+    return a.exec();
+}
+</code></pre>
+<h3 id="26-pro工程文件解释">2.6 pro工程文件解释</h3>
+<pre><code class="language-c++">// Qt 包含的模块
+QT       += core gui
+
+// 大于 4 版本以上，包含 widget 模块
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+//目标  生成的.exe程序的名称
+TARGET = 01firstProject
+// 模板 应用程序模板
+TEMPLATE = app
+
+DEFINES += QT_DEPRECATED_WARNINGS
+
+// 源文件
+SOURCES += \
+        main.cpp \
+        mywidget.cpp
+
+// 头文件
+HEADERS += \
+        mywidget.h
+</code></pre>
+<h3 id="27-h-文件解释">2.7 .h 文件解释</h3>
+<pre><code class="language-c++">#ifndef MYWIDGET_H
+#define MYWIDGET_H
+
+// 包含头文件 Qwidget    窗口类
+#include &lt;QWidget&gt;
+
+// 类 myWidget 继承父类 QWidget
+class myWidget : public QWidget
+{
+    // Q_OBJECT宏，允许类中使用信号和槽的机制
+    Q_OBJECT
+
+public:
+    // 构造函数（有参构造）
+    myWidget(QWidget *parent = 0);
+    // 析构函数
+    ~myWidget();
+};
+
+#endif // MYWIDGET_H
+</code></pre>
+<h2 id="3-按钮控件常见api">3. 按钮控件常见API</h2>
+<p>3.1 创建 QPushButton * btn=new QPushButton;<br>
+3.2 设置父亲 btn-&gt;setParent(this);<br>
+3.3 设置文本 btn-&gt;setText(&quot;第一个按钮&quot;);<br>
+3.4 设置位置 btn2-&gt;move(宽,高);<br>
+3.5 重新指定窗口大小 resize(600,400);<br>
+3.6 设置窗口标题 setWindowTitle(&quot;第一个窗口&quot;);<br>
+3.7 设置窗口固定大小 setFixedSize(600,400);</p>
+<pre><code class="language-c++">// mywidget.cpp
+
+#include &quot;mywidget.h&quot;
+#include &lt;QPushButton&gt; // 按钮控件的头文件
+
+// 命名规范
+// 类名 首字母大写 ，单词与单词之间首字母大写
+// 函数名 变量名称 首字母小写
+
+// 快捷键
+// 注释：ctrl + /
+// 运行：ctrl + r
+// 编译：ctrl + b
+// 字体缩放 ctrl + 鼠标滚轮
+// 查找 ctrl + f
+// 整行移动 ctrl + shift + ↑ 或者 ↓
+// 帮助文档 F1
+// 自动对齐 ctrl + i
+// 同名之间的 .h 和 .cpp 切换
+
+
+// 帮助文档 第一种方式 F1    第二种方式 左侧按钮
+myWidget::myWidget(QWidget *parent)
+    : QWidget(parent)
+{
+    // 创建一个按钮
+    QPushButton * btn=new QPushButton;
+    //  btn-&gt;show();// show 以顶层方式弹出控件
+    // 让btn对象 依赖在 myWidget 窗口中
+    btn-&gt;setParent(this);
+
+    // 显示文本
+    btn-&gt;setText(&quot;第一个按钮&quot;);
+
+    //创建第二个按钮
+    QPushButton * btn2=new QPushButton(&quot;第二个按钮&quot;,this);
+
+    // 移动btn2窗口
+    btn2-&gt;move(100,100);
+
+    //重置窗口大小
+    resize(600,400);
+
+    //设置固定的窗口大小
+    setFixedSize(600,400);
+    //设置窗口标题
+    setWindowTitle(&quot;第一个窗口&quot;);
+
+
+}
+
+myWidget::~myWidget()
+{
+
+}
+
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-202110181072.png" alt="第一天笔记-202110181072.png" loading="lazy"></figure>
+<h2 id="4-对象数">4. 对象数</h2>
+<p>4.1 当创建的对象在堆区时候，如果指定的父亲是 QObject 派生下来的类或者 QObject 的子类派生下来的类，可以不用管理释放的操作，将对象会放入对象树中。</p>
+<ul>
+<li>QWidget是能够在屏幕上显示的一切组件的父类
+<ul>
+<li>QWidget继承自QObject，因此也继承了这种对象树关系。一个孩子自动地成为父组件的一个子组件。因此，它会显示在父组件的坐标系统中，被父组件的边界剪裁。例如，当用户关闭一个对话框的时候，应用程序将其删除，那么，我们希望属于这个对话框的按钮、图标等应该一起被删除。事实就是如此，因为这些都是对话框的子组件。</li>
+</ul>
+</li>
+</ul>
+<p>4.2 一定程度上简化了内存回收机制。</p>
+<ul>
+<li>
+<p>当一个QObject对象在堆上创建的时候，Qt 会同时为其创建一个对象树。不过，对象树中对象的顺序是没有定义的。这意味着，销毁这些对象的顺序也是未定义的。</p>
+</li>
+<li>
+<p>任何对象树中的 QObject对象 delete 的时候，如果这个对象有 parent，则自动将其从 parent 的children()列表中删除；如果有孩子，则自动 delete 每一个孩子。Qt 保证没有QObject会被 delete 两次，这是由析构顺序决定的。<br>
+<img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-2021101815158.png" alt="第一天笔记-2021101815158.png" loading="lazy"></p>
+</li>
+</ul>
+<h2 id="5-qt-中的坐标系">5. qt 中的坐标系</h2>
+<p>以左上角为原点（0,0），X向右增加，Y向下增加。</p>
+<figure data-type="image" tabindex="2"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211018151848.png" alt="第一天笔记-20211018151848.png" loading="lazy"></figure>
+<h2 id="6-信号与槽">6. 信号与槽</h2>
+<figure data-type="image" tabindex="3"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211018154314.png" alt="第一天笔记-20211018154314.png" loading="lazy"></figure>
+<ul>
+<li>
+<p>6.1 连接函数 connect</p>
+</li>
+<li>
+<p>6.2 参数</p>
+<ul>
+<li>6.2.1 参数1 信号发送者</li>
+<li>6.2.2 参数2 发送的信号</li>
+<li>6.2.3 参数3 信号接受着</li>
+<li>6.2.4 参数4 处理的槽函数</li>
+</ul>
+</li>
+<li>
+<p>6.3 松散耦合</p>
+</li>
+<li>
+<p>6.4 实现 ：点击按钮，关闭窗口的案例</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211018154751.png" alt="第一天笔记-20211018154751.png" loading="lazy"></figure>
+<pre><code class="language-c++">    //创建第二个按钮
+    QPushButton * btn2=new QPushButton(&quot;第二个按钮&quot;,this);
+
+    // 移动btn2窗口
+    btn2-&gt;move(100,100);
+
+    // 需求： 点击myBtn 关闭窗口
+    //参数1 信号的发送者 参数2 发送的信号(函数的地址) 参数3 函数的接受者  参数4 处理的槽
+    connect(btn2,&amp;QPushButton::clicked,this,&amp;QWidget::close);```
+</code></pre>
+<h2 id="7-自定义的信号与槽">7. 自定义的信号与槽</h2>
+<ul>
+<li>7.1 自定义信号
+<ul>
+<li>7.1.1 写到 signals 下</li>
+<li>7.1.2 返回值为void</li>
+<li>7.1.3 需要声明，不需要实现</li>
+<li>7.1.4 可以有参数，可以重载</li>
+</ul>
+</li>
+<li>7.2 自定义槽函数
+<ul>
+<li>7.2.1 写到 public slot 或者 public 或者全局函数</li>
+<li>7.2.2 返回为void</li>
+<li>7.2.3 需要声明，需要实现</li>
+<li>7.2.4 可以有参数，可以重载</li>
+</ul>
+</li>
+<li>7.3 触发自定义信号
+<ul>
+<li>7.3.1 emit 自定义信号</li>
+</ul>
+</li>
+<li>7.3 案例：下课后，老师发出饿了信号，学生响应，并请老师吃饭</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AC%94%E8%AE%B0-20211022192249.png" alt="第一阶段笔记-20211022192249.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AC%94%E8%AE%B0-20211022192323.png" alt="第一阶段笔记-20211022192323.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AC%94%E8%AE%B0-20211022193138.png" alt="第一阶段笔记-20211022193138.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AC%94%E8%AE%B0-20211022193138.png" alt="第一阶段笔记-20211022193138.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AC%94%E8%AE%B0-20211022195413.png" alt="第一阶段笔记-20211022195413.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211018213946.png" alt="第一天笔记-20211018213946.png" loading="lazy"></figure>
+<h2 id="8-自定义信号和槽出现重载">8. 自定义信号和槽出现重载</h2>
+<ul>
+<li>需要利用<mark>函数指针</mark>明确指向函数的地址<pre><code class="language-c++">//  链接带参数的槽
+// 指针 -》 地址
+// 函数指针 -》 函数地址
+void(Teacher:: *teacherSign)(QString)=&amp;Teacher::hungry;
+void(Student:: *studentSlot)(QString)=&amp;Student::treat;
+connect(zt,teacherSign,st,studentSlot);
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="11"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AC%94%E8%AE%B0-20211022192855.png" alt="第一阶段笔记-20211022192855.png" loading="lazy"></figure>
+<ul>
+<li><code>QString</code> 类型转换为 <code>char *</code> 类型：解决打印出的值带有双引号
+<ul>
+<li>通过 <code>toUtf8()</code> 转换成 QByteArray 类型</li>
+<li>然后通过 <code>.data()</code> 装换成 <code>char *</code> 类型<br>
+<img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211019205851.png" alt="第一天笔记-20211019205851.png" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c++">void Student::treat(QString foodName){
+    qDebug()&lt;&lt;&quot;eat:&quot;&lt;&lt;foodName;
+    // QString 转 char *:先转成 QByteArray（.toUtf8()）再转成char *（.data()）
+    qDebug()&lt;&lt;&quot;eat:&quot;&lt;&lt;foodName.toUtf8().data();
+}
+</code></pre>
+<ul>
+<li>信号可以链接信号</li>
+</ul>
+<pre><code class="language-c++">    //无参信号与槽链接
+    void(Teacher:: *teacherSign2)(void)=&amp;Teacher::hungry;
+    void(Student:: *studentSlot2)(void)=&amp;Student::treat;
+    connect(zt,teacherSign2,st,studentSlot2);
+
+    //信号链接信号  按钮信号链接老师饿了的信号，直接触发
+    connect(btn,&amp;QPushButton::clicked,zt,teacherSign2);
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211019212236.png" alt="第一天笔记-20211019212236.png" loading="lazy"></figure>
+<ul>
+<li>断开信号 disconnect</li>
+</ul>
+<figure data-type="image" tabindex="13"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211019212324.png" alt="第一天笔记-20211019212324.png" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-20211019212445.png" alt="第一天笔记-20211019212445.png" loading="lazy"></figure>
+<h2 id="8-拓展">8. 拓展:</h2>
+<ul>
+<li>1.信号可以链接信号
+<ul>
+<li>当第一个信号发出时，第二个信号被发出。除此之外，这种信号-信号的形式和信号-槽的形式没有什么区别。</li>
+</ul>
+</li>
+<li>2.一个信号可以链接多个槽函数
+<ul>
+<li>如果是这种情况，这些槽会一个接一个的被调用，但是它们的调用顺序是不确定的。</li>
+</ul>
+</li>
+<li>3.多个信号可以同时链接同一个槽函数
+<ul>
+<li>只要任意一个信号发出，这个槽就会被调用。</li>
+</ul>
+</li>
+<li>4.信号与槽函数的参数 必须类型一一对应</li>
+<li>5.信号与槽的参数的个数：信号的个数可以多于槽函数，但类型需要一一对应</li>
+</ul>
+<h2 id="9-qt4版本的信号与槽">9. qt4版本的信号与槽</h2>
+<pre><code>connect(zt,SIGNAL(hungry(),st,SLOT(treat());
+connect(信号的发送者,发送的信号SIGNAL(信号),信号的接受者,槽函数SLOT(槽函数))
+</code></pre>
+<p>优点：参数直观<br>
+缺点：类型不做检测<br>
+qt5以上版本支持QT4版本的写法</p>
+<blockquote>
+<p>这里使用了SIGNAL和SLOT这两个宏，将两个函数名转换成了字符串。注意到connect()函数的 signal 和 slot 都是接受字符串，一旦出现连接不成功的情况，Qt4是没有编译错误的（因为一切都是字符串，编译期是不检查字符串是否匹配），而是在运行时给出错误。这无疑会增加程序的不稳定性。</p>
+</blockquote>
+<h2 id="10-lambda-表达式函数">10. lambda 表达式函数、</h2>
+<p>函数：<code>[](){};</code><br>
+函数调用：<code>[](){}();</code></p>
+<p><code>[函数对象参数](操作符重载函数参数){函数体}</code><br>
+<code>[函数对象参数](操作符重载函数参数)mutable -&gt;返回值{函数体}</code></p>
+<ul>
+<li>
+<ol>
+<li><mark>函数对象参数</mark><br>
+[],标识一个 Lambda 的开始，这部分必须存在，<mark>不能省略</mark>。函数对象参数是传递给编译器自动生成的函数对象类的构造函数的。函数对象参数只能使用那些到定义Lambda为止时Lambda所在作用范围内可见的局部变量（包括Lambda所在类的this）。函数对象参数有以下形式：</li>
+</ol>
+<ul>
+<li>空。没有使用任何函数对象参数。</li>
+<li>=。函数体内可以使用Lambda所在作用范围内所有可见的局部变量（包括Lambda所在类的this），并且是<mark>值传递方式</mark>（相当于编译器自动为我们按值传递了所有局部变量）。</li>
+<li>&amp;。函数体内可以使用Lambda所在作用范围内所有可见的局部变量（包括Lambda所在类的this），并且是<mark>引用传递方式</mark>（相当于编译器自动为我们按引用传递了所有局部变量）。</li>
+<li>this。函数体内可以使用Lambda所在类中的成员变量。</li>
+<li>a。将a按值进行传递。按值进行传递时，函数体内不能修改传递进来的a的拷贝，因为默认情况下函数是const的。要修改传递进来的a的拷贝，可以添加mutable修饰符。</li>
+<li>&amp;a。将a按引用进行传递。</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>操作符重载函数参数<br>
+标识重载的 () 操作符的参数，没有参数时，这部分可以省略。参数可以通过按值（如：(a,b)）和按引用（如：(&amp;a,&amp;b)）两种方式进行传递。</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>可修改标识符<br>
+mutable声明，这部分可以省略。按值传递函数对象参数时，加上mutable修饰符后，可以修改按值传递进来的拷贝（注意是能修改拷贝，而不是值本身）。<br>
+<img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-2021102011112.png" alt="第一天笔记-2021102011112.png" loading="lazy"></li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>函数返回值<br>
+-&gt;返回值类型，标识函数返回值的类型，当返回值为void，或者函数体中只有一处return的地方（此时编译器可以自动推断出返回值类型）时，这部分可以省略。<br>
+<img src="http://md.gitnote.cn/%E7%AC%AC%E4%B8%80%E5%A4%A9%E7%AC%94%E8%AE%B0-202110201139.png" alt="第一天笔记-202110201139.png" loading="lazy"></li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>函数体<br>
+{}，标识函数的实现，这部分不能省略，但函数体可以为空。</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-c++">    //利用lambda表达式 实现点击按钮关闭窗口
+    QPushButton * btn2 = new QPushButton;
+    btn2-&gt;setParent(this);
+    btn2-&gt;setText(&quot;关闭&quot;);
+    btn2-&gt;move(100,0);
+    // connect(btn2,&amp;QPushButton::clicked,this,&amp;Widget::close);
+    //当第三个参数是 this 时，可以省略不写
+    connect(btn2,&amp;QPushButton::clicked,this,[=](){
+        this-&gt;close();
+    });
+</code></pre>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/javascript-webapi_3_bom/" class="post-title gt-a-link">
+                    javascript学习笔记——webapi_3_BOM
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

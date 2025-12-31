@@ -1,0 +1,871 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>javascript学习笔记——webapi_2_事件高级 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    javascript学习笔记——webapi_2_事件高级
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-09-23 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/GShRDCpDp/" class="post-tags">
+                            # javascript
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/l3xjV_uj9T/" class="post-tags">
+                            # 前端
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本文是本人最近学习 javascript 的笔记，内容尚不完善，正在学习补充中！</p>
+<!-- more -->
+<h2 id="事件高级">事件高级</h2>
+<h3 id="1-注册事件绑定事件">1. 注册事件（绑定事件）</h3>
+<h4 id="11-注册事件概述">1.1 注册事件概述</h4>
+<p>给元素添加事件，称为注册事件或者绑定事件。</p>
+<p>注册事件有两种方式：<mark>传统方式</mark>和<mark>方法监听注册方式</mark>。</p>
+<blockquote>
+<p>传统注册方式：</p>
+<ul>
+<li>利用 on 开头的事件 onclick</li>
+<li>&lt;button onclick=”alret('hi~')“&gt;</button></li>
+<li>btn.onclick=function(){}</li>
+<li>特点：注册事件的<mark>唯一性</mark></li>
+</ul>
+</blockquote>
+<blockquote>
+<p>方法监听注册方式:</p>
+<ul>
+<li>w3c 标准推荐方式</li>
+<li>addEventListener() 它是一个方法</li>
+<li>IE9 之前的 IE 不支持此方法，可使用 attachEvent() 代替</li>
+<li>特点：同一个元素同一个事件可以注册多个监听器</li>
+<li>按注册顺序依次执行</li>
+</ul>
+</blockquote>
+<h4 id="12-addeventlistener">1.2 addEventListener</h4>
+<pre><code>eventTarget.addEventListener(type,listener[,useCapture])
+</code></pre>
+<p>eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget（目标对象）上，当该对象触发指定的事件时，就会执行事件处理函数。</p>
+<p>该方法接收三个参数：</p>
+<ul>
+<li>type：事件类型字符串，比如 click 、mouseover ，注意这里不要带 on</li>
+<li>listener：事件处理函数，事件发生时，会调用该监听函数</li>
+<li>useCapture：可选参数，是一个布尔值，默认是 false。学完 DOM 事件流后，我们再进一步学习</li>
+</ul>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;button&gt;传统注册事件&lt;/button&gt;
+    &lt;button&gt;方法监听注册实践&lt;/button&gt;
+    &lt;script&gt;
+        var btns = document.querySelectorAll('button');
+        // 1. 传统方式注册事件  只执行绑定的最后一个事件处理程序
+        btns[0].onclick = function() {
+            alert('hi~')
+        }
+        btns[0].onclick = function() {
+                alert('R U ok~')
+            }
+            // 2. 事件侦听注册事件 addEventListener 里面的事件类型是字符串
+            //  同一个元素，同一个事件可以添加多个侦听器（事件处理程序）
+        btns[1].addEventListener('click', function() {
+            alert('22');
+        })
+        btns[1].addEventListener('click', function() {
+            alert('33');
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h4 id="13-attachevent-事件监听方式非标准">1.3 attachEvent 事件监听方式(非标准)</h4>
+<pre><code>eventTarget.attachEvent(eventNameWithOn, callback)
+</code></pre>
+<p>eventTarget.attachEvent()方法将指定的监听器注册到 eventTarget（目标对象） 上，当该对象触发指定的事件时，指定的回调函数就会被执行。</p>
+<blockquote>
+<p>该方法接收两个参数：</p>
+<ul>
+<li>eventNameWithOn：事件类型字符串，比如 onclick 、onmouseover ，这里要带 on</li>
+<li>callback： 事件处理函数，当目标触发事件时回调函数被调用</li>
+</ul>
+</blockquote>
+<p><mark>注意：IE8 及早期版本支持</mark></p>
+<h3 id="2-删除事件解绑事件">2. 删除事件（解绑事件）</h3>
+<h4 id="21-删除事件的方式">2.1 删除事件的方式</h4>
+<ul>
+<li>
+<p>传统注册方式</p>
+<pre><code>eventTarget.onclick = null;
+</code></pre>
+</li>
+<li>
+<p>方法监听注册方式</p>
+<pre><code>eventTarget.removeEventListener(type, listener[, useCapture]);
+
+eventTarget.detachEvent(eventNameWithOn, callback); // ie8以前
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div&gt;1&lt;/div&gt;
+    &lt;div&gt;2&lt;/div&gt;
+    &lt;div&gt;3&lt;/div&gt;
+    &lt;script&gt;
+        var divs = document.querySelectorAll('div');
+        divs[0].onclick = function() {
+                alert('11');
+                // 1. 传统方式删除事件
+                divs[0].onclick = null;
+            }
+        //2. 方法监听注册方式删除事件   注：这里不能用匿名函数
+        divs[1].addEventListener('click', fn);
+
+        function fn() {
+            alert('22');
+            divs[1].removeEventListener('click', fn);
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="3-dom-事件流">3. DOM 事件流</h3>
+<p>事件流描述的是从页面中接收事件的顺序。<br>
+事件发生时会在元素节点之间按照特定的顺序传播，这个传播过程即 DOM 事件流。</p>
+<p><mark>DOM 事件流分为3个阶段:</mark></p>
+<ol>
+<li>捕获阶段</li>
+<li>当前目标阶段</li>
+<li>冒泡阶段</li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192320292.png" alt="WebApi笔记_2_事件高级-202192320292.png" loading="lazy"></figure>
+<ul>
+<li>事件冒泡： IE 最早提出，事件开始时由最具体的元素接收，然后逐级向上传播到到 DOM 最顶层节点的过程。</li>
+<li>事件捕获： 网景最早提出，由 DOM 最顶层节点开始，然后逐级向下传播到到最具体的元素接收的过程。</li>
+</ul>
+<p>我们向水里面扔一块石头，首先它会有一个下降的过程，这个过程就可以理解为从最顶层向事件发生的最具体元素（目标点）的捕获过程；之后会产生泡泡，会在最低点（ 最具体元素）之后漂浮到水面上，这个过程相当于事件冒泡。<br>
+<img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021923203259.png" alt="WebApi笔记_2_事件高级-2021923203259.png" loading="lazy"></p>
+<blockquote>
+<p><mark>注意</mark></p>
+<ol>
+<li>JS 代码中只能执行捕获或者冒泡其中的一个阶段。</li>
+<li>onclick 和 attachEvent 只能得到冒泡阶段。</li>
+<li>addEventListener(type, listener[, useCapture])第三个参数如果是 true，表示在事件捕获阶段调用事件处理程序；如果是 false（不写默认就是false），表示在事件冒泡阶段调用事件处理程序。</li>
+<li><mark>实际开发中我们很少使用事件捕获，我们更关注事件冒泡。</mark></li>
+<li>有些事件是没有冒泡的，比如 onblur、onfocus、onmouseenter、onmouseleave</li>
+<li>事件冒泡有时候会带来麻烦，有时候又会帮助很巧妙的做某些事件，我们后面讲解。</li>
+</ol>
+</blockquote>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div class=&quot;father&quot;&gt;
+        &lt;div class=&quot;son&quot;&gt;son盒子&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // DOM 事件流的三个阶段
+        // 1. JS 代码只能执行捕获或者冒泡其中的一个阶段。
+        // 2. onclick 和 attachEvent (ie) 只能得到冒泡阶段。
+        // 3. 捕获阶段 如果 addEventListener 第三个参数为 true ，那么则处于捕获阶段    
+        // document -&gt; html -&gt; body -&gt; father -&gt; son
+        var son = document.querySelector('.son');
+        son.addEventListener('click', function() {
+
+            console.log('son');
+        }, true);
+        var father = document.querySelector('.father');
+        father.addEventListener('click', function() {
+
+            console.log('father');
+        }, true);
+        // 4. 冒泡阶段 如果 addEventListener 第三个参数为 false 或者省略 ，那么则处于冒泡阶段  
+        // son -&gt; father -&gt; body -&gt; html -&gt;document
+        var son = document.querySelector('.son');
+        son.addEventListener('click', function() {
+
+            console.log('son');
+        }, false);
+        var father = document.querySelector('.father');
+        father.addEventListener('click', function() {
+
+            console.log('father');
+        }, false);
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021923205423.png" alt="WebApi笔记_2_事件高级-2021923205423.png" loading="lazy"></figure>
+<h3 id="4-事件对象">4. 事件对象</h3>
+<h4 id="41-什么是事件对象">4.1 什么是事件对象</h4>
+<p>官方解释：event 对象代表事件的状态，比如键盘按键的状态、鼠标的位置、鼠标按钮的状态。<br>
+简单理解：事件发生后，跟事件相关的一系列信息数据的集合都放到这个对象里面，这个对象就是事件对象 event，它有很多属性和方法。</p>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div&gt;123&lt;/div&gt;
+    &lt;div&gt;123&lt;/div&gt;
+    &lt;script&gt;
+        // 事件对象
+        var divs = document.querySelectorAll('div');
+            // 1. event 就是一个事件对象 写到我们监听函数的括号里
+            // 2. 事件对象只有有了事件才会存在，它是系统自动创建的，不需要传递参数
+            // 3. 事件对象是我们事件的一系列相关数据的集合 跟事件相关的 比如鼠标点击里面就包含了鼠标的相关信息，
+            // 4. 事件对象我们可以自己命名，比如 event、e
+            // 5. 事件对象也有兼容性问题 ie678 通过 window.event
+        divs[0].onclick = function(event) {      
+            console.log(event);
+        }
+        divs[1].addEventListener('click', function(event) {
+            console.log(event);
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192491931.png" alt="WebApi笔记_2_事件高级-202192491931.png" loading="lazy"></figure>
+<h4 id="42-事件对象的常见属性和方法">4.2 事件对象的常见属性和方法</h4>
+<figure data-type="image" tabindex="4"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192492152.png" alt="WebApi笔记_2_事件高级-202192492152.png" loading="lazy"></figure>
+<blockquote>
+<p>e.target 与 this 的区别：</p>
+</blockquote>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div&gt;123&lt;/div&gt;
+    &lt;ul&gt;
+        &lt;li&gt;abc&lt;/li&gt;
+        &lt;li&gt;abc&lt;/li&gt;
+        &lt;li&gt;abc&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+        // 常见事件对象的属性和方法
+        // 1. e.target 返回的是触发事件的对象（元素） 
+        //    this 返回的是绑定事件的对象（元素）
+        var div = document.querySelector('div');
+        div.addEventListener('click', function(e) {
+            console.log(e.target);
+            console.log(this);
+        })
+        var ul = document.querySelector('ul');
+        ul.addEventListener('click', function(e) {
+            // 我们给 ul 绑定了事件，那么 this 就指向 ul
+            console.log(this); // ul
+            // e.target 指向我们点击的那个对象 谁触发了这个事件
+            console.log(e.target); //li
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192493215.png" alt="WebApi笔记_2_事件高级-202192493215.png" loading="lazy"></figure>
+<blockquote>
+<p>事件对象阻止默认行为：</p>
+</blockquote>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div&gt;123&lt;/div&gt;
+    &lt;a href=&quot;http://www.baidu.com&quot;&gt;百度&lt;/a&gt;
+    &lt;form action=&quot;http://www.baidu.com&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;提交&quot; name=&quot;sub&quot;&gt;
+    &lt;/form&gt;
+    &lt;script&gt;
+        // 常见事件对象的属性和方法
+        // 1. 返回事件类型
+        var div = document.querySelector('div');
+        div.addEventListener('click', fn);
+
+        function fn(e) {
+            console.log(e.type);    //  click
+        }
+        // 2. 阻止默认行为（事件） 让链接不跳转 或 让提交按钮不提交
+        var a = document.querySelector('a');
+        a.addEventListener('click', function(e) {
+            e.preventDefault(); // 该方法阻止默认事件行为，如不让链接跳转等
+        })
+        a.onclick = function() {
+            // 我们可以利用 return false 也能阻止默认行为，没有兼容性问题，但return 后的代码不再执行
+            return false;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="5-阻止事件冒泡">5. 阻止事件冒泡</h3>
+<h4 id="51-阻止事件冒泡的两种方式">5.1 阻止事件冒泡的两种方式</h4>
+<p>事件冒泡：开始时由最具体的元素接收，然后逐级向上传播到到 DOM 最顶层节点。<br>
+事件冒泡本身的特性，会带来的坏处，也会带来的好处，需要我们灵活掌握.</p>
+<blockquote>
+<p>阻止事件冒泡</p>
+<ul>
+<li>标准写法：利用事件对象里面的 stopPropagation()方法<br>
+<code>e.stopPropagation()</code></li>
+<li>非标准写法：IE 6-8 利用事件对象 cancelBubble 属性<br>
+<code>e.cancelBubble = true;</code></li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;div class=&quot;father&quot;&gt;
+        &lt;div class=&quot;son&quot;&gt;son盒子&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // 常见事件对象的属性和方法
+        // 阻止冒泡 DOM 推荐的标准 stopPropagation()
+        var son = document.querySelector('.son');
+        son.addEventListener('click', function(e) {
+            console.log('son');
+            e.stopPropagation(); //阻止冒泡
+        }, false);
+        var father = document.querySelector('.father');
+        father.addEventListener('click', function() {
+            console.log('father');
+        }, false);
+        document.addEventListener('click', function() {
+            console.log('document');
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="6-事件委托代理-委派">6. 事件委托（代理、委派）</h3>
+<p>事件冒泡本身的特性，会带来的坏处，也会带来的好处，需要我们灵活掌握。生活中有如下场景：</p>
+<p>咱们班有100个学生， 快递员有100个快递， 如果一个个的送花费时间较长。同时每个学生领取的时候，也需要排队领取，也花费时间较长，何如？</p>
+<p>解决方案： 快递员把100个快递，委托给班主任，班主任把这些快递放到办公室，同学们下课自行领取即可。</p>
+<p>优势： 快递员省事，<strong>委托</strong> 给班主任就可以走了。 同学们领取也方便，因为相信班主任。</p>
+<ul>
+<li>
+<p>事件委托</p>
+<ul>
+<li>事件委托也称为事件代理， 在 jQuery 里面称为事件委派。</li>
+</ul>
+</li>
+<li>
+<p>事件委托的原理</p>
+<ul>
+<li><mark>不是每个子节点单独设置事件监听器，而是事件监听器设置在其父节点上，然后利用冒泡原理影响设置每个子节点。</mark></li>
+<li>以上案例：给 ul 注册点击事件，然后利用事件对象的 target 来找到当前点击的 li，因为点击 li，事件会冒泡到 ul 上，ul 有注册事件，就会触发事件监听器。</li>
+</ul>
+</li>
+<li>
+<p>事件委托的作用</p>
+<ul>
+<li>我们只操作了一次 DOM ，提高了程序的性能。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;ul&gt;
+        &lt;li&gt;之乎者也&lt;/li&gt;
+        &lt;li&gt;之乎者也&lt;/li&gt;
+        &lt;li&gt;之乎者也&lt;/li&gt;
+        &lt;li&gt;之乎者也&lt;/li&gt;
+        &lt;li&gt;之乎者也&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+        // 事件委托的核心原理：给父节点添加监听器，利用事件冒泡影响每个子节点
+        var ul = document.querySelector('ul');
+        ul.addEventListener('click', function(e) {
+            console.log('123');
+            e.target.style.backgroundColor = 'pink';
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021924102254.png" alt="WebApi笔记_2_事件高级-2021924102254.png" loading="lazy"></figure>
+<h3 id="7-常用鼠标事件">7. 常用鼠标事件</h3>
+<h4 id="71-常用鼠标事件">7.1 常用鼠标事件</h4>
+<figure data-type="image" tabindex="7"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0-20219228502.png" alt="WebApi笔记-20219228502.png" loading="lazy"></figure>
+<ul>
+<li>禁止鼠标右键菜单<br>
+contextmenu主要控制应该何时显示上下文菜单，主要用于程序员取消默认的上下文菜单。</li>
+</ul>
+<pre><code class="language-javascript">&lt;body&gt;
+    我是一段不愿意分享的文字
+    &lt;script&gt;
+        // 1. contextmenu 我们可以禁用右键
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault(); //取消默认事件
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<ul>
+<li>禁用鼠标选中（selectstart 开始选中）</li>
+</ul>
+<pre><code class="language-javascript">&lt;body&gt;
+    我是一段不愿意分享的文字
+    &lt;script&gt;
+        // 2. 禁止选中文字 selectstart
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h4 id="72-鼠标事件对象">7.2 鼠标事件对象</h4>
+<p>event对象代表事件的状态，跟事件相关的一系列信息的集合。现阶段我们主要是用鼠标事件对象 MouseEvent 和键盘事件对象 KeyboardEvent。</p>
+<figure data-type="image" tabindex="8"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021924103839.png" alt="WebApi笔记_2_事件高级-2021924103839.png" loading="lazy"></figure>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;script&gt;
+        // 鼠标事件对象 MouseEvent
+        document.addEventListener('click', function(e) {
+            // 1. client 鼠标在可视区的 X Y 坐标
+            console.log(e.clientX);
+            console.log(e.clientY);
+            // 2. page 鼠标在页面文档的 X Y 坐标
+            console.log(e.pageX);
+            console.log(e.pageY);
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<blockquote>
+<p>跟随鼠标的案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="9"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192410464.png" alt="WebApi笔记_2_事件高级-202192410464.png" loading="lazy"></figure>
+<ol>
+<li>鼠标不断的移动，使用鼠标移动事件： mousemove</li>
+<li>在页面中移动，给document注册事件</li>
+<li>图片要移动距离，而且不占位置，我们使用绝对定位即可</li>
+<li>核心原理： 每次鼠标移动，我们都会获得最新的鼠标坐标， 把这个x和y坐标做为图片的top和left 值就可以移动图片</li>
+</ol>
+<pre><code class="language-css">&lt;style&gt;
+        img {
+            position: absolute;
+        }
+&lt;/style&gt;
+</code></pre>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;img src=&quot;http://md.gitnote.cn/WebApi笔记_2_事件高级-2021924104851.png&quot; alt=&quot;&quot;&gt;
+    &lt;script&gt;
+        var pic = document.querySelector('img');
+        document.addEventListener('mousemove', function(e) {
+            // mousemove 只要鼠标移动就触发
+            var x = e.pageX;
+            var y = e.pageY;
+            pic.style.left = x - 50 + 'px';
+            pic.style.top = y - 50 + 'px';
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021924105519.png" alt="WebApi笔记_2_事件高级-2021924105519.png" loading="lazy"></figure>
+<h3 id="8-常用键盘事件">8. 常用键盘事件</h3>
+<h4 id="81-常用键盘事件">8.1 常用键盘事件</h4>
+<p>事件除了使用鼠标触发，还可以使用键盘触发。</p>
+<figure data-type="image" tabindex="11"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021924143430.png" alt="WebApi笔记_2_事件高级-2021924143430.png" loading="lazy"></figure>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;script&gt;
+        // 常用的键盘事件
+        // 1. keyup 按键弹起的时候触发
+        document.onkeyup = function() {
+                console.log('我弹起了！');
+            }
+            // 2. keydown 按键按下的时候触发
+        document.onkeydown = function() {
+                console.log('我按下了！');
+            }
+            // 3. keypress 按键按下的时候触发  不能识别功能键 ctrl shift
+        document.onkeypress = function() {
+                console.log('我按下了press！');
+            }
+            // 4. 三个事件的执行顺序  keydown keypress keyup
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<h4 id="82-键盘事件对象">8.2 键盘事件对象</h4>
+<figure data-type="image" tabindex="12"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192414440.png" alt="WebApi笔记_2_事件高级-202192414440.png" loading="lazy"></figure>
+<blockquote>
+<p>注意：</p>
+<ul>
+<li>onkeydown 和 onkeyup 不区分字母大小写，onkeypress 区分字母大小写。</li>
+<li>在我们实际开发中，我们更多的使用keydown和keyup， 它能识别所有的键（包括功能键）</li>
+<li>Keypress 不识别功能键，但是keyCode属性能区分大小写，返回不同的ASCII值</li>
+</ul>
+</blockquote>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;script&gt;
+        // 键盘事件对象中的 keyCode 属性,返回按下键的 ASCII 码值
+        document.addEventListener('keyup', function(e) {
+            console.log(e);
+            console.log(e.keyCode);
+            // 1. 我们的 keyup 和 keydown 事件不区分字母大小写  a 和 A 得到的都是 A:65
+            // 2. 我们的 keypress 事件区分字母大小写 a:97 A:65
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<blockquote>
+<p>模拟京东按键输入案例：</p>
+</blockquote>
+<figure data-type="image" tabindex="13"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-2021924145332.png" alt="WebApi笔记_2_事件高级-2021924145332.png" loading="lazy"></figure>
+<ol>
+<li>核心思路： 检测用户是否按下了s 键，如果按下s 键，就把光标定位到搜索框里面</li>
+<li>使用键盘事件对象里面的keyCode 判断用户按下的是否是s键</li>
+<li>搜索框获得焦点： 使用 js 里面的 focus() 方法</li>
+</ol>
+<pre><code class="language-javascript">&lt;body&gt;
+    &lt;input type=&quot;text&quot; name=&quot;&quot; id=&quot;&quot;&gt;
+    &lt;script&gt;
+        var search = document.querySelector('input');
+        document.addEventListener('keyup', function(e) {
+            if (e.keyCode === 83) {
+                search.focus();
+            }
+        })
+    &lt;/script&gt;
+&lt;/body&gt;
+</code></pre>
+<figure data-type="image" tabindex="14"><img src="http://md.gitnote.cn/WebApi%E7%AC%94%E8%AE%B0_2_%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7-202192415246.png" alt="WebApi笔记_2_事件高级-202192415246.png" loading="lazy"></figure>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/javascript_webapi_1/" class="post-title gt-a-link">
+                    javascript学习笔记——webapi_1_DOM基础
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

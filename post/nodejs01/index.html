@@ -1,0 +1,838 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Nodejs学习——Nodejs基础 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Nodejs学习——Nodejs基础
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-03-08 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/ujPeyaWYH/" class="post-tags">
+                            # nodejs
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/GShRDCpDp/" class="post-tags">
+                            # javascript
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E5%88%9D%E8%AF%86-nodejs">1. 初识 Node.js</a>
+<ul>
+<li><a href="#11-%E4%BB%80%E4%B9%88%E6%98%AF-nodejs">1.1 什么是 Node.js ?</a></li>
+<li><a href="#12-nodejs-%E4%B8%AD%E7%9A%84-javascript-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83">1.2 Node.js 中的 JavaScript 运行环境</a></li>
+<li><a href="#13-nodejs-%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88">1.3 Node.js 可以做什么？</a></li>
+<li><a href="#14-nodejs-%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0">1.4 Node.js 如何学习</a></li>
+</ul>
+</li>
+<li><a href="#2-fs-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97">2. fs 文件系统模块</a>
+<ul>
+<li><a href="#21-%E4%BB%80%E4%B9%88%E6%98%AF-fs-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97">2.1 什么是 fs 文件系统模块</a></li>
+<li><a href="#22-%E8%AF%BB%E5%8F%96%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9">2.2 读取指定文件中的内容</a></li>
+<li><a href="#23-%E5%90%91%E6%8C%87%E5%AE%9A%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%AD%E5%86%99%E5%85%A5%E5%86%85%E5%AE%B9">2.3 向指定的文件中写入内容</a></li>
+<li><a href="#25-%E7%BB%83%E4%B9%A0%E8%80%83%E8%AF%95%E6%88%90%E7%BB%A9%E6%95%B4%E7%90%86">2.5 练习：考试成绩整理</a></li>
+<li><a href="#26-fs-%E6%A8%A1%E5%9D%97-%E8%B7%AF%E5%BE%84%E5%8A%A8%E6%80%81%E6%8B%BC%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98">2.6 fs 模块 - 路径动态拼接的问题</a></li>
+</ul>
+</li>
+<li><a href="#3-path-%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97">3. path 路径模块</a>
+<ul>
+<li><a href="#31-%E4%BB%80%E4%B9%88%E6%98%AF-path-%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9D%97">3.1 什么是 path 路径模块</a></li>
+<li><a href="#32-%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5">3.2 路径拼接</a></li>
+<li><a href="#33-%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%96%87%E4%BB%B6%E5%90%8D">3.3 获取路径中文件名</a></li>
+<li><a href="#34-%E8%8E%B7%E5%8F%96%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D">3.4 获取路径中文件扩展名</a></li>
+</ul>
+</li>
+<li><a href="#4-http-%E6%A8%A1%E5%9D%97">4. http 模块</a>
+<ul>
+<li><a href="#41-%E5%88%9B%E5%BB%BA%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84-web-%E6%9C%8D%E5%8A%A1%E5%99%A8">4.1 创建最基本的 web 服务器</a></li>
+<li><a href="#42-%E6%A0%B9%E6%8D%AE%E4%B8%8D%E5%90%8C%E7%9A%84-url-%E5%93%8D%E5%BA%94%E4%B8%8D%E5%90%8C%E7%9A%84-html-%E5%86%85%E5%AE%B9%E7%AE%80%E6%98%93%E8%B7%AF%E7%94%B1">4.2 根据不同的 url 响应不同的 html 内容（简易路由）</a></li>
+</ul>
+</li>
+<li><a href="#5-%E6%A8%A1%E5%9D%97%E5%8C%96">5. 模块化</a>
+<ul>
+<li><a href="#51-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E6%A6%82%E5%BF%B5">5.1 模块化的概念</a></li>
+<li><a href="#52-nodejs-%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96">5.2 Node.js 中的模块化</a></li>
+<li><a href="#53-nodejs-%E6%A8%A1%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F">5.3 Node.js 模块作用域</a></li>
+<li><a href="#54-%E6%A8%A1%E5%9D%97%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E6%88%90%E5%91%98">5.4 模块作用域的成员</a></li>
+<li><a href="#55-nodejs-%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E8%A7%84%E8%8C%83">5.5 Node.js 中的模块化规范</a></li>
+</ul>
+</li>
+<li><a href="#6-npm-%E4%B8%8E%E5%8C%85">6. npm 与包</a>
+<ul>
+<li><a href="#61-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%B6%E9%97%B4">6.1 格式化时间</a></li>
+<li><a href="#62-%E5%8C%85%E7%9A%84%E8%A7%84%E8%8C%83%E4%B8%8E%E7%AE%A1%E7%90%86">6.2 包的规范与管理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="1-初识-nodejs">1. 初识 Node.js</h2>
+<h3 id="11-什么是-nodejs">1.1 什么是 Node.js ?</h3>
+<blockquote>
+<p>Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine<br>
+Node.js® 是一个基于 Chrome V8 引擎 的 JavaScript 运行时环境</p>
+</blockquote>
+<h3 id="12-nodejs-中的-javascript-运行环境">1.2 Node.js 中的 JavaScript 运行环境</h3>
+<figure data-type="image" tabindex="1"><img src="http://img.upyun.gitnote.cn/2023/03/01/20230301204051.png" alt="" loading="lazy"></figure>
+<p>注意：</p>
+<ul>
+<li>浏览器是 JavaScript 的前端运行环境</li>
+<li>Node.js 是 JavaScript 是后端运行环境</li>
+<li>Node.js 中无法调用 DOM 与 BOM 等浏览器内置 API</li>
+</ul>
+<h3 id="13-nodejs-可以做什么">1.3 Node.js 可以做什么？</h3>
+<p>Node.js 作为一个 JavaScript 的运行环境，仅仅提供了基础的功能与API。然后，基于 Node.js 提供的基础功能，有很多的工具与框架可以使用。</p>
+<ul>
+<li>基于 Express 框架，可以快速构建 Web 应用</li>
+<li>基于 Electron 框架，可以构建跨平台的桌面应用</li>
+<li>基于 restify 框架，可以快速构建 API 接口项目</li>
+<li>读写和操作数据库、创建实用的命令行工具辅助前端开发、etc…</li>
+</ul>
+<h3 id="14-nodejs-如何学习">1.4 Node.js 如何学习</h3>
+<p>JavaScript 基础语法 + Node.js 内置 API（fs、path、http等）+ 第三方 模块（express、mysql等）</p>
+<h2 id="2-fs-文件系统模块">2. fs 文件系统模块</h2>
+<h3 id="21-什么是-fs-文件系统模块">2.1 什么是 fs 文件系统模块</h3>
+<p>fs 模块是 node 官方提供的、用来操作文件的模块。它提供了一系列的方法与属性，用来满足用户对文件的操作需求。</p>
+<ul>
+<li><code>fs.readFile()</code> 方法，用来读取指定文件的内容</li>
+<li><code>fs.writeFile()</code> 方法，用来向指定文件写入内容</li>
+</ul>
+<p>如果要在 Javascript 代码中使用 fs 模块，则需要使用如下方式导入它：</p>
+<pre><code class="language-javascript">const fs = require('fs')
+</code></pre>
+<h3 id="22-读取指定文件中的内容">2.2 读取指定文件中的内容</h3>
+<ol>
+<li>fs.readFile() 的语法格式：</li>
+</ol>
+<pre><code class="language-javascript">fs.readFile(path[,options],callback)
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>参数1：必选参数，字符串，表示文件的路径</li>
+<li>参数2：可选参数，表示以什么<mark>编码</mark>格式来读取文件</li>
+<li>参数3：必选参数，文件读取完成后，通过回调函数来拿到读取的结果。</li>
+</ul>
+<ol start="2">
+<li>fs.readFile() 的示例代码</li>
+</ol>
+<pre><code class="language-javascript">const fs = require('fs')
+fs.readFile('./files/11.txt','utf8',function(err,dataStr){
+	console.log(err)
+	console.log('------')
+	console.log(dataStr)
+})
+
+</code></pre>
+<ol start="3">
+<li>判断文件是否读取成功<br>
+可以判断 err 对象是否为 null，从而知晓文件读取的结果。</li>
+</ol>
+<pre><code class="language-javascript">const fs = require('fs')
+fs.readFile('./files/11.txt', 'utf8', function (err, dataStr) {
+	if (err != null) {
+		console.log(&quot;读取失败&quot;);
+		console.log(err.message);
+	} else {
+		console.log(dataStr)
+	}
+})
+
+</code></pre>
+<h3 id="23-向指定的文件中写入内容">2.3 向指定的文件中写入内容</h3>
+<ol>
+<li>fs.writeFile() 的语法格式</li>
+</ol>
+<pre><code class="language-javascript">fs.writeFile(file,data[,options],callback)
+</code></pre>
+<p>参数含义：</p>
+<ul>
+<li>参数1：必选参数，需要指定一个文件路径，表示文件的存放路径</li>
+<li>参数2：必选参数，表示要写入的内容</li>
+<li>参数3：可选参数，表示以什么格式写入文件内容，默认为 utf8</li>
+<li>参数4：必选参数，文件写入完成后的回调函数</li>
+</ul>
+<ol start="2">
+<li>fs.writeFile() 示例代码：</li>
+</ol>
+<pre><code class="language-javascript">const fs = require('fs')
+fs.writeFile('./files/22.txt','hello world!',function(err){
+	console.log(err)
+})
+</code></pre>
+<ol start="3">
+<li>判断文件是否写入成功<br>
+可以判断 err 对象是否为 null，从而知晓文件写入的结果。</li>
+</ol>
+<pre><code class="language-javascript">const fs = require('fs')
+fs.writeFile('./files/22.txt','hello world!',function(err){
+	if(err){
+        console.log(&quot;写入失败:&quot;+err.message);
+        return;
+    }
+    console.log(&quot;写入成功&quot;);
+})
+</code></pre>
+<h3 id="25-练习考试成绩整理">2.5 练习：考试成绩整理</h3>
+<h3 id="26-fs-模块-路径动态拼接的问题">2.6 fs 模块 - 路径动态拼接的问题</h3>
+<p>在使用 fs 模块操作文件时，如果提供的操作路径是以 ./ 或 ../ 开头的相对路径时，容易出现路径动态拼接错误的问题</p>
+<p>原因：代码在运行的时候，会以执行 node 命令时所处的目录，动态拼接出被操作文件的完整路径</p>
+<p>解决方案：在使用 fs 模块操作文件时，直接提供完整的路径，从而防止路径动态拼接的问题</p>
+<p><code>__dirname</code> 获取文件所处的绝对路径</p>
+<pre><code class="language-javascript">const fs = require('fs')
+fs.writeFile(__dirname+'/files/22.txt','hello world!',function(err){
+	if(err){
+        console.log(&quot;写入失败:&quot;+err.message);
+        return;
+    }
+    console.log(&quot;写入成功&quot;);
+})
+</code></pre>
+<h2 id="3-path-路径模块">3. path 路径模块</h2>
+<h3 id="31-什么是-path-路径模块">3.1 什么是 path 路径模块</h3>
+<p>path 模块是 Node.js 官方提供的、用来处理路径的模块。它提供了一系列的方法和属性，用来满足用户对路径的处理需求。</p>
+<ul>
+<li><code>path.join()</code> 方法，用来将多个路径片段拼接成一个完整的路径字符串。</li>
+<li><code>path.basename()</code> 方法，用来从路径字符串中将文件名解析出来。</li>
+</ul>
+<h3 id="32-路径拼接">3.2 路径拼接</h3>
+<ul>
+<li><code>path.join()</code> 的语法格式</li>
+</ul>
+<pre><code class="language-javascript">const path = require('path')
+
+path.join([...paths])
+</code></pre>
+<p>参数说明：</p>
+<ul>
+<li><code>...paths</code> ：路径片段的序列</li>
+<li>返回值：拼接完成的字符串</li>
+</ul>
+<p>代码示例：</p>
+<pre><code class="language-javascript">const path = require('path');
+
+const pathStr = path.join('/a','/b/c','../','d');
+console.log(pathStr);   // \a\b\d
+</code></pre>
+<pre><code class="language-javascript">const path = require('path');
+const fs = require('fs');
+
+fs.readFile(path.join(__dirname,'/files/22.txt'),'utf8',function(err,data){
+    if(err){
+        console.log(&quot;读取失败:&quot;+err.message);
+        return;
+    }
+    console.log(data);
+})
+</code></pre>
+<p><mark>注意：今后但是涉及到路径拼接的操作，都要使用 path.join() 方法来处理。不要直接用 + 进行字符串的拼接。</mark></p>
+<h3 id="33-获取路径中文件名">3.3 获取路径中文件名</h3>
+<p>使用 path.basename() 方法，可以获取路径中的最后一部分，常通过该方法获取路径中的文件名。</p>
+<ul>
+<li><code>path.basename()</code> 的语法格式</li>
+</ul>
+<pre><code class="language-javascript">path.basename(path[,ext])
+</code></pre>
+<p>参数说明：</p>
+<ul>
+<li>path：必选参数，表示一个路径的字符串</li>
+<li>ext：可选参数，表示文件的拓展名</li>
+<li>返回值：表示路径中的最后一部分</li>
+</ul>
+<p>代码示例：</p>
+<pre><code class="language-javascript">const path = require('path');
+
+const fPath=&quot;/a/b/c/d/index.html&quot;;
+
+const fullName = path.basename(fPath);
+console.log(fullName);  // index.html
+
+const nameWithOut = path.basename(fPath,'.html');
+console.log(nameWithOut);  // index
+</code></pre>
+<h3 id="34-获取路径中文件扩展名">3.4 获取路径中文件扩展名</h3>
+<ul>
+<li><code>path.extname()</code> 语法格式：</li>
+</ul>
+<pre><code class="language-javascript">path.extname(path)
+</code></pre>
+<p>参数说明：</p>
+<ul>
+<li><code>path</code> ：必选参数，表示一个路径的字符串</li>
+</ul>
+<p>代码示例：</p>
+<pre><code class="language-javascript">const path = require('path');
+
+const fPath=&quot;/a/b/c/d/index.html&quot;;
+
+const pathExt = path.extname(fPath);
+console.log(pathExt);  // .html
+</code></pre>
+<h2 id="4-http-模块">4. http 模块</h2>
+<ul>
+<li>什么是 http 模块：<br>
+http 模块是 Node.js 官方提供的、用来创建 web 服务器的模块。</li>
+</ul>
+<h3 id="41-创建最基本的-web-服务器">4.1 创建最基本的 web 服务器</h3>
+<p>创建服务器的基本步骤：</p>
+<ul>
+<li>导入 http 模块</li>
+<li>创建 web 服务器实例</li>
+<li>为服务器绑定 request 事件，监听客户端的请求</li>
+<li>启动服务器</li>
+</ul>
+<pre><code class="language-javascript">const http = require('http');
+
+// 创建 web 服务器实例
+const server = http.createServer()
+
+// 为 web 服务器实例添加 request 请求事件，监听用户的请求
+server.on('request', (req, res) =&gt; {
+    const url = req.url
+    console.log(url);
+})
+
+// 启动 web 服务器，监听 3000 端口
+server.listen(3000, () =&gt; {
+    console.log('server is running at http://127.0.0.1:3000');
+})
+</code></pre>
+<ul>
+<li>req 请求对象：<br>
+只要服务器接收到了客户端的请求，就会调用通过 server.on() 为服务器绑定的 request 事件处理函数。</li>
+</ul>
+<p>如果想在事件处理函数中，访问与客户端相关的数据或属性，可已使用以下的方式：</p>
+<pre><code class="language-javascript">// 为 web 服务器实例添加 request 请求事件，监听用户的请求
+server.on('request', (req, res) =&gt; {
+    // req 是请求对象，包含了用户的请求信息
+    // req.url 是用户请求的路径
+    // req.method 是用户请求的方法
+    const url = req.url
+    console.log(url);
+})
+</code></pre>
+<ul>
+<li>res 响应对象：<br>
+在服务器的 request 事件处理函数中，如果想访问与服务器相关的数据或属性，可以使用如下方式：</li>
+</ul>
+<pre><code class="language-javascript">// 为 web 服务器实例添加 request 请求事件，监听用户的请求
+server.on('request', (req, res) =&gt; {
+    // req 是请求对象，包含了用户的请求信息
+    // req.url 是用户请求的路径
+    // req.method 是用户请求的方法
+    const url = req.url
+    const method = req.method
+    // res 是响应对象，包含了服务器给用户的响应信息
+    // 要想给用户发送响应
+    // res.end() 方法的作用
+    // 向用户发送指定内容，并结束这次响应
+    const str = `your request url is ${url}, your request method is ${method}`
+    res.end(str)
+})
+</code></pre>
+<ul>
+<li>解决中文乱码问题<br>
+当调用 res.end() 方法，向客户端发送中文内容的时候，会出现乱码问题，此时，需要手动设置内容的编码格式：</li>
+</ul>
+<pre><code class="language-javascript">server.on('request', (req, res) =&gt; {
+   
+    const url = req.url
+    const method = req.method
+    // 设置响应头，解决中文乱码问题
+    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    const str = `你的 ip 是： ${url},你的请求方法是： ${method}`
+    res.end(str)
+})
+</code></pre>
+<h3 id="42-根据不同的-url-响应不同的-html-内容简易路由">4.2 根据不同的 url 响应不同的 html 内容（简易路由）</h3>
+<p>核心的实现步骤：</p>
+<ul>
+<li>获取请求的 url 地址</li>
+<li>设置默认的响应内容为 404 Not Found</li>
+<li>判断用户请求是否为 / 或 /index.html 首页</li>
+<li>判断用户请求是否为 /about.html 关于页面</li>
+<li>设置 Content-Type 响应投，防止中文乱码</li>
+<li>使用 res.end() 把内容响应给客户端</li>
+</ul>
+<pre><code class="language-javascript">const http = require('http')
+const server = http.createServer()
+
+server.on('request', (req, res) =&gt; {
+  const url = req.url
+  // 设置默认的响应内容为 404 Not found
+  let content = '&lt;h1&gt;404 Not found!&lt;/h1&gt;'
+  // 判断用户请求的是否为 / 或 /index.html 首页
+  // 判断用户请求的是否为 /about.html 关于页面
+  if (url === '/' || url === '/index.html') {
+    content = '&lt;h1&gt;首页&lt;/h1&gt;'
+  } else if (url === '/about.html') {
+    content = '&lt;h1&gt;关于页面&lt;/h1&gt;'
+  }
+
+  res.setHeader('Content-Type', 'text/html; charset=utf-8')
+  res.end(content)
+})
+
+server.listen(80, () =&gt; {
+  console.log('server running at http://127.0.0.1')
+})
+</code></pre>
+<h2 id="5-模块化">5. 模块化</h2>
+<h3 id="51-模块化的概念">5.1 模块化的概念</h3>
+<ul>
+<li>模块化是指解决一个复杂问题时，自顶向下逐层把系统划分为若干模块的过程，模块是可组合、分解和更换的单元。</li>
+<li>模块化可提高代码的复用性和可维护性，实现按需加载。</li>
+<li>模块化规范是对代码进行模块化拆分和组合时需要遵守的规则，如使用何种语法格式引用模块和向外暴露成员。</li>
+</ul>
+<p>模块化的好处：</p>
+<ul>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载</li>
+</ul>
+<h3 id="52-nodejs-中的模块化">5.2 Node.js 中的模块化</h3>
+<p>Node.js 中模块的分类：</p>
+<ul>
+<li>内置模块</li>
+<li>自定义模块</li>
+<li>第三方模块</li>
+</ul>
+<p>模块的加载：<br>
+使用 <code>require()</code> 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用。</p>
+<pre><code class="language-javascript">// 1. 加载内置的 fs 模块
+const fs = require('fs')
+
+// 2. 加载用户的自定义模块
+const custom = require('./custom.js')
+
+// 3. 加载第三方模块
+const moment = require('moment')
+</code></pre>
+<p>注意：使用 <code>require()</code> 方法加载其他模块时，会执行被加载模块中的代码。</p>
+<h3 id="53-nodejs-模块作用域">5.3 Node.js 模块作用域</h3>
+<ul>
+<li>和函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域</li>
+<li>防止全局变量污染</li>
+</ul>
+<h3 id="54-模块作用域的成员">5.4 模块作用域的成员</h3>
+<ul>
+<li>自定义模块中都有一个 module 对象，存储了和当前模块有关的信息</li>
+<li>在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。<mark>导入自定义模块时，得到的就是 module.exports 指向的对象。</mark></li>
+<li>默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，<strong>以 module.exports 指向的对象为准</strong>。</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="http://img.upyun.gitnote.cn/2023/03/06/20230306145159.png" alt="" loading="lazy"></figure>
+<p>注意：为了防止混乱，建议大家不要在同一个模块中同时使用 exports 和 module.exports</p>
+<h3 id="55-nodejs-中的模块化规范">5.5 Node.js 中的模块化规范</h3>
+<p>Node.js 遵循了 CommonJS 的模块化规范，CommonJS 规定了<mark>模块的特性</mark>和<mark>各模块之间如何相互依赖</mark>。</p>
+<p>CommonJS规定：</p>
+<ul>
+<li>每个模块内部，module 变量代表当前模块。</li>
+<li>module 变量是一个对象，它的 exports 属性（即 module.exports）是对外的接口。</li>
+<li>加载某个模块，其实是加载该模块的 module.exports 属性。require() 方法用户加载模块。</li>
+</ul>
+<h2 id="6-npm-与包">6. npm 与包</h2>
+<p>Node.js 中的第三方模块又叫做包。</p>
+<h3 id="61-格式化时间">6.1 格式化时间</h3>
+<ol>
+<li>
+<p>传统做法<br>
+<img src="http://img.upyun.gitnote.cn/2023/03/06/20230306151519.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>高级做法</p>
+</li>
+</ol>
+<ul>
+<li>使用 npm 包管理工具，在项目中安转格式化时间的包 moment</li>
+<li>使用 require() 导入格式化时间的包</li>
+<li>参考 moment 的官方文档对时间进行格式化</li>
+</ul>
+<pre><code class="language-javascript">// 导入需要的包
+const moment = require('moment');
+
+
+const dt = new Date();
+
+console.log(dt); // 2023-03-06T07:23:18.761Z
+console.log(moment(dt).format('YYYY-MM-DD HH:mm:ss')); // 2023-03-06 15:23:18
+</code></pre>
+<h3 id="62-包的规范与管理">6.2 包的规范与管理</h3>
+<p>包的版本号是以 ”点分十进制“ 形式进行定义的，总共有三个数字，例如：2.24.0</p>
+<ul>
+<li>第一位数字表示：大版本</li>
+<li>第二位数字表示：功能版本</li>
+<li>第三位数字功能：Bug 修复版本</li>
+</ul>
+<p><mark>版本号提升的规则：只要前面的版本号增长了，后面的版本号就要归零。</mark></p>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/go_with_net/" class="post-title gt-a-link">
+                    web内外网判断界面
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

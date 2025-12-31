@@ -1,0 +1,1268 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>ESP32cam系列教程002：ESP32cam通过MQTT协议上传图片数据到阿里云IOT平台 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    ESP32cam系列教程002：ESP32cam通过MQTT协议上传图片数据到阿里云IOT平台
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-07-23 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/kC1UI7U5z/" class="post-tags">
+                            # ESP32
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/9cVEUchBCB/" class="post-tags">
+                            # 嵌入式硬件
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p><ul class="markdownIt-TOC">
+<li><a href="#1-esp32cam%E9%80%9A%E8%BF%87mqtt%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0">1. ESP32cam通过MQTT协议上传图片数据到阿里云平台</a>
+<ul>
+<li><a href="#11-%E9%98%BF%E9%87%8C%E4%BA%91%E7%89%A9%E8%81%94%E7%BD%91%E5%B9%B3%E5%8F%B0%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE">1.1 阿里云物联网平台相关配置</a></li>
+<li><a href="#12-esp32cam-%E9%80%9A%E8%BF%87-mqtt-%E5%8D%8F%E8%AE%AE%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91iot%E5%B9%B3%E5%8F%B0">1.2 esp32cam 通过 mqtt 协议上传图片到阿里云IOT平台</a></li>
+</ul>
+</li>
+<li><a href="#2-%E4%BB%8E%E9%98%BF%E9%87%8C%E4%BA%91iot%E5%B9%B3%E5%8F%B0%E8%8E%B7%E5%8F%96%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%B9%B6%E4%BF%9D%E5%AD%98%E5%88%B0%E6%9C%AC%E5%9C%B0">2. 从阿里云IOT平台获取图片数据并保存到本地</a>
+<ul>
+<li><a href="#21-%E9%98%BF%E9%87%8C%E4%BA%91%E7%89%A9%E8%81%94%E7%BD%91%E5%B9%B3%E5%8F%B0%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE">2.1 阿里云物联网平台相关配置</a></li>
+<li><a href="#22-%E5%B0%86%E9%98%BF%E9%87%8C%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E9%80%9A%E8%BF%87amqp%E5%AE%9E%E6%97%B6%E6%8B%89%E5%8F%96%E5%88%B0%E6%9C%AC%E5%9C%B0">2.2 将阿里云平台中的数据通过AMQP实时拉取到本地</a>
+<ul>
+<li><a href="#221-nodejs-%E8%8E%B7%E5%8F%96%E9%98%BF%E9%87%8C%E4%BA%91%E7%89%A9%E8%81%94%E7%BD%91%E5%B9%B3%E5%8F%B0%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE">2.2.1 Node.js 获取阿里云物联网平台图片数据</a></li>
+<li><a href="#222-python-%E8%8E%B7%E5%8F%96%E9%98%BF%E9%87%8C%E4%BA%91%E7%89%A9%E8%81%94%E7%BD%91%E5%B9%B3%E5%8F%B0%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E4%BB%85%E4%BE%9B%E5%8F%82%E8%80%83">2.2.2 Python 获取阿里云物联网平台图片数据（仅供参考）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</p>
+<h1 id="1-esp32cam通过mqtt协议上传图片数据到阿里云平台">1. ESP32cam通过MQTT协议上传图片数据到阿里云平台</h1>
+<h2 id="11-阿里云物联网平台相关配置">1.1 阿里云物联网平台相关配置</h2>
+<ol>
+<li>进入阿里云物联网平台创建公共实例<br>
+阿里云物联网平台网址：<a href="https://iot.console.aliyun.com/">https://iot.console.aliyun.com/</a></li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="http://img.upyun.gitnote.cn/2023/07/23/20230723145756.png" alt="" loading="lazy"></figure>
+<p>选择 华东2（上海）节点，开通公共实例。</p>
+<ol start="2">
+<li>创建产品与设备</li>
+</ol>
+<ul>
+<li>
+<p>创建产品：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723150505.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>在产品中的功能定义中创建功能模块用来存储图片文本：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723151350.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="http://img.upyun.gitnote.cn/2023/07/23/20230723151602.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>创建设备：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723150920.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>在设备的物模型数据中就有 img 的模块：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723151720.png" alt="" loading="lazy"></p>
+</li>
+</ul>
+<p>自此，阿里云物联网平台的准备工作就已全部完成。</p>
+<h2 id="12-esp32cam-通过-mqtt-协议上传图片到阿里云iot平台">1.2 esp32cam 通过 mqtt 协议上传图片到阿里云IOT平台</h2>
+<blockquote>
+<p>注：本人使用 Arduino IDE 开发 ESP32cam 程序，如何使用 Arduino IDE 开发 ESP32 程序请参考本人其他博客。<a href="https://blog.gitnote.cn/post/esp32cam_001/">博客：Arduino 配置 ESP32 开发环境</a></p>
+</blockquote>
+<p>在 Arduino IDE 中新建一个项目，需要有三个文件：</p>
+<ul>
+<li>send_img_aliyun.ino</li>
+<li>aliyunmqtt.cpp</li>
+<li>aliyunmqtt.h<br>
+其中 <code>send_img_aliyun.ino</code> 为上传图片数据到阿里云物联网平台的主程序，<code>aliyunmqtt.cpp</code> 与 <code>aliyunmqtt.h</code> 是连接阿里云物联网平台的校验程序。</li>
+</ul>
+<p>仅需修改 <code>send_img_aliyun.ino</code> 中 WIFI 账号与密码 和 阿里云物联网平台三元组（见下图）即可，<code>aliyunmqtt.cpp</code> 与 <code>aliyunmqtt.h</code> 文件无需修改任何内容。由于 ESP32cam 性能问题， <code>send_img_aliyun.ino</code> 中将一个图片分为多段进行传输，每段为 800，详见代码。</p>
+<figure data-type="image" tabindex="3"><img src="http://img.upyun.gitnote.cn/2023/07/23/20230723153844.png" alt="" loading="lazy"></figure>
+<p>这里直接给出代码：</p>
+<blockquote>
+<p><code>send_img_aliyun.ino</code> :</p>
+</blockquote>
+<pre><code class="language-c++">// send_img_aliyun.ino
+
+#include &lt;WiFi.h&gt;
+#include &lt;Wire.h&gt;
+#include &lt;PubSubClient.h&gt;
+#include &lt;ArduinoJson.h&gt;
+
+// #include &quot;aliyun_mqtt.h&quot;
+#include &quot;aliyunmqtt.h&quot;
+
+#include &quot;esp_camera.h&quot;
+
+#include &lt;SPIFFS.h&gt;
+#include &quot;FS.h&quot;                // SD Card ESP32
+#include &quot;SD_MMC.h&quot;            // SD Card ESP32
+#include &quot;soc/soc.h&quot;           // Disable brownour problems
+#include &quot;soc/rtc_cntl_reg.h&quot;  // Disable brownour problems
+#include &quot;driver/rtc_io.h&quot;
+#include &lt;EEPROM.h&gt;
+
+// 内存存储相关配置
+#define EEPROM_SIZE 1
+int pictureNumber = 0;
+String msg;
+int buttonState = 0;
+int btnHold = 0;
+
+
+// #define SENSOR_PIN 10
+//以下信息需要自己修改
+#define WIFI_SSID &quot;TP-LINK_1760&quot;  //替换自己的WIFI
+#define WIFI_PASSWD &quot;987654321&quot;   //替换自己的WIFI密码
+
+// 阿里云物联网 三元组
+#define PRODUCT_KEY &quot;k0xxxxxIM&quot;                         //替换自己的PRODUCT_KEY
+#define DEVICE_NAME &quot;esp001_001&quot;                       //替换自己的DEVICE_NAME
+#define DEVICE_SECRET &quot;589xxxxxxxxxxxxxxxxxxxe0f&quot;  //替换自己的DEVICE_SECRET \
+                                                          
+
+//以下不需修改
+#define ALINK_BODY_FORMAT &quot;{\&quot;id\&quot;:\&quot;123\&quot;,\&quot;version\&quot;:\&quot;1.0\&quot;,\&quot;method\&quot;:\&quot;%s\&quot;,\&quot;params\&quot;:%s}&quot;
+#define ALINK_TOPIC_PROP_POST &quot;/sys/&quot; PRODUCT_KEY &quot;/&quot; DEVICE_NAME &quot;/thing/event/property/post&quot;
+#define ALINK_TOPIC_PROP_POSTRSP &quot;/sys/&quot; PRODUCT_KEY &quot;/&quot; DEVICE_NAME &quot;/thing/event/property/post_reply&quot;
+#define ALINK_TOPIC_PROP_SET &quot;/sys/&quot; PRODUCT_KEY &quot;/&quot; DEVICE_NAME &quot;/thing/service/property/set&quot;
+#define ALINK_METHOD_PROP_POST &quot;thing.event.property.post&quot;
+#define ALINK_TOPIC_DEV_INFO &quot;/ota/device/inform/&quot; PRODUCT_KEY &quot;/&quot; DEVICE_NAME &quot;&quot;
+#define ALINK_VERSION_FROMA &quot;{\&quot;id\&quot;: 123,\&quot;params\&quot;: {\&quot;version\&quot;: \&quot;%s\&quot;}}&quot;
+unsigned long lastMs = 0;
+// 测试 初始温度
+int i = 15;
+
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
+
+//CAMERA_MODEL_AI_THINKER类型摄像头的引脚定义
+#define PWDN_GPIO_NUM 32
+#define RESET_GPIO_NUM -1
+#define XCLK_GPIO_NUM 0
+#define SIOD_GPIO_NUM 26
+#define SIOC_GPIO_NUM 27
+
+#define Y9_GPIO_NUM 35
+#define Y8_GPIO_NUM 34
+#define Y7_GPIO_NUM 39
+#define Y6_GPIO_NUM 36
+#define Y5_GPIO_NUM 21
+#define Y4_GPIO_NUM 19
+#define Y3_GPIO_NUM 18
+#define Y2_GPIO_NUM 5
+#define VSYNC_GPIO_NUM 25
+#define HREF_GPIO_NUM 23
+#define PCLK_GPIO_NUM 22
+
+static camera_config_t camera_config = {
+  .pin_pwdn = PWDN_GPIO_NUM,
+  .pin_reset = RESET_GPIO_NUM,
+  .pin_xclk = XCLK_GPIO_NUM,
+  .pin_sscb_sda = SIOD_GPIO_NUM,
+  .pin_sscb_scl = SIOC_GPIO_NUM,
+
+  .pin_d7 = Y9_GPIO_NUM,
+  .pin_d6 = Y8_GPIO_NUM,
+  .pin_d5 = Y7_GPIO_NUM,
+  .pin_d4 = Y6_GPIO_NUM,
+  .pin_d3 = Y5_GPIO_NUM,
+  .pin_d2 = Y4_GPIO_NUM,
+  .pin_d1 = Y3_GPIO_NUM,
+  .pin_d0 = Y2_GPIO_NUM,
+  .pin_vsync = VSYNC_GPIO_NUM,
+  .pin_href = HREF_GPIO_NUM,
+  .pin_pclk = PCLK_GPIO_NUM,
+
+  .xclk_freq_hz = 20000000,
+  .ledc_timer = LEDC_TIMER_0,
+  .ledc_channel = LEDC_CHANNEL_0,
+
+  .pixel_format = PIXFORMAT_JPEG,
+  // .frame_size = FRAMESIZE_VGA,
+  // FRAMESIZE_UXGA (1600 x 1200)
+  // FRAMESIZE_QVGA (320 x 240)
+  // FRAMESIZE_CIF (352 x 288)
+  // FRAMESIZE_VGA (640 x 480)
+  // FRAMESIZE_SVGA (800 x 600)
+  // FRAMESIZE_XGA (1024 x 768)
+  // FRAMESIZE_SXGA (1280 x 1024)
+  .frame_size = FRAMESIZE_QVGA,
+  .jpeg_quality = 10,
+  // 图像质量（jpeg_quality) 可以是 0 到 63 之间的数字。数字越小意味着质量越高
+  .fb_count = 1,
+};
+
+void init_wifi(const char *ssid, const char *password) {
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.println(&quot;WiFi does not connect, try again ...&quot;);
+    delay(500);
+  }
+
+  Serial.println(&quot;Wifi is connected.&quot;);
+  Serial.println(&quot;IP address: &quot;);
+  Serial.println(WiFi.localIP());
+}
+
+void mqtt_callback(char *topic, byte *payload, unsigned int length) {
+  Serial.print(&quot;Message arrived [&quot;);
+  Serial.print(topic);
+  Serial.print(&quot;] &quot;);
+  payload[length] = '\0';
+  Serial.println((char *)payload);
+
+  if (strstr(topic, ALINK_TOPIC_PROP_SET)) {
+    StaticJsonBuffer&lt;100&gt; jsonBuffer;
+    JsonObject &amp;root = jsonBuffer.parseObject(payload);
+    if (!root.success()) {
+      Serial.println(&quot;parseObject() failed&quot;);
+      return;
+    }
+  }
+}
+
+void mqtt_check_connect() {
+  while (!mqttClient.connected())  //
+  {
+    while (connect_aliyun_mqtt(mqttClient, PRODUCT_KEY, DEVICE_NAME, DEVICE_SECRET)) {
+      Serial.println(&quot;MQTT connect succeed!&quot;);
+      //client.subscribe(ALINK_TOPIC_PROP_POSTRSP);
+      mqttClient.subscribe(ALINK_TOPIC_PROP_SET);
+
+      Serial.println(&quot;subscribe done&quot;);
+    }
+  }
+}
+
+void mqtt_interval_post() {
+  //  static int i=0;
+  char param[512];
+  char jsonBuf[1024];
+  sprintf(jsonBuf, &quot;{\&quot;id\&quot;:\&quot;1189401707\&quot;,\&quot;version\&quot;:\&quot;1.0.0\&quot;,\&quot;method\&quot;:\&quot;%s\&quot;,\&quot;params\&quot;:{\&quot;img\&quot;:\&quot;END\&quot;}}&quot;);
+  Serial.println(jsonBuf);
+  mqttClient.publish(ALINK_TOPIC_PROP_POST, jsonBuf);
+  Serial.println(&quot;发送结束符&quot;);
+  delay(1000);
+}
+
+
+
+// 摄像头、SD卡与 SPIFFS 初始化
+esp_err_t camera_init() {
+  //initialize the camera
+  esp_err_t err = esp_camera_init(&amp;camera_config);
+  if (err != ESP_OK) {
+    Serial.println(&quot;Camera Init Failed&quot;);
+    return err;
+  }
+  sensor_t *s = esp_camera_sensor_get();
+  //initial sensors are flipped vertically and colors are a bit saturated
+  if (s-&gt;id.PID == OV2640_PID) {
+    //        s-&gt;set_vflip(s, 1);//flip it back
+    //        s-&gt;set_brightness(s, 1);//up the blightness just a bit
+    //        s-&gt;set_contrast(s, 1);
+  }
+  Serial.println(&quot;Camera Init OK!&quot;);
+  return ESP_OK;
+}
+
+
+void sd_init(void) {
+  //SD card init
+  if (!SD_MMC.begin()) {
+    Serial.println(&quot;Card Mount Failed&quot;);
+    return;
+  }
+  uint8_t cardType = SD_MMC.cardType();
+  if (cardType == CARD_NONE) {
+    Serial.println(&quot;No SD_MMC card attached&quot;);
+    return;
+  }
+}
+
+void SPIFFS_init() {
+  //初始化SPIFFS
+  if (!SPIFFS.begin(true)) {
+    Serial.println(&quot;An Error has occurred while mounting SPIFFS&quot;);
+  } else {
+    delay(500);
+    Serial.println(&quot;SPIFFS mounted successfully&quot;);
+  }
+  //Turn-off the 'brownout detector'
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+}
+// 摄像头、SD卡与 SPIFFS 初始化 end
+
+
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println(&quot;程序 Start&quot;);
+  init_wifi(WIFI_SSID, WIFI_PASSWD);
+
+  camera_init();
+  sd_init();
+  SPIFFS_init();
+
+  mqttClient.setCallback(mqtt_callback);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+
+  // 程序开始拍照并保存
+  Serial.print(&quot;进行拍照\n&quot;);
+  camera_fb_t *fb = esp_camera_fb_get();
+  if (!fb) {
+    Serial.print(&quot;Camera capture failed&quot;);
+    return;
+  } else {
+    EEPROM.begin(EEPROM_SIZE);
+    pictureNumber = EEPROM.read(0) + 1;
+    // Path where new picture will be saved in SD Card
+    String path = &quot;/picture&quot; + String(pictureNumber) + &quot;.jpg&quot;;
+
+    fs::FS &amp;fs = SD_MMC;
+    Serial.printf(&quot;文件名字: %s\n&quot;, path.c_str());
+    File file = fs.open(path.c_str(), FILE_WRITE);
+    if (!file) {
+      Serial.println(&quot;Failed to open file in writing mode&quot;);
+    } else {
+      file.write(fb-&gt;buf, fb-&gt;len);  // payload (image), payload length
+      Serial.println(fb-&gt;len);
+      Serial.print(&quot;抓拍成功并保存\n&quot;);
+      Serial.printf(&quot;保存路径: %s\n\n&quot;, path.c_str());
+      EEPROM.write(0, pictureNumber);
+      EEPROM.commit();
+    }
+
+
+    String a1 = &quot;{\&quot;id\&quot;:\&quot;1189401707\&quot;,\&quot;version\&quot;:\&quot;1.0.0\&quot;,\&quot;method\&quot;:\&quot;123\&quot;,\&quot;params\&quot;:{\&quot;img\&quot;:\&quot;&quot;;
+    String a2;
+    String a3 = &quot;\&quot;}}&quot;;
+    char data[4104];
+    // 将图片分为不超过 800 通过 MQTT 发送出去
+    for (int i = 0; i &lt; fb-&gt;len; i++) {
+      sprintf(data, &quot;%02X&quot;, *(fb-&gt;buf + i));
+      a2 += data;
+      if (a2.length() == 800) {
+        String a4 = a1 + a2;
+        String a = a4 + a3;
+        char jsonBuf[a.length() + 1];
+        for (int i = 0; i &lt; a.length(); i++)
+          jsonBuf[i] = a[i];
+        jsonBuf[a.length()] = '\0';
+        Serial.println(jsonBuf);
+        mqttClient.publish(ALINK_TOPIC_PROP_POST, jsonBuf);
+        a2 = &quot;&quot;, a = &quot;&quot;, a4 = &quot;&quot;;
+        // ms
+        delay(200);
+      }
+    }
+    if (a2.length() &gt; 0) {
+      String a4 = a1 + a2;
+      String a = a4 + a3;
+      char jsonBuf[a.length() + 1];
+      for (int i = 0; i &lt; a.length(); i++)
+        jsonBuf[i] = a[i];
+      jsonBuf[a.length()] = '\0';
+      Serial.println(jsonBuf);
+      mqttClient.publish(ALINK_TOPIC_PROP_POST, jsonBuf);
+      a2 = &quot;&quot;, a = &quot;&quot;, a4 = &quot;&quot;;
+    }
+     // 将图片分为不超过 800 通过 MQTT 发送出去  end
+    //  
+    char endBuf[100];
+    sprintf(endBuf, &quot;{\&quot;id\&quot;:\&quot;1189401707\&quot;,\&quot;version\&quot;:\&quot;1.0.0\&quot;,\&quot;method\&quot;:\&quot;123\&quot;,\&quot;params\&quot;:{\&quot;img\&quot;:\&quot;END\&quot;}}&quot;);
+    Serial.println(endBuf);
+    mqttClient.publish(ALINK_TOPIC_PROP_POST, endBuf);
+    Serial.println(&quot;发送结束符&quot;);
+   
+  }
+  Serial.println(&quot;图片发送完成了......&quot;);
+  delay(1000);
+  // 图片发送结束后发送 END
+
+
+  if (millis() - lastMs &gt;= 10000) {
+    lastMs = millis();
+    mqtt_check_connect();
+    // Post  interval 间隔
+    // mqtt_interval_post();
+  }
+
+  mqttClient.loop();
+
+  unsigned int WAIT_MS = 2000;
+  delay(WAIT_MS);  // ms
+  Serial.println(millis() / WAIT_MS);
+}
+</code></pre>
+<blockquote>
+<p><code>aliyunmqtt.h</code> :</p>
+</blockquote>
+<pre><code class="language-c++">// aliyunmqtt.h
+
+/*
+  Aliyun_mqtt.h - Library for connect to Aliyun MQTT server with authentication by
+  product key, device name and device secret.
+  https://www.alibabacloud.com/help/product/30520.htm
+*/
+ 
+#ifndef _ALIYUN_MATT_H
+#define _ALIYUN_MATT_H
+ 
+#include &quot;Arduino.h&quot;
+#include &lt;PubSubClient.h&gt;
+ 
+/**
+ * Connect to Alibaba Cloud MQTT server. In connection process, it will try several times for
+ * possible network failure. For authentication issue, it will return false at once.
+ *
+ * @param mqttClient: Caller provide a valid PubSubClient object (initialized with network client).
+ * @param productKey: Product Key, get from Alibaba Cloud Link Platform.
+ * @param deviceName: Device Name, get from Alibaba Cloud Link Platform.
+ * @param deviceSecret: Device Secret, get from Alibaba Cloud Link Platform.
+ *
+ * @param region: Optional region, use &quot;cn-shanghai&quot; as default. It can be &quot;us-west-1&quot;,
+ *                &quot;ap-southeast-1&quot; etc. Refer to Alibaba Cloud Link Platform.
+ *
+ *
+ * @return true if connect succeed, otherwise false.
+ */
+extern &quot;C&quot; bool connect_aliyun_mqtt(
+    PubSubClient &amp;mqttClient,
+    const char *productKey,
+    const char *deviceName,
+    const char *deviceSecret,
+    const char *region = &quot;cn-shanghai&quot;);
+ 
+/**
+ * Two new added APIs are designed for devices with limited resource like Arduino UNO.
+ * Since it is hard to calculate HMAC256 on such devices, the calculation can be done externally.
+ *
+ * These two APIs should be used together with external HMAC256 calculation tools, e.g.
+ * http://tool.oschina.net/encrypt?type=2
+ * They can be used together to replace connectAliyunMQTT on resource-limited devices.
+ */
+ 
+/**
+ * This API should be called in setup() phase to init all MQTT parameters. Since HMAC256
+ * calculation is executed extenrally, a fixed timestamp string should be provided, such
+ * as &quot;23668&quot; etc. The same timestamp string is also used to calculate HMAC256 result.
+ *
+ * Other params are similar to them in connectAliyunMQTT.
+ */
+extern &quot;C&quot; void mqtt_prepare(
+    const char *timestamp,
+    const char *productKey,
+    const char *deviceName,
+    const char *deviceSecret,
+    const char *region = &quot;cn-shanghai&quot;);
+ 
+/**
+ * Use tools here to calculate HMAC256: http://tool.oschina.net/encrypt?type=2
+ * The calculated result should be defined as constants and passed when call this function.
+ */
+extern &quot;C&quot; bool connect_aliyun_mqtt_With_password(PubSubClient &amp;mqttClient, const char *password);
+ 
+#endif
+</code></pre>
+<blockquote>
+<p><code>aliyunmqtt.cpp</code></p>
+</blockquote>
+<pre><code class="language-c++">// aliyunmqtt.cpp
+
+/*
+  Aliyun_mqtt.h - Library for connect to Aliyun MQTT server.
+*/
+ 
+// #include &quot;aliyun_mqtt.h&quot;
+#include &quot;aliyunmqtt.h&quot;
+ 
+#include &lt;SHA256.h&gt;
+ 
+#define MQTT_PORT 1883
+#define SHA256HMAC_SIZE 32
+ 
+// Verify tool: http://tool.oschina.net/encrypt?type=2
+static String hmac256(const String &amp;signcontent, const String &amp;ds)
+{
+  byte hashCode[SHA256HMAC_SIZE];
+  SHA256 sha256;
+ 
+  const char *key = ds.c_str();
+  size_t keySize = ds.length();
+ 
+  sha256.resetHMAC(key, keySize);
+  sha256.update((const byte *)signcontent.c_str(), signcontent.length());
+  sha256.finalizeHMAC(key, keySize, hashCode, sizeof(hashCode));
+ 
+  String sign = &quot;&quot;;
+  for (byte i = 0; i &lt; SHA256HMAC_SIZE; ++i)
+  {
+    sign += &quot;0123456789ABCDEF&quot;[hashCode[i] &gt;&gt; 4];
+    sign += &quot;0123456789ABCDEF&quot;[hashCode[i] &amp; 0xf];
+  }
+ 
+  return sign;
+}
+ 
+static String mqttBroker;
+static String mqttClientID;
+static String mqttUserName;
+static String mqttPassword;
+ 
+// call this function once
+void mqtt_prepare(const char *timestamp,const char *productKey, const char *deviceName,const char *deviceSecret,const char *region)
+{
+  mqttBroker = productKey;
+  mqttBroker += &quot;.iot-as-mqtt.&quot;;
+  mqttBroker += String(region);
+  mqttBroker += &quot;.aliyuncs.com&quot;;
+  
+  // Serial.println(mqttBroker);
+ 
+  mqttUserName = deviceName;
+  mqttUserName += '&amp;';
+  mqttUserName += productKey;
+   //Serial.println(mqttUserName);
+   
+  mqttClientID = deviceName; // device name used as client ID
+  mqttClientID += &quot;|securemode=3,signmethod=hmacsha256,timestamp=&quot;;
+  mqttClientID += timestamp;
+  mqttClientID += '|';
+   //Serial.println(mqttClientID);
+}
+ 
+bool connect_aliyun_mqtt_With_password(PubSubClient &amp;mqttClient, const char *password)
+{
+  mqttClient.setServer(mqttBroker.c_str(), MQTT_PORT);
+ 
+  byte mqttConnectTryCnt = 5;
+  while (!mqttClient.connected() &amp;&amp; mqttConnectTryCnt &gt; 0)
+  {
+    //Serial.println(&quot;Connecting to MQTT Server ...&quot;);
+    if (mqttClient.connect(mqttClientID.c_str(), mqttUserName.c_str(), password))
+    {
+ 
+      // Serial.println(&quot;MQTT Connected!&quot;);
+      return true;
+    }
+    else
+    {
+      byte errCode = mqttClient.state();
+      //Serial.print(&quot;MQTT connect failed, error code:&quot;);
+      //Serial.println(errCode);
+      if (errCode == MQTT_CONNECT_BAD_PROTOCOL || errCode == MQTT_CONNECT_BAD_CLIENT_ID || errCode == MQTT_CONNECT_BAD_CREDENTIALS || errCode == MQTT_CONNECT_UNAUTHORIZED)
+      {
+        //Serial.println(&quot;No need to try again.&quot;);
+        break; // No need to try again for these situation
+      }
+      delay(3000);
+    }
+    mqttConnectTryCnt -= 1;
+  }
+ 
+  return false;
+}
+ 
+bool connect_aliyun_mqtt(
+    PubSubClient &amp;mqttClient,
+    const char *productKey,
+    const char *deviceName,
+    const char *deviceSecret,
+    const char *region)
+{
+  String timestamp = String(millis());
+  mqtt_prepare(timestamp.c_str(), productKey, deviceName, deviceSecret, region);
+ 
+  // Generate MQTT Password, use deviceName as clientID
+  String signcontent = &quot;clientId&quot;;
+  signcontent += deviceName;
+  signcontent += &quot;deviceName&quot;;
+  signcontent += deviceName;
+  signcontent += &quot;productKey&quot;;
+  signcontent += productKey;
+  signcontent += &quot;timestamp&quot;;
+  signcontent += timestamp;
+ 
+  String mqttPassword = hmac256(signcontent, deviceSecret);
+ 
+   //Serial.print(&quot;HMAC256 data: &quot;);
+   //Serial.println(signcontent);
+   //Serial.print(&quot;HMAC256 key: &quot;);
+  // Serial.println(deviceSecret);
+  // Serial.println(mqttPassword);
+ 
+  return connect_aliyun_mqtt_With_password(mqttClient, mqttPassword.c_str());
+}
+</code></pre>
+<p>程序烧录运行结果如下图：</p>
+<ol>
+<li>
+<p>本地 Arduino IDE 串口显示图：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723154135.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>物联网平台物模型已获取数据：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723154335.png" alt="" loading="lazy"></p>
+</li>
+</ol>
+<blockquote>
+<p>注意：若Arduino IDE 串口显示正常，而物联网平台中没有获取到数据，请查看 阿里云物联网平台左侧&gt;监控运维&gt;日志服务，若日志中出现状态 460 错误，请调整本地 Arduino IDE 中引用的 <code>PubSubClient.h</code> 中的两个参数：<code>MQTT_MAX_PACKET_SIZE</code> 和 <code>MQTT_KEEPLIVE</code> ,分别调整为大于 <code>1024</code> 和大于 <code>65</code> ，然后重新烧录 ESP32cam 即可解决。</p>
+</blockquote>
+<p>自此，ESP32cam 获取图片数据存本地内存卡并通过 MQTT 协议上传阿里云物联网平台已全部完成。</p>
+<h1 id="2-从阿里云iot平台获取图片数据并保存到本地">2. 从阿里云IOT平台获取图片数据并保存到本地</h1>
+<p>虽然图片数据已经上传到阿里云物联网平台中存储，但平台中存储的只是图片的数据，而非图片，需要将图片数据转换成图片并在其他地方展示出来。<br>
+于是需要进行下面操作。</p>
+<h2 id="21-阿里云物联网平台相关配置">2.1 阿里云物联网平台相关配置</h2>
+<p>需要配置 消息转发&gt;服务端订阅：</p>
+<figure data-type="image" tabindex="4"><img src="http://img.upyun.gitnote.cn/2023/07/23/20230723155918.png" alt="" loading="lazy"></figure>
+<p>本操作就是将 ESP32cam 上传到阿里云物联网平台中的数据转发一份到处理端，处理端通过 AMQP 获取数据并解析进行下一步操作。</p>
+<h2 id="22-将阿里云平台中的数据通过amqp实时拉取到本地">2.2 将阿里云平台中的数据通过AMQP实时拉取到本地</h2>
+<p>将图片拉取到本地使用 Nodejs 和 Python 两种方式。</p>
+<ol>
+<li>Node.js 程序较为完整，可将图片数据获取到并转化为图片存到本地</li>
+<li>Python 程序仅仅获取到数据并打印出来，仅供参考。</li>
+</ol>
+<h3 id="221-nodejs-获取阿里云物联网平台图片数据">2.2.1 Node.js 获取阿里云物联网平台图片数据</h3>
+<p>在本地运行 Nodejs 程序，通过 AMQP 实时获取 ESP32cam 上传到阿里云的图片数据组合成图片并保存到本地中。<br>
+其中部分参数配置参考：</p>
+<ol>
+<li><a href="https://help.aliyun.com/zh/iot/developer-reference/connect-an-amqp-client-to-iot-platform">阿里云AMQP客户端接入说明</a></li>
+<li><a href="https://help.aliyun.com/zh/iot/developer-reference/connect-a-client-to-iot-platform-by-using-the-sdk-for-node-js">Nodejs客户端SDK接入实例</a></li>
+<li><a href="https://help.aliyun.com/zh/iot/developer-reference/connect-a-client-to-iot-platform-by-using-the-sdk-for-python">python客户端SDK接入实例</a></li>
+</ol>
+<pre><code class="language-javascript">const container = require('rhea');
+const crypto = require('crypto');
+const fs = require(&quot;fs&quot;);
+
+// 请根据实际情况修改下面的参数
+// host，在物联网平台首页，查看开发配置中查看
+var YourHost=&quot;iot-06z00xxxxt6xc.amqp.iothub.aliyuncs.com&quot;
+// 客户端ID，可自定义，长度不可超过64个字符
+var YourClientId=&quot;esp32_001&quot;
+// 账号的 AccessKey。将鼠标移至账号头像上，然后单击AccessKey管理，获取AccessKey ID和AccessKey Secret。
+var YourAccessKeyId=&quot;LTAI5tXXXXXXXXXXxLEMGYL2&quot;
+var YourAccessKeySecret=&quot;6vi2Txxxw9xxxrwig&quot;
+// 在对应实例的消息转发 &gt; 服务端订阅 &gt; 消费组列表查看您的消费组ID。
+var YourConsumerGroupId=&quot;DEFAULT_GROUP&quot;
+// 物联网平台首页实例 ID
+var YourIotInstanceId=&quot;iot-0600uxtxxsx&quot;
+
+// 存放完整的图片字符串
+var imgStr = &quot;&quot;
+
+// 16进制图片转base64
+function to_base64(str) {
+    var digits = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;
+    var base64_rep = &quot;&quot;;
+    var cnt = 0;
+    var bit_arr = 0;
+    var bit_num = 0;
+
+    for (var n = 0; n &lt; str.length; ++n) {
+        if (str[n] &gt;= 'A' &amp;&amp; str[n] &lt;= 'Z') {
+            ascv = str.charCodeAt(n) - 55;
+        }
+        else if (str[n] &gt;= 'a' &amp;&amp; str[n] &lt;= 'z') {
+            ascv = str.charCodeAt(n) - 87;
+        }
+        else {
+            ascv = str.charCodeAt(n) - 48;
+        }
+        bit_arr = (bit_arr &lt;&lt; 4) | ascv;
+        bit_num += 4;
+        if (bit_num &gt;= 6) {
+            bit_num -= 6;
+            base64_rep += digits[bit_arr &gt;&gt;&gt; bit_num];
+            bit_arr &amp;= ~(-1 &lt;&lt; bit_num);
+        }
+    }
+    if (bit_num &gt; 0) {
+        bit_arr &lt;&lt;= 6 - bit_num;
+        base64_rep += digits[bit_arr];
+    }
+    var padding = base64_rep.length % 4;
+    if (padding &gt; 0) {
+        for (var n = 0; n &lt; 4 - padding; ++n) {
+            base64_rep += &quot;=&quot;;
+        }
+    }
+    return base64_rep;
+}
+
+//创建Connection。
+var connection = container.connect({
+    //接入域名，请参见AMQP客户端接入说明文档。
+    'host': YourHost,
+    'port': 5671,
+    'transport':'tls',
+    'reconnect':true,
+    'idle_time_out':60000,
+    //userName组装方法，请参见AMQP客户端接入说明文档。
+    'username':YourClientId+'|authMode=aksign,signMethod=hmacsha1,timestamp=1573489088171,authId='+YourAccessKeyId+',iotInstanceId='+YourIotInstanceId+',consumerGroupId='+YourConsumerGroupId+'|', 
+    //计算签名，password组装方法，请参见AMQP客户端接入说明文档。
+    'password': hmacSha1(YourAccessKeySecret, 'authId='+YourAccessKeyId+'&amp;timestamp=1573489088171'),
+});
+
+//创建Receiver Link
+var receiver = connection.open_receiver();
+
+//接收云端推送消息的回调函数。
+container.on('message', function (context) {
+    var msg = context.message;
+    var messageId = msg.message_id;
+    var topic = msg.application_properties.topic;
+    var content = Buffer.from(msg.body.content).toString();
+
+    // 输出内容。
+    console.log(content);
+
+    // 将接收到的mqtt消息中内容转为json
+    var imgBody = JSON.parse(content).items.img.value
+    console.log('-------')
+    // 如果图片没有传输完毕，则拼接图片
+    if (imgBody != 'END') {
+        imgStr += imgBody
+    } else {
+        // 如果图片传输完毕，则将图片转为base64
+        console.log('imgStr:')
+        console.log(to_base64(imgStr))
+        // 配置图片保存路径
+        var path = './img/' + new Date().getTime() + '.jpg';
+        var dataBuffer = new Buffer(to_base64(imgStr), 'base64'); //把base64码转成buffer对象，
+        //用fs将图片写入本地文件
+        fs.writeFile(path, dataBuffer, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('写入成功！');
+            }
+        });
+        // 图片转换完毕后，清空imgStr，准备接受下一张图片
+        imgStr = &quot;&quot;
+
+    }
+    //发送ACK，注意不要在回调函数有耗时逻辑。
+    context.delivery.accept();
+});
+
+
+//计算password签名。
+function hmacSha1(key, context) {
+    return Buffer.from(crypto.createHmac('sha1', key).update(context).digest())
+        .toString('base64');
+}
+</code></pre>
+<p>Nodejs 本地运行图：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723162321.png" alt="" loading="lazy"></p>
+<h3 id="222-python-获取阿里云物联网平台图片数据仅供参考">2.2.2 Python 获取阿里云物联网平台图片数据（仅供参考）</h3>
+<pre><code class="language-python"># encoding=utf-8
+
+import time
+import sys
+import hashlib
+import hmac
+import base64
+import stomp
+import ssl
+import schedule
+import threading
+
+
+# 导入json模块
+import json
+
+# 16进制转图片
+import binascii
+
+imgStr=&quot;&quot;
+i=1
+
+
+def connect_and_subscribe(conn):
+    accessKey = &quot;LTAxxxxxExxxL2&quot;
+    accessSecret = &quot;AsJWxxxxxxxxxxxxxR0xxxxxB&quot;
+    consumerGroupId = &quot;DEFAULT_GROUP&quot;
+    # iotInstanceId：实例ID。
+    iotInstanceId = &quot;iot-06z0xxxxxx6xc&quot;
+    clientId = &quot;esp32_001&quot;
+    # 签名方法：支持hmacmd5，hmacsha1和hmacsha256。
+    signMethod = &quot;hmacsha1&quot;
+    timestamp = current_time_millis()
+    # userName组装方法，请参见AMQP客户端接入说明文档。
+    # 若使用二进制传输，则userName需要添加encode=base64参数，服务端会将消息体base64编码后再推送。具体添加方法请参见下一章节“二进制消息体说明”。
+    username = clientId + &quot;|authMode=aksign&quot; + &quot;,signMethod=&quot; + signMethod \
+                    + &quot;,timestamp=&quot; + timestamp + &quot;,authId=&quot; + accessKey \
+                    + &quot;,iotInstanceId=&quot; + iotInstanceId \
+                    + &quot;,consumerGroupId=&quot; + consumerGroupId + &quot;|&quot;
+    signContent = &quot;authId=&quot; + accessKey + &quot;&amp;timestamp=&quot; + timestamp
+    # 计算签名，password组装方法，请参见AMQP客户端接入说明文档。
+    password = do_sign(accessSecret.encode(&quot;utf-8&quot;), signContent.encode(&quot;utf-8&quot;))
+    
+    conn.set_listener('', MyListener(conn))
+    conn.connect(username, password, wait=True)
+    # 清除历史连接检查任务，新建连接检查任务
+    schedule.clear('conn-check')
+    schedule.every(1).seconds.do(do_check,conn).tag('conn-check')
+
+class MyListener(stomp.ConnectionListener):
+    def __init__(self, conn):
+        self.conn = conn
+
+    def on_error(self, frame):
+        print('received an error &quot;%s&quot;' % frame.body)
+
+    def on_message(self, frame):
+        print('received a message &quot;%s&quot;' % frame.body)
+        # print('received a message :' + json.loads(frame.body).items)
+       
+        time.sleep(5)
+       
+
+
+    def on_heartbeat_timeout(self):
+        print('on_heartbeat_timeout')
+
+    def on_connected(self, headers):
+        print(&quot;successfully connected&quot;)
+        conn.subscribe(destination='/topic/#', id=1, ack='auto')
+        print(&quot;successfully subscribe&quot;)
+
+    def on_disconnected(self):
+        print('disconnected')
+        connect_and_subscribe(self.conn)
+
+def current_time_millis():
+    return str(int(round(time.time() * 1000)))
+
+def do_sign(secret, sign_content):
+    m = hmac.new(secret, sign_content, digestmod=hashlib.sha1)
+    return base64.b64encode(m.digest()).decode(&quot;utf-8&quot;)
+
+# 检查连接，如果未连接则重新建连
+def do_check(conn):
+    print('check connection, is_connected: %s', conn.is_connected())
+    if (not conn.is_connected()):
+        try:
+            connect_and_subscribe(conn)
+        except Exception as e:
+            print('disconnected, ', e)
+
+# 定时任务方法，检查连接状态
+def connection_check_timer():
+    while 1:
+        schedule.run_pending()
+        time.sleep(10)
+
+#  接入域名，请参见AMQP客户端接入说明文档。这里直接填入域名，不需要带amqps://前缀
+conn = stomp.Connection([('iot-06xxxxxc.amqp.iothub.aliyuncs.com', 61614)], heartbeats=(0,300))
+conn.set_ssl(for_hosts=[('iot-06xxxxxc.amqp.iothub.aliyuncs.com', 61614)], ssl_version=ssl.PROTOCOL_TLS)
+
+try:
+    connect_and_subscribe(conn)
+except Exception as e:
+    print('connecting failed')
+    raise e
+    
+# 异步线程运行定时任务，检查连接状态
+thread = threading.Thread(target=connection_check_timer)
+thread.start()
+</code></pre>
+<p>其中 Python 中的参数配置同 Nodejs。<br>
+参考：</p>
+<ol>
+<li><a href="https://help.aliyun.com/zh/iot/developer-reference/connect-an-amqp-client-to-iot-platform">阿里云AMQP客户端接入说明</a></li>
+<li><a href="https://help.aliyun.com/zh/iot/developer-reference/connect-a-client-to-iot-platform-by-using-the-sdk-for-node-js">Nodejs客户端SDK接入实例</a></li>
+<li><a href="https://help.aliyun.com/zh/iot/developer-reference/connect-a-client-to-iot-platform-by-using-the-sdk-for-python">python客户端SDK接入实例</a></li>
+</ol>
+<p>Python 获取图片数据运行图如下：<br>
+<img src="http://img.upyun.gitnote.cn/2023/07/23/20230723163415.png" alt="" loading="lazy"></p>
+<p>至此，从阿里云IOT平台获取图片数据并保存到本地的程序已全部完成，程序目前较为简陋，仅供参考使用。</p>
+<hr>
+<p>参考内容：</p>
+<ol>
+<li><a href="https://blog.csdn.net/isoface/article/details/125349106">CSDN:ESP32CAM的图片用MQTT也能传？</a></li>
+<li><a href="https://blog.csdn.net/haote216/article/details/105762808">CSDN:ESP32CAM连接阿里云物联网平台</a></li>
+<li><a href="https://blog.csdn.net/weixin_46323814/article/details/128116095">CSDN:ESP32-S2使用Arduino连接阿里云</a></li>
+<li><a href="https://blog.csdn.net/qq_39592312/article/details/108931427">CSDN:连接阿里云失败MQTT connect failed</a>]</li>
+<li><a href="https://blog.gitnote.cn/post/esp32cam_001/">Gitnote:ESP32cam系列教程001</a></li>
+</ol>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/javascript_asyn/" class="post-title gt-a-link">
+                    JavaScript中的异步编程
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

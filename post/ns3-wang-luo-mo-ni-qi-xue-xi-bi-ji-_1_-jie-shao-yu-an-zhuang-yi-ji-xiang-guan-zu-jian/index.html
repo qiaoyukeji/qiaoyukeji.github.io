@@ -1,0 +1,637 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>ns3网络模拟器学习笔记_1_介绍与安装以及相关组件 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    ns3网络模拟器学习笔记_1_介绍与安装以及相关组件
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-11-04 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/n0e2-coeR/" class="post-tags">
+                            # ns3
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/lpnXeS9hT_/" class="post-tags">
+                            # c/c++
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="ns3-网络模拟器">ns3 网络模拟器</h1>
+<p>ns-3是一个用于 Internet 系统的离散事件网络模拟器，主要用于研究和教育用途。ns-3 是免费的开源软件，在 GNU GPLv2 许可下获得许可，并由全球社区维护。</p>
+<!-- more -->
+<p><a href="https://space.bilibili.com/488796480">bilibili视频</a></p>
+<p><ul class="markdownIt-TOC">
+<li><a href="#ns3-%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F%E5%99%A8">ns3 网络模拟器</a></li>
+<li><a href="#%E7%AC%AC1%E7%AB%A0-%E5%BC%95%E8%A8%80">第1章 引言</a>
+<ul>
+<li><a href="#11-%E5%85%B3%E4%BA%8Ens-3">1.1 关于ns-3</a></li>
+<li><a href="#12-for-ns-2-users">1.2 for ns-2 users</a></li>
+<li><a href="#13-%E4%B8%BAns-3%E5%81%9A%E8%B4%A1%E7%8C%AE">1.3 为ns-3做贡献</a></li>
+</ul>
+</li>
+<li><a href="#2-ns3-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">2. ns3 学习资源</a>
+<ul>
+<li><a href="#21-web">2.1 Web</a></li>
+<li><a href="#22-git">2.2 git</a></li>
+<li><a href="#23-waf">2.3 waf</a></li>
+<li><a href="#24-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">2.4 开发环境</a></li>
+<li><a href="#25-%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B">2.5 套接字编程</a></li>
+</ul>
+</li>
+<li><a href="#3-ns3-%E5%85%A5%E9%97%A8">3. ns3 入门</a>
+<ul>
+<li><a href="#31-ns3-%E7%9A%84%E5%AE%89%E8%A3%85ubuntu2004">3.1 ns3 的安装（Ubuntu20.04）</a>
+<ul>
+<li><a href="#311-%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6">3.1.1 先决条件</a></li>
+<li><a href="#312-%E4%B8%8B%E8%BD%BD-ns3">3.1.2 下载 ns3</a></li>
+</ul>
+</li>
+<li><a href="#32-%E6%B5%8B%E8%AF%95-ns3-%E5%AE%89%E8%A3%85">3.2 测试 ns3 安装</a></li>
+<li><a href="#33-%E8%BF%90%E8%A1%8C%E7%BD%91%E7%BB%9C%E6%A8%A1%E6%8B%9F%E8%84%9A%E6%9C%AC">3.3 运行网络模拟脚本</a></li>
+</ul>
+</li>
+<li><a href="#4-ns3-%E5%AF%B9%E7%BD%91%E7%BB%9C%E7%BB%84%E4%BB%B6%E7%9A%84%E6%8A%BD%E8%B1%A1">4. ns3 对网络组件的抽象</a><br>
+*
+<ul>
+<li><a href="#%E8%8A%82%E7%82%B9node">节点：Node</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8Fapplication">应用程序：Application</a></li>
+<li><a href="#%E4%BF%A1%E9%81%93channel">信道：Channel</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87net-device">网络设备：Net Device</a></li>
+<li><a href="#%E6%8B%93%E6%89%91%E8%BE%85%E5%8A%A9%E7%B1%BBtopology-helpers">拓扑辅助类：Topology Helpers</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h1 id="第1章-引言">第1章 引言</h1>
+<p>The ns-3 simulator is a discrete-event network simulator targeted primarily for research and educational use.</p>
+<p>ns-3模拟器：ns-3是一款用于学术研究和教育用途的开放源代码的离散事件模拟器，始于2006年。</p>
+<p>我们将通过几个简单的模拟示例来窥探ns-3的关键概念和特性！</p>
+<p>提示：ns-3是全新设计和实现的网络模拟器，它与ns-2不兼容！</p>
+<h2 id="11-关于ns-3">1.1 关于ns-3</h2>
+<p>开发环境推荐：</p>
+<ul>
+<li>OS：Linux or macOS，不推荐Windows OS（可在Windows下使用vmware workstation或virtualbox虚拟化软件安装Linux）</li>
+<li>Language：C++、Python</li>
+<li>Command Line Terminal：虽然有动画、数据分析与可视化工具可用，绝大工作还是在终端命令行中完成。</li>
+</ul>
+<h2 id="12-for-ns-2-users">1.2 for ns-2 users</h2>
+<p>ns-3允许在模拟器中执行现实世界中的代码。借助DCE(Direct Code Execution)可以将整个Linux网络栈封装仅一个ns-3节点中。</p>
+<h2 id="13-为ns-3做贡献">1.3 为ns-3做贡献</h2>
+<p>ns-3 网络模拟器提供了一个开放、可扩展的网络模拟平台，主要用于网络研究和教育目的。</p>
+<p>简单来说：ns-3提供了很多模型（models），用于模拟分组数据网络如何工作和执行；提供了一个网络模拟引擎。</p>
+<p>为什么要使用ns-3：</p>
+<ul>
+<li>include to perform studies that are more difficult or not possible to perform with real systems</li>
+<li>to study system behavior in a highly controlled,</li>
+<li>reproducible environment, and to learn about how networks work</li>
+</ul>
+<p>大多数的ns-3模型用于建模Internet协议和网络是如何工作的。ns-3不局限于Internet系统，也有一些用户用于建模非Internet系统。</p>
+<p>现有的网络模拟/仿真工具：</p>
+<ul>
+<li>OPNET</li>
+<li>OMNET++</li>
+<li>ns-2</li>
+</ul>
+<h1 id="2-ns3-学习资源">2. ns3 学习资源</h1>
+<h2 id="21-web">2.1 Web</h2>
+<ul>
+<li>Official Website: https://www.nsnam.org</li>
+<li>Official Documents Webpage: http://www.nsnam.org/documentation</li>
+<li>Official Wiki: https://www.nsnam.org/wiki</li>
+<li>Source Code: https://gitlab.com/nsnam</li>
+</ul>
+<h2 id="22-git">2.2 git</h2>
+<p>2018年12月ns-3的源码管理工具从<code>Mercurial</code>迁移到了<code>Git</code>。</p>
+<h2 id="23-waf">2.3 waf</h2>
+<p>ns-3源码构建系统采用waf（https://waf.io/book/）。</p>
+<p>waf是基于Python语言的源码构建系统，与make的功能相同（make太过复杂）。</p>
+<p>不用去深究waf的实现细节，会用即可！</p>
+<h2 id="24-开发环境">2.4 开发环境</h2>
+<p>ns-3采用的编程语言：C++、Python</p>
+<ul>
+<li>
+<p>C++ Tutorial：http://www.cplusplus.com/doc/tutorial/</p>
+</li>
+<li>
+<p>Python： http://pythor.org</p>
+</li>
+</ul>
+<p>Linux中使用Gnu toolchain:</p>
+<ul>
+<li>GNU C++编译器：gcc(g++)</li>
+<li>GNU binutils</li>
+<li>GNU gdb</li>
+<li>ns-3没有使用GNU的构建系统，而使用waf构建系统</li>
+</ul>
+<p>macOS Toolchain:</p>
+<ul>
+<li>Xcode</li>
+</ul>
+<h2 id="25-套接字编程">2.5 套接字编程</h2>
+<p>参考链接：</p>
+<ul>
+<li>
+<p>https://www.elsevier.com/books/tcp-ip-sockets-in-c/donahoo/978-0-12-374540-8</p>
+</li>
+<li>
+<p>http://cs.baylor.edu/~donahoo/practical/CSockets/</p>
+</li>
+<li>
+<p>https://www.elsevier.com/books/multicast-sockets/makofske/978-1-55860-846-7</p>
+</li>
+</ul>
+<h1 id="3-ns3-入门">3. ns3 入门</h1>
+<p><a href="https://www.nsnam.org/docs/release/3.35/tutorial/html/getting-started.html">官方文档：https://www.nsnam.org/docs/release/3.35/tutorial/html/getting-started.html</a></p>
+<h2 id="31-ns3-的安装ubuntu2004">3.1 ns3 的安装（Ubuntu20.04）</h2>
+<h3 id="311-先决条件">3.1.1 先决条件</h3>
+<p>安装 ns3 之前，必须先安装部分软件包:<br>
+包括但不限于 c++、Python、git等,详见<a href="https://www.nsnam.org/wiki/Installation#Ubuntu.2FDebian.2FMint">https://www.nsnam.org/wiki/Installation#Ubuntu.2FDebian.2FMint</a></p>
+<p>进入链接后，按照步骤一步一步安装依赖包即可。</p>
+<h3 id="312-下载-ns3">3.1.2 下载 ns3</h3>
+<ol>
+<li>下载 Allinone 源码包<pre><code># wget http://www.nsnam.org/release/ns-allinone-3.33.tar.bz2
+# tar xjf ns-allinone-3.33.tar.bz2
+# cd ns-allinone-3.33
+bake      constants.py   ns-3.30           README
+build.py  netanim-3.108  pybindgen-0.20.0  util.py
+</code></pre>
+<ul>
+<li>构建 ns3
+<blockquote>
+<p>第一次构建 ns-3 项目时，您应该使用 allinone 环境进行构建。这将以最常用的方式为您配置项目。<br>
+进入目录中找到 <code>build.py</code> 文件，使用以下命令构建 ns3</p>
+</blockquote>
+<pre><code>./build.py
+</code></pre>
+</li>
+</ul>
+</li>
+<li>使用 Git 下载源码<br>
+略</li>
+<li>使用 Bake 下载源码<br>
+略</li>
+</ol>
+<h2 id="32-测试-ns3-安装">3.2 测试 ns3 安装</h2>
+<pre><code>cd ns-allinone-3.33/ns-3.33
+./test.py
+</code></pre>
+<h2 id="33-运行网络模拟脚本">3.3 运行网络模拟脚本</h2>
+<pre><code>root@qiao-virtual-machine:/home/qiao/桌面/ns-allinone-3.35/ns-3.35# ./waf --run hello-simulator
+Waf: Entering directory `/home/qiao/桌面/ns-allinone-3.35/ns-3.35/build'
+Waf: Leaving directory `/home/qiao/桌面/ns-allinone-3.35/ns-3.35/build'
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (0.849s)
+Hello Simulator
+</code></pre>
+<p>不编译直接运行脚本：</p>
+<pre><code>root@qiao-virtual-machine:/home/qiao/桌面/ns-allinone-3.35/ns-3.35# ./waf --run hello-simulator
+Waf: Entering directory `/home/qiao/桌面/ns-allinone-3.35/ns-3.35/build'
+Hello Simulator
+
+</code></pre>
+<p><strong>向模拟脚本中传递命令行参数</strong></p>
+<pre><code>./waf --run &lt;ns 3-program&gt; --command-template=&quot;%s &lt;args&gt;&quot;
+
+./waf --run 'test-runner --suite=mytest --verbose'
+./waf --run test-runner --command-template=&quot;%s --help&quot;
+</code></pre>
+<h1 id="4-ns3-对网络组件的抽象">4. ns3 对网络组件的抽象</h1>
+<h3 id="节点node">节点：Node</h3>
+<ul>
+<li>ns3 将基本的计算设备抽象成 Node （具体表现为 C++ 的 Node 类）</li>
+<li>Node 类提供了很多方法来模拟计算机设备在计算机网络中的行为</li>
+<li>Node 概念对应于 host、end system</li>
+<li>把 Node 堪称一台计算机，需要向计算机内添加软硬件功能部件：应用程序、协议栈、计算机外设等</li>
+</ul>
+<h3 id="应用程序application">应用程序：Application</h3>
+<ul>
+<li>应用程序 Application 是运行在 Node 内部的用户软件</li>
+<li>ns3 中有很多 Application 类的子类
+<ul>
+<li>UdbEchoClientApplication</li>
+<li>UdbEchoServerApplication</li>
+</ul>
+</li>
+</ul>
+<h3 id="信道channel">信道：Channel</h3>
+<ul>
+<li>
+<p>信道Channel：数据传输的通道，有线、无线...</p>
+<ul>
+<li>现实世界：网卡  &lt;-------------&gt; 双绞线</li>
+<li>模拟世界：Node &lt;--------------&gt; Channel</li>
+</ul>
+</li>
+<li>
+<p>channel 类提供相应的方法来管理通信子网对象，将节点连接到通信子网中。</p>
+<ul>
+<li>A Channel specialization may model somethings as simple as a wire.有线线路</li>
+<li>The specialized Channel can also model things as complicated as a large Etherent switch.以太网交换机</li>
+<li>or three-dimensional space full obstruction in the case of wireless nwetworks.无线网络中充满障碍的三维空间</li>
+</ul>
+</li>
+<li>
+<p>常见的 Channel：</p>
+<ul>
+<li>CsmaChannel：可以建模实现 csma （carrier sense multiple access）的通信子网</li>
+<li>PointToPointChannel</li>
+<li>WifiChannel</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络设备net-device">网络设备：Net Device</h3>
+<ul>
+<li>ns3 中 net device 抽象包括两个部分：
+<ul>
+<li>software driver：设备驱动程序</li>
+<li>simulated hardware</li>
+</ul>
+</li>
+<li>net device 被安装到 Node 中，使当前 Node 能够和其他 Node 构建网络（Channel）</li>
+<li>Just as in a real computer ,a Node may be connected to more than one Channel via multiple NetDevices.(就像在真实的计算机中一样，一个节点可以通过多个网络设备连接到多个通道。)</li>
+</ul>
+<h3 id="拓扑辅助类topology-helpers">拓扑辅助类：Topology Helpers</h3>
+<p>为什么需要 Helper 类 ？<br>
+<strong>核心</strong>：简化网络拓扑配置，将那些机械的重复性的配置操作用 Helper 实现 ！</p>
+<blockquote>
+<p>In a large simulated network you will need to arrange many connections between Nodes, NetDevices and Channels.</p>
+<p>Since connecting NetDevices to Nodes, NetDevices to Channels, assigning IP addresses, etc., are such common tasks in ns-3, we provide what we call topology helpers to make this as easy as possible.</p>
+<p>For example, it may take many distinct ns-3 core operations to create a NetDevice, add a MAC address, install that net device on a Node, configure the node’s protocol stack, and then connect the NetDevice to a Channel. Even more operations would be required to connect multiple devices onto multipoint channels and then to connect individual networks together into internetworks.</p>
+<p>We provide topology helper objects that combine those many distinct operations into an easy to use model for your convenience.</p>
+</blockquote>
+<blockquote>
+<p>在大型模拟网络中，您需要在节点、网络设备和通道之间安排许多连接。</p>
+<p>由于将 NetDevice 连接到节点、NetDevice 连接到通道、分配 IP 地址等是 ns-3 中的常见任务，因此我们提供了所谓的拓扑帮助器来使这一切尽可能简单。</p>
+<p>例如，可能需要许多不同的 ns-3 核心操作来创建 NetDevice、添加 MAC 地址、在节点上安装该网络设备、配置节点的协议栈，然后将 NetDevice 连接到通道。将多个设备连接到多点通道，然后将各个网络连接到互联网络中，还需要更多的操作。</p>
+<p>为了您的方便，我们提供了拓扑帮助对象，这些对象将许多不同的操作组合成一个易于使用的模型。</p>
+</blockquote>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/yi-xiao-shi-matlab-su-cheng-bi-ji/" class="post-title gt-a-link">
+                    一小时 Matlab 速成笔记
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

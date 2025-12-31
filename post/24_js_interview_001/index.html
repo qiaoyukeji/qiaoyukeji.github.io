@@ -1,0 +1,584 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>24秋招：前端面试题学习与记录_001 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    24秋招：前端面试题学习与记录_001
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-08-30 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/DvPMjmpPI/" class="post-tags">
+                            # 24秋招
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/l3xjV_uj9T/" class="post-tags">
+                            # 前端
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <blockquote>
+<p>参考：https://www.bilibili.com/video/BV12E41137h7</p>
+</blockquote>
+<h1 id="1-h5c3-部分">1、H5+C3 部分</h1>
+<h2 id="11-cookiessessionstorage-和-localstorage">1.1  cookies，sessionStorage 和 localStorage</h2>
+<p>问题：请描述一下cookies,sessionStorage和localStorage的区别？<br>
+分析：考察求职者对于<mark>本地存储的方式</mark>是否熟悉，因为初学者会把 cookies 和 sessionStorage 与 localStorage 搞混</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>cookies ：它是网站用来<mark>标记用户身份</mark>的一段数据，通常情况下是一段加密的字符串，并且默认情况之下只会在同源的HTTP请求中携带</li>
+<li>sessionStorage：它是浏览器<mark>本地存储</mark>的一种方式，以键值对的形式进行存储，并且存储的数据会在<mark>浏览器关闭之后自动删除</mark></li>
+<li>localStorage：它也是浏览器<mark>本地存储</mark>的一种方式，和sessionStorage一样，也是以键值对的形式存在的，不过它存储的是一个持久化的数据，一般<mark>不主动删除</mark>，数据会一直存在</li>
+</ul>
+<h2 id="12-displaynone-与-visibilityhidden">1.2 display:none; 与 visibility:hidden;</h2>
+<p>问题：display:none;与visibility:hidden;的区别？<br>
+分析：这是一个比较容易出现错误的CSS问题，没有大量实际开发经验的开发者，很难了解它们之间的区别</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>共同点：它们都可以让元素不可见</li>
+<li>不同点：
+<ul>
+<li>display:none; 会让元素完全从渲染树中<mark>消失</mark>，不渲染的时候<mark>不占据任何空间</mark>。而 visibility:hidden; 不会让元素从渲染树消失，不渲染时元素<mark>继续占据空间</mark>，只是<mark>内容不可见</mark></li>
+<li>display:none; 是<mark>非继承属性</mark>，子孙节点消失是因为元素从渲染树消失造成，通过修改子孙节点属性无法显示；而 visibility:hidden; 是<mark>继承属性</mark>，子孙节点消失由于继承了 hidden ，通过设置 visibility:visible; 可以让子孙节点显式</li>
+</ul>
+</li>
+</ul>
+<h2 id="13-为什么要初始化-css-样式">1.3  为什么要初始化 CSS 样式</h2>
+<p>问题：为什么要初始化CSS样式？<br>
+分析：这个问题主要是看你有没有实际开发的经验，因为对于没有实际开发经验的同学，是不知道在正式项目开发时要初始化 CSS 样式的，也就是清理掉一些元素默认所携带的样式，比如默认的 padding 和 margin</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>因为浏览器的<mark>兼容问题</mark>，不同浏览器对有些元素的默认样式是<mark>不同的</mark>，并且默认的样式会影响到项目最终的布局，如果没对 CSS 初始化，那么有可能会出现浏览器之间的页面<mark>显示差异</mark>。</li>
+</ul>
+<h2 id="14-postcss">1.4 PostCSS</h2>
+<p>问题：什么是 postcss ，以及 postcss 有什么作用？<br>
+分析：有很多已经工作了两年、三年的开发者依然无法解释清楚 postcss 是什么，以及它的作用</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>首先明确 postcss 是一个平台</li>
+<li>基于这个平台，可以使用一些插件，来优化 css 的代码。比如说：autoprefixer 插件，他就需要基于 postcss 使用，作用是可以帮助我们为 CSS 增加上不同的浏览器前缀。</li>
+</ul>
+<h1 id="2-javascript-部分">2、JavaScript 部分</h1>
+<h2 id="21-闭包">2.1 闭包</h2>
+<p>问题：解释一下什么是闭包？以及闭包解决了什么问题？<br>
+分析：闭包的问题一直是在前端方面非常被关注的问题，这个问题作为面试题经久不衰</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>什么是闭包？
+<ul>
+<li>闭包就是能够读取<mark>其他函数内部变量</mark>的=<mark>一个函数</mark>。通常情况下，我们会在一个函数中，去创建另外一个函数，然后通过新创建的这个函数来访问上层函数的局部变量，被访问到的局部变量会始终保存在内存之中。</li>
+</ul>
+</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="http://img.upy.qiaoyukeji.cn/2023/08/28/20230828161838.png" alt="" loading="lazy"></figure>
+<h2 id="22-原型与原型链">2.2 原型与原型链</h2>
+<p>原型与原型链分别是什么？有什么特点？<br>
+分析：原型和原型链的问题和闭包一样，也是面试被问到频率很高的一个问题。</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>每个函数都有一个 <mark>prototype</mark> 属性，这个属性会指向一个对象，就是通过调用该构造函数而创建的实例的原型，可以通过实例对象的 <code>__proto__</code> 来访问到这个原型对象。</li>
+<li>实例在创建时，就会默认关联原型，并且会从原型继承属性。</li>
+<li>而每一个原型对象又都会存在一个 <mark>constructor</mark> 属性，这个属性会指向关联的这个构造函数。</li>
+<li>当访问一个实例对象的属性时，如果说这个实例对象中没有这个属性，那么 js 引擎就会去<mark>该实例对象的原型对象</mark>中去找</li>
+<li>如果属性在原型对象中也找不到，那么就会去原型的原型中去找，一直到找到最上层的原型，也就是 Object 为止。</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="http://img.upy.qiaoyukeji.cn/2023/08/28/20230828170334.png" alt="" loading="lazy"></figure>
+<h2 id="23-this-对象">2.3 this 对象</h2>
+<p>问题：谈谈对 This 对象的理解<br>
+分析：在 JS 中一直存在着一个<mark>本不应该存在</mark>的问题，那就是关于 this 指向的问题。关于 this 的指向在其他的语言（比如java)中是非常明确的。但是因为 js 的历史问题，导致 this 的指向一直是一个重难点</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>this 总是指向<mark>函数的直接调用者</mark>（而非间接调用者）</li>
+<li>如果有 <mark>new</mark> 关键字，this 指向 new 出来的那个对象</li>
+<li>在事件中，this 指向触发这个事件的对象，特殊的是，IE 中的 attachEvent 中的 this 总是指向全局对象 Window</li>
+</ul>
+<h2 id="24-webpack">2.4 webpack</h2>
+<p>问题：谈谈你对webpack的看法<br>
+分析：对于中级工程师来说，webpack的内容一般不会问的很深，因为除非是高软或者是架构师，否则一般不会去配置webpack，但是这并不是你可能光明正大说不会的理由</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>webpack 是一个 <mark>JS 的模块打包工具</mark>，可以使用 webpack 管理项目中的 JS 模块依赖。</li>
+<li>Webpack 提供了一些<mark>默认的配置</mark>，比如说 devServer，我们可以利用 devServer 来快速启动一个开发时的web服务器。</li>
+<li>并且因为 webpack <mark>默认只能打包 js 文件</mark>，所以 webpack 额外提供了 loader 的概念，我们可以使用 loader 来预处理一些文件，并且可以打包除了 JS 之外的任何静态资源。</li>
+<li>另外 webpack 还提供了<mark>插性</mark>的概念，我们可以使用很多的插件来在 webpack 上做一些<mark>辅助性的工作</mark>，比如 HtmlWebpackPlugin 这种用来创建 HTML 文件的插件。</li>
+</ul>
+<h2 id="25-promise">2.5 promise</h2>
+<p>问题：谈谈你对 promise 的了解<br>
+分析：promise是目前开发中经常会用到的一个知识点，所以它是必须要掌握的</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>首先 promise 是 ES6 提出的一个<mark>异步编程解决方案</mark>。相比于传统的容易陷入<mark>回调地狱</mark>的异步回调方案来说，promise 会让异步的操作变得更加的优雅。</li>
+<li>ES6 规定 promise 是一个<mark>构造函数</mark>，所以我们需要通过 new 关键字来生成一个 promise 的实例对象。</li>
+<li>Promise 的构造函数接受<mark>一个函数</mark>作为参数，函数中的代码在 new primise 的时候，<mark>会立刻执行</mark>，我们可以在这里去执行异步代码的操作。并且该函数默认存在两个参数分别是 <mark>resolve和reject</mark>，这两个参数也是函数，用来标记异步执行的状态。</li>
+<li>比如 resolve，当 promise 的异步操作<mark>完成</mark>的时候，我们可以调用 resolve 函数，来标记当前的异步操作已经完成了。</li>
+<li>而 reject，是在异步操作<mark>失败</mark>的时候进行调用，用来标记当前的异步操作失败了。</li>
+<li>这些标记的状态我们可以通过 promise 实例对象的 <mark>.then</mark> 方法和 <mark>.catch</mark> 方法接收。其中，.then 方法是异步完成的回调，.catach 是异步失败的回调。</li>
+</ul>
+<h2 id="26-null-undefined">2.6 null、undefined</h2>
+<p>问题：null和undefined的区别是什么？<br>
+分析：这个问题多出现在笔试中，是考察工程师基础知识掌握程度的一个很好的题目</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>undefined ：表示不存在这个值，是一个<mark>变量的最原始状态</mark></li>
+<li>null ：是一个<mark>具体的值</mark>，只不过这个值是<mark>一个空值</mark>而已</li>
+</ul>
+<h2 id="27-同步与异步">2.7 同步与异步</h2>
+<p>问题：什么是同步？什么是异步？他们的区别是什么？<br>
+分析：对于任何一门编程语言来说，同步和异步的概念永远都是一个重点问题</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>同步：线程被<mark>阻塞</mark>，等待任务返回结果。</li>
+<li>异步：异步就是线程<mark>不会被阻塞</mark>，任务完成通知 JS 引擎。</li>
+</ul>
+<h2 id="28-event-loop">2.8 event loop</h2>
+<p>问题：什么是 EventLoop ?<br>
+分析：询问 EventLoop，主要就是为了询问JS的一个线程机制，因为你只有了解了 JS 的单线程机制，你才可以理解什么是 EventLoop</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>JavaScript 语言的一大特点就是<mark>单线程</mark>，也就是说，<mark>同一时间只能做一件事</mark>。</li>
+<li>单线程就意味着，<mark>所有的任务都需要排队</mark>，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不等不一直等着。</li>
+<li>于是，所有任务可以分成两种，一种是<mark>同步任务</mark>（synchronous），另一种是<mark>异步任务</mark>（asynchronous）。</li>
+<li>同步任务指的是，<mark>在主线程上排队执行的任务</mark>，只有前一个任务执行完毕，才能行后一个任务。</li>
+<li>异步任务指的是，<mark>不进入主线程、而进入&quot;任务队列”(task queue)的任务</mark>，只有&quot;任务队列&quot;通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</li>
+<li>而当主线程中的任务完成之后，主线程从&quot;任务队列&quot;中读取事件，这个过程是循环不断的，这就是 <mark>Event Loop (事件循环)</mark>。</li>
+</ul>
+<h2 id="29-bind-call-apply">2.9 bind、call、apply</h2>
+<p>问题：bind、call、apply的区别？<br>
+分析：这三个方法在 react 的项目中会使用的非常的多，并且因为这三个方法会牵扯到 this 的指向问题，所以在面试中被问到的概率会非常大</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>call 和 apply 都是为了<mark>解决改变 this 的指向</mark>，作用都是相同的，只是传参的方式不同。</li>
+<li>除了第一个参数外，call 可以接收一个参数列表，apply 只接受一个参数数组。</li>
+<li>bind 和其他两个方法作用也是一致的，只是该方法会返回一个函数。并且我们可以通过 bind 实现柯里化。</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="http://img.upy.qiaoyukeji.cn/2023/08/30/20230830162818.png" alt="" loading="lazy"></figure>
+<h2 id="210-typeof-与-instanceof">2.10 typeof 与 instanceof</h2>
+<p>问题：typeof 与 instanceof 的区别？<br>
+分析：typeof 与 instanceof 都是在项目中会经常使用到的方法，并且这两个方法的作用经常容易搞混，所以在面试中，这两个方法会经常被问到</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>typeof：会<mark>返回一个值的类型</mark>。对于基本数据类型，除了 null 都可以返回正确的类型。而对于 null 则会返回 object，这是 js 的一个 bug 。而对于引用数据类型来说，除了函数之外，其他的都会返回 object</li>
+<li>instanceof：它是用来判断<mark>一个对象</mark>是否<mark>是另一个对象</mark>的实例，注意它<mark>只能用来判断对象</mark></li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="http://img.upy.qiaoyukeji.cn/2023/08/30/20230830163354.png" alt="" loading="lazy"></figure>
+<h1 id="3-vue-部分">3、Vue 部分</h1>
+<h2 id="31-vue-生命周期">3.1 Vue 生命周期</h2>
+<p>问题：请说一下对 Vue 生命周期的理解<br>
+分析：如果要使用 Vue 来开发项目，那么 Vue 生命周期部分，是必须要掌握的一个内容</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>Vue 实例从<mark>创建到销毁</mark>的过程，就是生命周期。</li>
+<li>总共分为 8 个阶段，分别为：<mark>创建前/后，载入前/后，更新前/后，销毁前/后</mark></li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="http://img.upy.qiaoyukeji.cn/2023/08/30/20230830164101.png" alt="" loading="lazy"></figure>
+<h2 id="32-双向绑定的原理">3.2 双向绑定的原理</h2>
+<p>问题：请说一下 Vue 实现双向数据绑定的原理<br>
+分析：如果你的简历中有关于 Vue 的内容，那么 Vue 实现双向数据绑定的原理是有很大概率会被问到的一个知识点</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>vue 实现数据双向绑定主要是：采用<mark>数据劫持</mark>结合<mark>发布者-订阅者</mark>模式的方式。</li>
+<li>数据劫持：通过 Object.defineProperty() 来劫持特对象各个属性的 setter，getter。</li>
+<li>发布者-订阅者模式：在<mark>数据变动</mark>时发布者发布消息给<mark>订阅者</mark>，触发相应监听回调。</li>
+<li>总的来说：当把一个普通 <mark>Javascript 对象</mark>传给 Vue 实例来作为它的 <mark>data 选项</mark>时，Vue 将遍历它的属性，用 Object.defineProperty() 监听它们的 getter/setter 方法。这样，它们就可以让 Vue 追踪依赖，在对象的属性被==访问(get)和修改(set)==时通知变化。</li>
+</ul>
+<h2 id="33-参数传递">3.3 参数传递</h2>
+<p>问题：请说一下 Vue 中如何实现参数的传递？<br>
+分析：Vue 中各个组件之间的参数传递，是使用Vue进行项目开发时大慨率会用到的一个知识点</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>父组件给子组件传值：子组件通过 <mark>pops 属性</mark>接受数据。</li>
+<li>子组件给父组件传值：子组件通过 <mark>$emit 方法</mark>传递参数。</li>
+<li>兄弟组件传值：对于兄弟组件之间传值来说，兄弟组件之间其实没有任何的相互依赖关系，也就是说他们之间其实<mark>没有关系</mark>。而对于没有关系的两个组件，如果想要进行数据传递，那么就需要有一个<mark>第三方</mark>。通过这个第三方来为两个没有关系的组件建立关系。目前比较通用的方式，主要有两种：
+<ul>
+<li>一个是 <mark>eventBus 方案</mark>，建立一个<mark>事件中心</mark>，通过它传递事件来进行数据传递。</li>
+<li>第二个就是通过 <mark>vuex</mark> 来进行数据共享。</li>
+</ul>
+</li>
+</ul>
+<h2 id="34-路由-vuerouter">3.4 路由 VueRouter</h2>
+<p>问题：请说一下 Vue 的路由实现：hash 模式和 history 模式<br>
+分析：这个问题对于初、中级工程师来说被问到主要是一个加分项，因为路由模式在进行项目开发的时候所产生的影响比较有限，更大的影响是在项目部署之后的生产环境中</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>hash 模式：是vue-router的默认模式使用哈希，URL 中会出现 <code>#</code> 号字符， <mark><code>#</code> 以及 <code>#</code> 后面的字符称之为哈希(hash)</mark>。特点：hash 虽然在URL中，但<mark>不被包括在HTTP请求</mark>中。</li>
+<li>history 模式：国内线上项目使用的比较多的还是 history 模式，这种模式下 URL 中不会存在 <code>#</code> 这种难看的字符。不过这种模式下，需要<mark>后台</mark>进行配合，因为 Vue 打包的项目通常是一个单页的应用，也就是<mark>任何的 URL 其实指向的都是一个HTML文件</mark>，所以我们需要在 <mark>apache 或者 nginx</mark> 中进行配置，当 URL 匹配不到资源时，指向同一个 html 页面的配置。</li>
+</ul>
+<h2 id="35-keepalive">3.5 KeepAlive</h2>
+<p>问题：<code>&lt;keep-alive&gt;&lt;\keep-alive&gt;</code> 的作用是什么？<br>
+分析：keepAlive 是构建公司级项目时经常会使用到的一个知识点</p>
+<p><strong>解答</strong>：</p>
+<ul>
+<li>KeepAlive 的作用：<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code> 包裹动态组件时，会<mark>缓存不活动的组件实例</mark>，住要用于<mark>保留组件状态</mark>或<mark>避免重新渲染</mark>。</li>
+</ul>
+<h1 id="4-总结">4、总结</h1>
+<p>目的：让大家可以针对每一个技术问题，以一种正确的方式，表达出自己心中对这个问题的理解。</p>
+<p><a href="https://interview.poetries.top/">其他前端面试题整理：https://interview.poetries.top/</a></p>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/esp32cam_http_ota/" class="post-title gt-a-link">
+                    ESP32cam系列教程003：ESP32cam实现远程 HTTP_OTA 自动升级
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>

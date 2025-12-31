@@ -1,0 +1,602 @@
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>nanopc-T4 开发板通过USB麦克风采集录制音频 | 巧遇个人博客</title>
+
+<link rel="shortcut icon" href="https://blog.zhawenwen.cn//favicon.ico?v=1767145525416">
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"> -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://blog.zhawenwen.cn//styles/main.css">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+  <!-- <script src='https://unpkg.com/valine/dist/Valine.min.js'></script> -->
+  <script src='https://lib.baomitu.com/valine/1.5.1/Valine.min.js'></script>
+
+
+<!-- google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1044517767209892"
+     crossorigin="anonymous"></script>
+<!-- google adsense -->
+    
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/base16/solarized-light.min.css"> -->
+
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/styles/base16/solarized-light.min.css">
+
+<!-- <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js,gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script> -->
+
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/cpp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/csharp.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/c.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/python.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/rust.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/xml.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/javascript.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/powershell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/shell.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/sql.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/http.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/go.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.3.1/languages/css.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/csharp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/c.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/rust.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/xml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/powershell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/shell.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/sql.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/http.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/go.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/languages/css.min.js"></script>
+ -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script> -->
+<!-- <script src="https://lib.baomitu.com/mermaid/10.6.1/mermaid.min.js"></script> -->
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script> -->
+<!-- <script>mermaid.initialize({startOnLoad:true});</script> -->
+<!-- 20250927注释掉，因为mermaid.min.js文件太大，导致页面加载很慢，而且不需要这个功能，所以注释掉 -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.css" /> -->
+<link rel="stylesheet" href="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.css" />
+<!-- <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.10.2/dist/viewer.min.js"></script> -->
+<script src="https://lib.baomitu.com/viewerjs/1.10.2/viewer.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.12.0/katex.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/KaTeX/0.16.8/katex.css" rel="stylesheet">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            巧遇个人博客
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="changeNavbar">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/plan" class="menu gt-a-link">
+                                计划
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="http://memos.gitnote.cn/" class="menu gt-a-link">
+                                随笔
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/post/about" class="menu gt-a-link">
+                                关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1767145525416"
+                action="/search/">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+<!-- 春节灯笼开始 
+
+    <div class="deng-box">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">春节</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+
+    <div class="deng-box1">
+        <div class="deng">
+            <div class="xian"></div>
+            <div class="deng-a">
+                <div class="deng-b">
+                    <div class="deng-t">快乐</div>
+                </div>
+            </div>
+            <div class="shui shui-a"></div>
+            <div class="shui shui-b"></div>
+            <div class="shui shui-c"></div>
+        </div>
+    </div>
+ 春节灯笼结束 -->
+
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    nanopc-T4 开发板通过USB麦克风采集录制音频
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-03-08 ·
+                    </time>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/t9WHtibxW/" class="post-tags">
+                            # nanopc
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/sDbdzzhr8/" class="post-tags">
+                            # opencv
+                        </a>
+                    
+                        <a href="https://blog.zhawenwen.cn/tag/0KB92EUnm/" class="post-tags">
+                            # python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#1-%E4%BD%BF%E7%94%A8-nanopc-t4-%E5%BC%80%E5%8F%91%E6%9D%BF%E9%87%87%E9%9B%86%E9%9F%B3%E9%A2%91">1. 使用 nanopc-T4 开发板采集音频</a></li>
+<li><a href="#2-%E4%BD%BF%E7%94%A8-tyless-%E5%BD%95%E5%88%B6%E5%A3%B0%E9%9F%B3">2. 使用 Tyless 录制声音</a></li>
+<li><a href="#3-%E4%BD%BF%E7%94%A8-ffrmpeg-%E5%B0%86%E5%AE%9E%E6%97%B6%E8%A7%86%E9%A2%91%E4%B8%8E%E9%9F%B3%E9%A2%91%E5%90%88%E5%B9%B6%E5%B9%B6%E6%8E%A8%E6%B5%81%E5%88%B0-rtmp-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD">3. 使用 ffrmpeg 将实时视频与音频合并并推流到 rtmp 服务器中</a></li>
+<li><a href="#4-%E6%88%90%E5%8A%9F%E5%AE%9E%E7%8E%B0opencv%E9%87%87%E9%9B%86%E5%9B%BE%E5%83%8F%E4%B8%8E%E9%9F%B3%E9%A2%91%E5%90%88%E5%B9%B6%E6%8E%A8%E9%80%81%E5%88%B0rtmp">4. 成功实现opencv采集图像与音频合并推送到rtmp</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="1-使用-nanopc-t4-开发板采集音频">1. 使用 nanopc-T4 开发板采集音频</h2>
+<p>使用开发板采集音频时，总是报错，通过查阅很多资料后，逐渐有了一些头绪。</p>
+<ul>
+<li>使用 <code>arecord -l</code> 命令可以查看当前系统的录音设备。</li>
+</ul>
+<p>由此可以看出，当前系统有两个 USB Audio 设备，分别为 Tyless 外置录音和 C920 摄像头自带的录音设备。</p>
+<pre><code class="language-bash">root@NanoPC-T4:/home/pi/projects/nanopc/nanopc2jetlinks4mqtt# arecord -l
+**** List of CAPTURE Hardware Devices ****
+card 0: realtekrt5651co [realtek,rt5651-codec], device 0: ff880000.i2s-rt5651-aif1 rt5651-aif1-0 []
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 3: Tyless [Tyless], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 4: C920 [HD Pro Webcam C920], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+</code></pre>
+<ul>
+<li>使用指定声卡录音</li>
+</ul>
+<pre><code class="language-bash">root@NanoPC-T4:/home/pi/projects/nanopc/nanopc2jetlinks4mqtt# sudo arecord -D hw:4 -d 40 test.wav -r16000 -fS16_LE -c 2
+Recording WAVE 'test.wav' : Signed 16 bit Little Endian, Rate 16000 Hz, Mono
+</code></pre>
+<blockquote>
+<p>-D 表示指定设备,hw:x 表示第x个设备（使用命令 arecord -l 查看）</p>
+<p>-d 表示时间，单位为秒</p>
+<p>'test.wav' 为录音保存的文件名</p>
+<p>-r 表示设置频率</p>
+<p>-f 为设置格式</p>
+<p>-c 表示通道数</p>
+</blockquote>
+<h2 id="2-使用-tyless-录制声音">2. 使用 Tyless 录制声音</h2>
+<p>使用 arecord -l 查看 tyless 的设备号，input_device_index=3<br>
+设置频率 rate 为48000Hz<br>
+设置通道数 CHANNELS 为 1</p>
+<p>具体代码如下（测试通过）：</p>
+<pre><code class="language-python"># name：008.py
+#录制音频
+import wave
+import pyaudio
+
+CHUNK = 1024
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+# RATE = 44100
+RATE = 48000
+#RATE = 22050
+RECORD_SECONDS =30
+p = pyaudio.PyAudio()
+#i=0
+while True:
+    #i=i+1
+    # 数据流
+    stream = p.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True,input_device_index=3, frames_per_buffer=CHUNK)
+    print(&quot;开始录音!&quot;)
+    frames = []
+    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+        data = stream.read(CHUNK,exception_on_overflow = False)
+        frames.append(data)
+    print(&quot;录音完毕！&quot;)
+    # 停止数据流
+    stream.stop_stream()
+    stream.close()
+    # 关闭PyAudio
+    #p.terminate()#不能这样操作，否则会出现不能循环的现
+    # 写入录音文件
+    wf = wave.open('011.wav', 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
+    print('音频数据写入完成')
+    break;
+
+</code></pre>
+<p>具体代码 :<a href="https://gitee.com/qiaoyukeji/nanopc2jetlinks4mqtt/blob/master/test_005_audio/008.py">https://gitee.com/qiaoyukeji/nanopc2jetlinks4mqtt/blob/master/test_005_audio/008.py</a></p>
+<h2 id="3-使用-ffrmpeg-将实时视频与音频合并并推流到-rtmp-服务器中">3. 使用 ffrmpeg 将实时视频与音频合并并推流到 rtmp 服务器中</h2>
+<pre><code class="language-bash">ffmpeg \
+-f alsa -ac 2 -i hw:4,0 -r 48000 \
+-f v4l2 -r 10 -i /dev/video0 \
+-c:v libx264 -s 640x480 -pix_fmt yuv420p -preset ultrafast -g 20 -b:v 2500k \
+-c:a aac -ar 44100 \
+-threads 0 -bufsize 512k \
+-f flv rtmp://iot.gitnote.cn/live/test &amp;&gt; stream.log
+</code></pre>
+<blockquote>
+<p>-f fmt	指定格式(音频或视频格式)</p>
+<p>-ac channels	设置声道数</p>
+<p>-i filename	指定输入文件名，在linux下当然也能指定:0.0(屏幕录制)或摄像头</p>
+<p>-r rate	桢速率(fps)</p>
+<p>-vcodec codec	强制使用codec编解码方式(copy to copy stream)</p>
+<p>-acodec codec	指定音频编码(copy to copy stream)</p>
+<p>-pix_fmt format  设置像素格式，“列表”作为参数显示所有支持的像素格式</p>
+<p>-g int	设置图像组大小</p>
+<p>-b	指定比特率(bits/s)，似乎ffmpeg是自动VBR的，指定了就大概是平均比特率</p>
+<p>-ar rate	设置音频采样率 (单位：Hz)</p>
+</blockquote>
+<p>具体参数含义见：<a href="https://www.scivision.dev/youtube-live-ffmpeg-livestream/">https://www.scivision.dev/youtube-live-ffmpeg-livestream/</a></p>
+<h2 id="4-成功实现opencv采集图像与音频合并推送到rtmp">4. 成功实现opencv采集图像与音频合并推送到rtmp</h2>
+<blockquote>
+<ul>
+<li>
+<p>图像使用opencv调用摄像头采集并处理</p>
+</li>
+<li>
+<p>音频使用 alsa 在 ffmpeg 命令行中采集</p>
+</li>
+<li>
+<p>然后合并推送远程rtmp服务器中</p>
+</li>
+</ul>
+</blockquote>
+<p>相关代码见：<a href="https://gitee.com/qiaoyukeji/nanopc2jetlinks4mqtt/blob/master/test_005_audio/rtmp_001.py">https://gitee.com/qiaoyukeji/nanopc2jetlinks4mqtt/blob/master/test_005_audio/rtmp_001.py</a></p>
+<pre><code class="language-python"># 本代码实现 opencv 采集视频并使用ffmpeg与音频audio合并推送到远程 rtmp 服务器中 
+# rtmp_001.py
+
+# 需先自行安装FFmpeg，并添加环境变量
+import cv2
+import subprocess
+import datetime
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+
+# RTMP服务器地址
+# rtmp = r'rtmp://156756.livepush.myqcloud.com/live/test'
+# rtmp = r'rtmp://172.17.14.191/live/test'
+rtmp = r'rtmp://iot.gitnote.cn/live/test'
+# 读取视频并获取属性
+cap = cv2.VideoCapture(0)
+
+cap.set(3, 640) # set video widht
+cap.set(4, 480) # set video height
+size = (int(640), int(480))
+sizeStr = str(size[0]) + 'x' + str(size[1])
+command = ['ffmpeg',
+    '-y',  # -y	覆盖已有文件
+    &quot;-thread_queue_size&quot;,&quot;102400&quot;, # 封装队列大小
+    ########### 音频采集相关参数
+    '-f', 'alsa', # -f fmt	指定格式(音频或视频格式)
+    '-ac', '2', # -ac channels	设置声道数
+    '-i', 'hw:3,0', # -i filename	指定输入文件名，在linux下当然也能指定:0.0(屏幕录制)或摄像头
+    ############ 视频处理相关参数
+    # '-f', 'v4l2',
+    '-f', 'rawvideo',  # -f fmt	指定格式(音频或视频格式)
+    '-vcodec','rawvideo', # -vcodec codec	强制使用codec编解码方式
+    '-pix_fmt', 'bgr24', # -pix_fmt format  设置像素格式，“列表”作为参数显示所有支持的像素格式
+    '-s', sizeStr, # -s size	分辨率
+    '-r', '25', #  -r rate	桢速率(fps)
+    '-i', '-',
+    '-c:v', 'libx264',
+    '-pix_fmt', 'yuv420p',
+    '-preset', 'ultrafast',
+    '-b:v','2000k',
+    '-c:a', 'aac', # 设置音频格式
+    '-ar', '44100',  # -ar rate	设置音频采样率 (单位：Hz)
+    &quot;-threads&quot;,&quot;2&quot;,
+    &quot;-bufsize&quot;,&quot;1024k&quot;, 
+    '-f', 'flv',
+
+    rtmp]
+pipe = subprocess.Popen(command, shell=False, stdin=subprocess.PIPE)
+
+font = cv2.FONT_ITALIC   # 字体
+fourcc = cv2.VideoWriter_fourcc(*'XVID')  #定义编解码器并创建VideoWriter对象，即输入四个字符代码即可得到对应的视频编码器（XVID编码器）
+out = cv2.VideoWriter('video1.avi', fourcc, 20.0, (640,480))  #参数：保存文件名，编码器，帧率，视频宽高
+
+
+# 图片帧添加文字函数
+def cv2ImgAddText(img, text, left, top, textColor=(0, 255, 0), textSize=20):
+    if (isinstance(img, np.ndarray)):  # 判断是否OpenCV图片类型
+        img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    # 创建一个可以在给定图像上绘图的对象
+    draw = ImageDraw.Draw(img)
+    # 字体的格式
+    fontStyle = ImageFont.truetype(
+        &quot;simsun.ttc&quot;, textSize, encoding=&quot;utf-8&quot;)
+    # 绘制文本
+    draw.text((left, top), text, textColor, font=fontStyle)
+    # 转换回OpenCV格式
+    return cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
+
+
+while cap.isOpened():
+    success, frame = cap.read()
+    cv2.putText(frame,(datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S'), (15,40),font , 1, (255,255,255), 2) 
+    # cv2.putText(frame,'安徽农业大学智慧养殖平台：HF-001 ', (15,400),font , 1, (255,255,255), 2) 
+    # frame=cv2ImgAddText(frame,&quot;安徽农业大学智慧养殖平台：HF-XX-001&quot;,15,50,(255,255,255),24)
+    if success:
+        if cv2.waitKey(1) &amp; 0xFF == ord('q'):
+            break
+        pipe.stdin.write(frame.tostring())
+        out.write(frame)
+
+cap.release()
+pipe.terminate()
+cv2.destroyAllWindows()
+</code></pre>
+
+                </div>
+            </article>
+            <!-- 加入版权信息 Start -->
+            <div style="background-color: rgb(157, 247, 157);color: black;padding: 20px;text-align: center;opacity: 60;">
+                <p><span>版权申明：</span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> (自由转载-非商用-相同方式共享-保持署名)</p>
+            </div>
+            <!-- 加入版权信息 END -->
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.zhawenwen.cn/post/nanopc-t4-tong-guo-mqtt-xie-yi-yu-jetlinks-ping-tai-hu-tong-ji-chu-gong-neng/" class="post-title gt-a-link">
+                    nanopc-T4 通过 mqtt 协议与 jetlinks 平台互通基础功能 
+                </a>
+            </div>
+        
+	
+
+        
+
+<div id="vcomments"></div>
+<!-- 开启与关闭Valine评论  -->
+    <!-- <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 't2aydCYvYz2GQEX1qzDgjyLn-gzGzoHsz',
+            appKey: '82qm4jyjtnoWKgB7bvkic7XC'
+        })
+    </script> -->
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">他日若遂凌云志，敢笑黄巢不丈夫！<meta name="baidu-site-verification" content="code-v9TubG0Cv1" /><meta name="msvalidate.01" content="8B5B1D4FCE1CBCBCD2836739B32F2960" />
+<script src="https://sdk.51.la/perf/js-sdk-perf.min.js" crossorigin="anonymous"></script>
+<script>
+  new LingQue.Monitor().init({id:"KbiL8olwnEa4wAKH",sendSuspicious:true});
+</script></div>
+    <div class="social-container">
+        
+            
+                <a href="https://gitee.com/qiaoyukeji" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <!-- 百度统计代码开始-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d6e719b7f63ff9269c09ddf23c29a6ad";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- 百度统计代码结束-->
+    <span class='cnzz_style ' ><a target="_blank" href="http://beian.miit.gov.cn" style="margin:2px auto">皖ICP备17002449号-6</a>
+    <br>
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=34030002020631" style="margin:2px auto">皖公网安备34030002020631号</a></span>
+    <br />
+    <br />
+    <!-- 网站运行时间 -->
+    <span id="span"></span>
+    <script type="text/javascript">
+        function runtime(){
+            // 初始时间，月/日/年 时:分:秒
+            X = new Date("09/06/2021 00:00:00");
+            Y = new Date();
+            T = (Y.getTime()-X.getTime());
+            M = 24*60*60*1000;
+            a = T/M;
+            A = Math.floor(a);
+            b = (a-A)*24;
+            B = Math.floor(b);
+            c = (b-B)*60;
+            C = Math.floor((b-B)*60);
+            D = Math.floor((c-C)*60);
+            //信息写入到DIV中
+            span.innerHTML = "本站勉强运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"
+        }
+        setInterval(runtime, 1000);
+    </script>
+    
+
+    <br>
+    <p style="margin:5px auto">联系邮箱：qiaoyukeji#gmail.com（#替换成@）</p>
+    <!-- 51 la 统计代码 -->
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id: "Jg6ThnzVApoRPH9e",ck: "Jg6ThnzVApoRPH9e",autoTrack:true})</script>
+    <!-- 51 la 详细数据展示 -->
+    <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/Jg6ThnzVApoRPH9e/quote.js?theme=#1B8EF8,#333333,#999999,#333333,#FFFFFF,#1690FF,12&f=12&display=0,0,1,1,1,1,1,0"></script>
+    
+
+<div style="font-size: 12px;">
+    <span>本网站由 <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="text-decoration: none;" style="display:inline;"><img src="http://blog.gitnote.cn/images/upyun_logo5.png" alt="又拍云" style="vertical-align: middle;" width="40" height="20" /> </a>提供CDN加速服务,</span>
+    
+    <span>由 <a href="https://www.qiniu.com/" style="text-decoration: none;" style="display:inline;"><img src="https://dn-mars-assets.qbox.me/qiniulogo/img-horizontal-blue-cn.png" alt="七牛云" style="vertical-align: middle;" width="40" height="10" /> </a>提供托管服务</span>
+</div>
+<!-- 为页面添加用户来源ip展示 -->
+  <script src="http://cdn.gitnote.cn/js/my_js/code_add_ip_source_to_html.js"> </script>
+
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>, <a href="https://blog.zhawenwen.cn//atom.xml" target="_blank">RSS</a>
+<br>
+Made by <a href="http://www.qiaoyukeji.cn" target="_blank">qiaoyu</a> ©2021-2024 All Rights Reserved
+    </div>
+</div>
+
+
+
+        <script>
+  hljs.highlightAll();
+</script>
+
+        <script>
+(function() {
+	function addEventListener(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+    }
+
+    addEventListener(window, 'load', function () {
+        var Viewer = window.Viewer;
+        var pictures = document.querySelector('.post-content');
+        var viewer = new Viewer(pictures);
+    });
+})();
+</script>
+
+
+        <script>
+            var ele = document.querySelector(".waline-visitor-count");
+            Object.defineProperty(ele, 'innerText', {
+                get: function() {
+                    return ele.innerText;
+                },
+                set: function(value) {
+                    ele.innerHTML = value;
+                    if (value > 0) {
+	                    var parent = document.querySelector(".leancloud_visitors");
+	                    parent.style.visibility="visible";
+	                }
+                }
+            });
+        </script>
+    </div>
+</div>
+</body>
+</html>
